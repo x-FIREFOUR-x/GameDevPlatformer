@@ -298,6 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 174533452}
   - component: {fileID: 174533451}
+  - component: {fileID: 174533453}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -372,6 +373,32 @@ Transform:
   m_Father: {fileID: 1396163181}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &174533453
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174533450}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.06266874}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.48}
+    newSize: {x: 10.5, y: 0.48}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 2
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10.5, y: 0.35466254}
+  m_EdgeRadius: 0
 --- !u!1 &262060707
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,6 +747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 784348080}
   - component: {fileID: 784348079}
+  - component: {fileID: 784348082}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -794,6 +822,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &784348082
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784348078}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a58fe6f7877855849bd33797f2eb103c, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.04770279, y: 0.6876452}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 3.125, y: 1.71875}
+    newSize: {x: 3.125, y: 1.71875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.85435104, y: 1.2798853}
+  m_EdgeRadius: 0
 --- !u!1001 &899957415
 PrefabInstance:
   m_ObjectHideFlags: 0
