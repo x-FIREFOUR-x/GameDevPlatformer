@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerEntity : MonoBehaviour
 {
-    
-
     [Header("Move")]
     [SerializeField] private float _moveSpeed;
     [SerializeField] private bool _faceRight;
