@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    [SerializeField] private PlayerEntity _playerEntity;
+    [SerializeField] private Player.PlayerEntity _playerEntity;
 
     private float _directionMove;
 
