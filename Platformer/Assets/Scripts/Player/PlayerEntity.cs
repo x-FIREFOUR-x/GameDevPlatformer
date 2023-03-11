@@ -15,12 +15,16 @@ namespace Player
 
         private Rigidbody2D _rigidbody;
 
+        public Vector2 Velocity { get { return _rigidbody.velocity; } }
 
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
         }
-
+        private void Update()
+        {
+            
+        }
 
         public void Move(float direction)
         {
@@ -52,6 +56,7 @@ namespace Player
             transform.Rotate(0, 180, 0);
             _faceRight = !_faceRight;
         }
+
     }
 
 }
