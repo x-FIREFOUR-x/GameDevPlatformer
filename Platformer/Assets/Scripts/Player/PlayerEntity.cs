@@ -17,14 +17,12 @@ namespace Player
 
         public Vector2 Velocity { get { return _rigidbody.velocity; } }
 
+
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
         }
-        private void Update()
-        {
-            
-        }
+        
 
         public void Move(float direction)
         {

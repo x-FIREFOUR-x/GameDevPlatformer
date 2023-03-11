@@ -12,7 +12,7 @@ namespace Player
         private AnimationType _currentAnimationType;
 
 
-        private void Update()
+        private void FixedUpdate()
         {
             UpdateAnimations();
         }
