@@ -4201,10 +4201,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: _jumpForce
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -4247,10 +4243,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8617698486661253671, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253692, guid: 4b90badacc47760428af352369253d53, type: 3}
