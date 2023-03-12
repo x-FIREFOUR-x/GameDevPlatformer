@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8617698486661253670}
   - component: {fileID: 8617698486661253665}
   - component: {fileID: 8617698486661253671}
+  - component: {fileID: 1572705051}
   m_Layer: 0
   m_Name: PlayerEntity
   m_TagString: Untagged
@@ -122,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04770279, y: 0.6876452}
+  m_Offset: {x: -0.05, y: 0.69}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -133,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85435104, y: 1.2798853}
+  m_Size: {x: 0.84, y: 1.25}
   m_EdgeRadius: 0
 --- !u!50 &8617698486661253670
 Rigidbody2D:
@@ -168,10 +169,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3001c71cd780d468d3fec3965ad714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 0}
   _moveSpeed: 4
   _faceRight: 1
   _jumpForce: 300
   _gravityScale: 1
+  _rollSpeed: 6
+  _rollDistance: 2.5
 --- !u!114 &8617698486661253671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,3 +189,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerEntity: {fileID: 8617698486661253665}
+--- !u!114 &1572705051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617698486661253692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1558ffd3445177649be45b66150aefb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 8617698486661253665}
+  _animator: {fileID: 2119696261}
