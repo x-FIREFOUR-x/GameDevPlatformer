@@ -23,6 +23,7 @@ namespace Player
             PlayAnimation(AnimationType.Run, Mathf.Abs(_player.Velocity.x) > 0);
             PlayAnimation(AnimationType.Jump, _player.Velocity.y > 0);
             PlayAnimation(AnimationType.Fall, _player.Velocity.y < 0);
+            PlayAnimation(AnimationType.Block, _player.BlockActive);
         }
 
         private void PlayAnimation(AnimationType animationType, bool active)

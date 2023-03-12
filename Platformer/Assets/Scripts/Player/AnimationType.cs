@@ -8,6 +8,7 @@ namespace Player
         Run = 1,
         Jump = 2,
         Fall = 3,
-        Atack = 4
+        Block = 4,
+        Atack = 5
     }
 }
