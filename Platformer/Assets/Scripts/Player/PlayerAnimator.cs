@@ -10,10 +10,16 @@ namespace Player
         private AnimationType _currentAnimationType;
 
 
+        private AnimationType _firstAttackAnimation = AnimationType.Attack;
+        private AnimationType _lastAttackAnimation = AnimationType.Attack3;
+
+        private AnimationType _lastShowAttackAnim = AnimationType.Attack;
+
         private void FixedUpdate()
         {
             UpdateAnimations();
         }
+
 
         private void UpdateAnimations()
         {
@@ -23,9 +29,31 @@ namespace Player
             PlayAnimation(AnimationType.Fall, _player.Velocity.y < 0);
             PlayAnimation(AnimationType.Roll, _player.RollActive);
             PlayAnimation(AnimationType.BlockIdle, _player.BlockActive);
-            PlayAnimation(AnimationType.Attack, _player.AttackActive);
+
+            UpdateAnimationsAttack();
         }
 
+        private void UpdateAnimationsAttack()
+        {
+            if(!_player.AttackActive)
+            {
+                for (int i = (int)_firstAttackAnimation; i <= (int)_lastAttackAnimation; i++)
+                {
+                    PlayAnimation((AnimationType)i, _player.AttackActive);
+                }
+            }
+            else
+            {
+                if(!(_currentAnimationType >= _firstAttackAnimation && _currentAnimationType <= _lastAttackAnimation))
+                {
+                    AnimationType randomAttackAnim = RandomAttackAnimation();
+                    PlayAnimation(randomAttackAnim, _player.AttackActive);
+
+                    _lastShowAttackAnim = randomAttackAnim;
+                }
+            }
+        }
+        
         private void PlayAnimation(AnimationType animationType, bool active)
         {
             if (!active)
@@ -48,6 +76,22 @@ namespace Player
         private void PlayAnimation(AnimationType animationType)
         {
             _animator.SetInteger(nameof(AnimationType), (int)animationType);
+        }
+
+        private AnimationType RandomAttackAnimation()
+        {
+            int randomAttackAnim = (int)_firstAttackAnimation;
+
+            bool randomCorrect = false;
+            while (!randomCorrect)
+            {
+                randomAttackAnim = Random.Range((int)_firstAttackAnimation, (int)_lastAttackAnimation + 1);
+
+                if (randomAttackAnim != (int)_lastShowAttackAnim)
+                    randomCorrect = true;
+            }
+
+            return (AnimationType)randomAttackAnim;
         }
     }
 

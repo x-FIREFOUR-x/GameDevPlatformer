@@ -9,6 +9,8 @@
         Roll = 4,
         BlockIdle = 5,
         Block = 6,
-        Attack = 7
+        Attack = 7,
+        Attack2 = 8,
+        Attack3 = 9
     }
 }

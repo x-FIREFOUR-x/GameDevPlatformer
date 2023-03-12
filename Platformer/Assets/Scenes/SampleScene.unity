@@ -4220,7 +4220,7 @@ PrefabInstance:
       objectReference: {fileID: 1572705057}
     - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: _timeAttack
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: _coliderRolling
