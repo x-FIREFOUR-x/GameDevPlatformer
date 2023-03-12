@@ -22,7 +22,8 @@ namespace Player
             PlayAnimation(AnimationType.Jump, _player.Velocity.y > 0);
             PlayAnimation(AnimationType.Fall, _player.Velocity.y < 0);
             PlayAnimation(AnimationType.Roll, _player.RollActive);
-            PlayAnimation(AnimationType.Block, _player.BlockActive);
+            PlayAnimation(AnimationType.BlockIdle, _player.BlockActive);
+            PlayAnimation(AnimationType.Attack, _player.AttackActive);
         }
 
         private void PlayAnimation(AnimationType animationType, bool active)

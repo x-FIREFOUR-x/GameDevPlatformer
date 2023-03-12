@@ -12,6 +12,7 @@ namespace Player
         private Vector2 _offsetFullCollider;
         private Vector2 _sizeFullCollider;
 
+
         [Header("Move")]
         [SerializeField] private float _moveSpeed;
         [SerializeField] private bool _faceRight;
@@ -30,13 +31,18 @@ namespace Player
 
         [SerializeField] private Vector2 _offsetRollCollider;
         [SerializeField] private Vector2 _sizeRollCollider;
-        
+
+
+        [Header("Attack")]
+        [SerializeField] private float _timeAttack;
+        private float _remainingTimeAttack;
 
         public Vector2 Velocity { get { return _rigidbody.velocity; } }
         public bool RollActive { get; private set; }
         public bool BlockActive { get; private set; }
+        public bool AttackActive { get; private set; }
 
-        
+
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
@@ -49,6 +55,7 @@ namespace Player
         private void Update()
         {
             UpdateRoll();
+            UpdateAtack();
         }
 
 
@@ -93,6 +100,15 @@ namespace Player
             BlockActive = activeBlock && IsCanBlock();
         }
 
+        public void Attack()
+        {
+            if (!IsCanAttack())
+                return;
+
+            AttackActive = true;
+            _remainingTimeAttack = _timeAttack;
+        }
+
 
         private bool IsCanMove()
         {
@@ -101,17 +117,22 @@ namespace Player
 
         private bool IsCanJump()
         {
-            return _rigidbody.velocity.y == 0 && !BlockActive && !RollActive;
+            return _rigidbody.velocity.y == 0 && !BlockActive && !RollActive && !AttackActive;
         }
 
         private bool IsCanRoll()
         {
-            return _rigidbody.velocity.y == 0 && !BlockActive && !RollActive;
+            return _rigidbody.velocity.y == 0 && !BlockActive && !RollActive && !AttackActive;
         }
 
         private bool IsCanBlock()
         {
-            return _rigidbody.velocity.y == 0 && !RollActive;
+            return _rigidbody.velocity.y == 0 && !RollActive && !AttackActive;
+        }
+
+        private bool IsCanAttack()
+        {
+            return _rigidbody.velocity.y == 0 && !RollActive && !AttackActive;
         }
 
 
@@ -159,6 +180,18 @@ namespace Player
         {
             _collider.size = size;
             _collider.offset = offset;
+        }
+
+
+        private void UpdateAtack()
+        {
+            if (AttackActive)
+            {
+                _remainingTimeAttack -= Time.deltaTime;
+
+                if(_remainingTimeAttack <= 0)
+                    AttackActive = false;
+            }
         }
     }
 
