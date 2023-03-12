@@ -37,7 +37,11 @@ namespace Player
         [SerializeField] private float _timeAttack;
         private float _remainingTimeAttack;
 
-        public Vector2 Velocity { get { return _rigidbody.velocity; } }
+        private Vector2 Velocity => _rigidbody.velocity;
+        
+        public bool MoveActive { get { return Velocity.x != 0; } }
+        public bool JumpActive { get { return Velocity.y > 0; }}
+        public bool FallActive { get { return Velocity.y < 0; } }
         public bool RollActive { get; private set; }
         public bool BlockActive { get; private set; }
         public bool AttackActive { get; private set; }
@@ -117,22 +121,22 @@ namespace Player
 
         private bool IsCanJump()
         {
-            return _rigidbody.velocity.y == 0 && !BlockActive && !RollActive && !AttackActive;
+            return !JumpActive && !FallActive && !BlockActive && !RollActive && !AttackActive;
         }
 
         private bool IsCanRoll()
         {
-            return _rigidbody.velocity.y == 0 && !BlockActive && !RollActive && !AttackActive;
+            return !BlockActive && !RollActive && !AttackActive;
         }
 
         private bool IsCanBlock()
         {
-            return _rigidbody.velocity.y == 0 && !RollActive && !AttackActive;
+            return !JumpActive && !FallActive && !RollActive && !AttackActive;
         }
 
         private bool IsCanAttack()
         {
-            return _rigidbody.velocity.y == 0 && !RollActive && !AttackActive;
+            return !JumpActive && !FallActive && !RollActive && !AttackActive;
         }
 
 

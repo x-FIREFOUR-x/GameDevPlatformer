@@ -24,9 +24,9 @@ namespace Player
         private void UpdateAnimations()
         {
             PlayAnimation(AnimationType.Idle, true);
-            PlayAnimation(AnimationType.Run, Mathf.Abs(_player.Velocity.x) > 0);
-            PlayAnimation(AnimationType.Jump, _player.Velocity.y > 0);
-            PlayAnimation(AnimationType.Fall, _player.Velocity.y < 0);
+            PlayAnimation(AnimationType.Run, _player.MoveActive);
+            PlayAnimation(AnimationType.Jump, _player.JumpActive);
+            PlayAnimation(AnimationType.Fall, _player.FallActive);
             PlayAnimation(AnimationType.Roll, _player.RollActive);
             PlayAnimation(AnimationType.BlockIdle, _player.BlockActive);
 
