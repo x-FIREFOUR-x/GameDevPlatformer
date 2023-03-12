@@ -10,6 +10,9 @@ public class InputReader : MonoBehaviour
 
         _playerEntity.Move(Input.GetAxisRaw("Horizontal"));
 
+        if (Input.GetButtonDown("Debug Multiplier"))
+            _playerEntity.Roll();
+
         if (Input.GetButtonDown("Jump"))
             _playerEntity.Jump();
     }

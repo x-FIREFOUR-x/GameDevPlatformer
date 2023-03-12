@@ -1,6 +1,4 @@
-﻿
-
-namespace Player
+﻿namespace Player
 {
     enum AnimationType
     {
@@ -8,7 +6,8 @@ namespace Player
         Run = 1,
         Jump = 2,
         Fall = 3,
-        Block = 4,
-        Atack = 5
+        Roll = 4,
+        Block = 5,
+        Atack = 6
     }
 }

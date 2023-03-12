@@ -5,6 +5,8 @@ namespace Player
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerEntity : MonoBehaviour
     {
+        private Rigidbody2D _rigidbody;
+
         [Header("Move")]
         [SerializeField] private float _moveSpeed;
         [SerializeField] private bool _faceRight;
@@ -13,15 +15,25 @@ namespace Player
         [SerializeField] private float _jumpForce;
         [SerializeField] private float _gravityScale;
 
-        private Rigidbody2D _rigidbody;
+        [Header("Roll")]
+        [SerializeField] private float _rollSpeed;
+        [SerializeField] private float _rollDistance;
+        private float _distanceCurrentRole;
+        private int _diretionRoll;
 
         public Vector2 Velocity { get { return _rigidbody.velocity; } }
+        public bool RollActive { get; private set; }
         public bool BlockActive { get; private set; }
 
-
+        
         private void Start()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
+        }
+
+        private void Update()
+        {
+            UpdateRoll();
         }
 
 
@@ -50,6 +62,16 @@ namespace Player
             _rigidbody.gravityScale = _gravityScale;
         }
 
+        public void Roll()
+        {
+            if (!IsCanRoll())
+                return;
+
+            RollActive = true;
+            _distanceCurrentRole = _rollDistance;
+            _diretionRoll = _faceRight ? 1 : -1;
+        }
+
         public void Block(bool activeBlock)
         {
             BlockActive = activeBlock && IsCanBlock();
@@ -58,17 +80,22 @@ namespace Player
 
         private bool IsCanMove()
         {
-            return !BlockActive;
+            return !BlockActive && !RollActive;
         }
 
         private bool IsCanJump()
         {
-            return _rigidbody.velocity.y == 0 && !BlockActive;
+            return _rigidbody.velocity.y == 0 && !BlockActive && !RollActive;
+        }
+
+        private bool IsCanRoll()
+        {
+            return _rigidbody.velocity.y == 0 && !BlockActive && !RollActive;
         }
 
         private bool IsCanBlock()
         {
-            return _rigidbody.velocity.y == 0;
+            return _rigidbody.velocity.y == 0 && !RollActive;
         }
 
 
@@ -82,6 +109,25 @@ namespace Player
         {
             transform.Rotate(0, 180, 0);
             _faceRight = !_faceRight;
+        }
+
+
+        private void UpdateRoll()
+        {
+            if(RollActive)
+            {
+                float distance = _rollSpeed * Time.deltaTime;
+                _distanceCurrentRole -= distance;
+
+                Vector3 position = transform.position;
+                position.x = position.x + distance * _diretionRoll;
+                transform.position = position;
+
+                if(_distanceCurrentRole <= 0)
+                {
+                    RollActive = false;
+                }
+            }
         }
     }
 

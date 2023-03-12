@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
@@ -23,6 +21,7 @@ namespace Player
             PlayAnimation(AnimationType.Run, Mathf.Abs(_player.Velocity.x) > 0);
             PlayAnimation(AnimationType.Jump, _player.Velocity.y > 0);
             PlayAnimation(AnimationType.Fall, _player.Velocity.y < 0);
+            PlayAnimation(AnimationType.Roll, _player.RollActive);
             PlayAnimation(AnimationType.Block, _player.BlockActive);
         }
 

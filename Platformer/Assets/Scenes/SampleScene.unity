@@ -4237,9 +4237,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: _playerAnimator
       value: 
       objectReference: {fileID: 1572705051}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _oppositionRollScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -4283,6 +4299,10 @@ PrefabInstance:
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253670, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253692, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_Name
