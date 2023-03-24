@@ -4,18 +4,19 @@ public class InputReader : MonoBehaviour
 {
     [SerializeField] private Player.PlayerEntity _playerEntity;
 
-    private float _directionMove;
-
     private void Update()
     {
-        _directionMove = Input.GetAxisRaw("Horizontal");
+        _playerEntity.Block(Input.GetButton("Fire2"));
+
+        _playerEntity.Move(Input.GetAxisRaw("Horizontal"));
+
+        if (Input.GetButtonDown("Debug Multiplier"))
+            _playerEntity.Roll();
 
         if (Input.GetButtonDown("Jump"))
             _playerEntity.Jump();
-    }
 
-    private void FixedUpdate()
-    {
-        _playerEntity.Move(_directionMove);
+        if (Input.GetButtonDown("Fire1"))
+            _playerEntity.Attack();
     }
 }

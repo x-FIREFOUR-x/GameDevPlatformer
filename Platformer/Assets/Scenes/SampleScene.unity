@@ -2995,6 +2995,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdad1329ceb8aec429155dde3bbd6fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &1572705057 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8617698486661253664, guid: 4b90badacc47760428af352369253d53, type: 3}
+  m_PrefabInstance: {fileID: 8617698486145366418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1581748568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4201,9 +4206,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8617698486661253664, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253664, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: _jumpForce
-      value: 300
+      propertyPath: _collider
+      value: 
+      objectReference: {fileID: 1572705057}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _timeAttack
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _coliderRolling
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _coliderFullHeight
+      value: 
+      objectReference: {fileID: 1572705057}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _sizeRollCollider.x
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _sizeRollCollider.y
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _offsetRollCollider.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _offsetRollCollider.y
+      value: 0.425
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_RootOrder
@@ -4247,10 +4288,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8617698486661253671, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253692, guid: 4b90badacc47760428af352369253d53, type: 3}

@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 8617698486661253693}
   - component: {fileID: 8617698486661253664}
   - component: {fileID: 8617698486661253670}
+  - component: {fileID: 2119696261}
   - component: {fileID: 8617698486661253665}
+  - component: {fileID: 4376251333676912599}
   - component: {fileID: 8617698486661253671}
   m_Layer: 0
   m_Name: PlayerEntity
@@ -101,7 +103,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04770279, y: 0.6876452}
+  m_Offset: {x: -0.05, y: 0.69}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -112,7 +114,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85435104, y: 1.2798853}
+  m_Size: {x: 0.84, y: 1.25}
   m_EdgeRadius: 0
 --- !u!50 &8617698486661253670
 Rigidbody2D:
@@ -135,6 +137,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &2119696261
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617698486661253692}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1630aa7161ced0648971c3be682c9265, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &8617698486661253665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,11 +169,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3001c71cd780d468d3fec3965ad714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 4376251333676912599}
   _moveSpeed: 4
   _faceRight: 1
-  _jumpForce: 400
+  _jumpForce: 300
   _gravityScale: 1
---- !u!114 &8617698486661253671
+  _rollSpeed: 6
+  _rollDistance: 2.5
+  _offsetRollCollider: {x: 0, y: 0}
+  _sizeRollCollider: {x: 0, y: 0}
+  _timeAttack: 0
+--- !u!114 &4376251333676912599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,6 +187,19 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8617698486661253692}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1558ffd3445177649be45b66150aefb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 2119696261}
+--- !u!114 &8617698486661253671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617698486661253692}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdad1329ceb8aec429155dde3bbd6fe0, type: 3}
   m_Name: 
