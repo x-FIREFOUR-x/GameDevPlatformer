@@ -1,10 +1,11 @@
+
 using UnityEngine;
+using System;
 
 namespace Player
 {
-    public class PlayerAnimator : MonoBehaviour
+    public class PlayerAnimatorController : MonoBehaviour
     {
-        [SerializeField] private PlayerEntity _player;
         [SerializeField] private Animator _animator;
 
         private AnimationType _currentAnimationType;
@@ -15,31 +16,26 @@ namespace Player
 
         private AnimationType _lastShowAttackAnim = AnimationType.Attack;
 
-        private void FixedUpdate()
-        {
-            UpdateAnimations();
-        }
 
-
-        private void UpdateAnimations()
+        public void UpdateAnimations(PlayerEntity player)
         {
             PlayAnimation(AnimationType.Idle, true);
-            PlayAnimation(AnimationType.Run, _player.MoveActive);
-            PlayAnimation(AnimationType.Jump, _player.JumpActive);
-            PlayAnimation(AnimationType.Fall, _player.FallActive);
-            PlayAnimation(AnimationType.Roll, _player.RollActive);
-            PlayAnimation(AnimationType.BlockIdle, _player.BlockActive);
+            PlayAnimation(AnimationType.Run, player.MoveActive);
+            PlayAnimation(AnimationType.Jump, player.JumpActive);
+            PlayAnimation(AnimationType.Fall, player.FallActive);
+            PlayAnimation(AnimationType.Roll, player.RollActive);
+            PlayAnimation(AnimationType.BlockIdle, player.BlockActive);
 
-            UpdateAnimationsAttack();
+            UpdateAnimationsAttack(player);
         }
 
-        private void UpdateAnimationsAttack()
+        private void UpdateAnimationsAttack(PlayerEntity player)
         {
-            if(!_player.AttackActive)
+            if(!player.AttackActive)
             {
                 for (int i = (int)_firstAttackAnimation; i <= (int)_lastAttackAnimation; i++)
                 {
-                    PlayAnimation((AnimationType)i, _player.AttackActive);
+                    PlayAnimation((AnimationType)i, player.AttackActive);
                 }
             }
             else
@@ -47,7 +43,7 @@ namespace Player
                 if(!(_currentAnimationType >= _firstAttackAnimation && _currentAnimationType <= _lastAttackAnimation))
                 {
                     AnimationType randomAttackAnim = RandomAttackAnimation();
-                    PlayAnimation(randomAttackAnim, _player.AttackActive);
+                    PlayAnimation(randomAttackAnim, player.AttackActive);
 
                     _lastShowAttackAnim = randomAttackAnim;
                 }
@@ -85,7 +81,7 @@ namespace Player
             bool randomCorrect = false;
             while (!randomCorrect)
             {
-                randomAttackAnim = Random.Range((int)_firstAttackAnimation, (int)_lastAttackAnimation + 1);
+                randomAttackAnim = UnityEngine.Random.Range((int)_firstAttackAnimation, (int)_lastAttackAnimation + 1);
 
                 if (randomAttackAnim != (int)_lastShowAttackAnim)
                     randomCorrect = true;

@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8617698486661253666}
   - component: {fileID: 8617698486661253693}
-  - component: {fileID: 2119696261}
   - component: {fileID: 8617698486661253664}
   - component: {fileID: 8617698486661253670}
+  - component: {fileID: 2119696261}
   - component: {fileID: 8617698486661253665}
+  - component: {fileID: 4376251333676912599}
   - component: {fileID: 8617698486661253671}
-  - component: {fileID: 1572705051}
   m_Layer: 0
   m_Name: PlayerEntity
   m_TagString: Untagged
@@ -90,26 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &2119696261
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8617698486661253692}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1630aa7161ced0648971c3be682c9265, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!61 &8617698486661253664
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -157,6 +137,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &2119696261
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617698486661253692}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1630aa7161ced0648971c3be682c9265, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &8617698486661253665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,13 +169,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3001c71cd780d468d3fec3965ad714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 0}
+  _animator: {fileID: 4376251333676912599}
   _moveSpeed: 4
   _faceRight: 1
   _jumpForce: 300
   _gravityScale: 1
   _rollSpeed: 6
   _rollDistance: 2.5
+  _offsetRollCollider: {x: 0, y: 0}
+  _sizeRollCollider: {x: 0, y: 0}
+  _timeAttack: 0
+--- !u!114 &4376251333676912599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617698486661253692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1558ffd3445177649be45b66150aefb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 2119696261}
 --- !u!114 &8617698486661253671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,17 +205,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerEntity: {fileID: 8617698486661253665}
---- !u!114 &1572705051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8617698486661253692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1558ffd3445177649be45b66150aefb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 8617698486661253665}
-  _animator: {fileID: 2119696261}

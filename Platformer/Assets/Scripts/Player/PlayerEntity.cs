@@ -6,6 +6,8 @@ namespace Player
     [RequireComponent(typeof(BoxCollider2D))]
     public class PlayerEntity : MonoBehaviour
     {
+        [SerializeField] private PlayerAnimatorController _animator;
+
         private Rigidbody2D _rigidbody;
 
         private BoxCollider2D _collider;
@@ -58,6 +60,8 @@ namespace Player
 
         private void Update()
         {
+            _animator.UpdateAnimations(this);
+
             UpdateRoll();
             UpdateAtack();
         }
