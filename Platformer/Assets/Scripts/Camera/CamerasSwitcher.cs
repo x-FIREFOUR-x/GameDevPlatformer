@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Camera
+namespace GameCamera
 {
     public class CamerasSwitcher : MonoBehaviour
     {
-        [SerializeField] private GameStateController _gameStateController;
+        [SerializeField] private GameLevelInitializer _gameLevelInitializer;
 
         [SerializeField] private Cinemachine.CinemachineBrain _cameraBrain;
         [SerializeField] private Cinemachine.CinemachineVirtualCamera[] _cameras;
@@ -32,7 +32,7 @@ namespace Camera
 
             if (_currentBlend == _blends.Length)
             {
-                _gameStateController.SetStateRunGame();
+                _gameLevelInitializer.PauseOff();
                 this.enabled = false;
             }
         }
