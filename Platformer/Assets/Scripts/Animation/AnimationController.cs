@@ -5,7 +5,7 @@ using Player;
 
 namespace Animation
 {
-    public class PlayerAnimatorController : MonoBehaviour
+    public class AnimationController : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
 
@@ -57,6 +57,7 @@ namespace Animation
             _currentAnimationType = animationType;
             PlayAnimation(_currentAnimationType);
         }
+
 
         private void PlayAnimation(AnimationType animationType)
         {

@@ -14,6 +14,7 @@ class GameLevelInitializer: MonoBehaviour
 
     private bool _onPause = true;
 
+
     private void Awake()
     {
         _externalDevicesInput = new ExternalDevicesInputReader();

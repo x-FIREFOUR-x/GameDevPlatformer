@@ -17,6 +17,7 @@ namespace InputReader
         public bool Roll { get; private set; }
         public bool Block { get; private set; }
 
+
         private void Awake()
         {
             _attackButton.onClick.AddListener(() => Attack = true);

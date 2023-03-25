@@ -6,12 +6,11 @@ namespace InputReader
     public class ExternalDevicesInputReader : IEentityInputSource
     {
         public float HorizontalDirection => Input.GetAxisRaw("Horizontal");
-
         public bool Attack { get; private set; }
         public bool Jump { get; private set; }
         public bool Roll { get; private set; }
-
         public bool Block => Input.GetButton("Fire2");
+
 
         public void OnUpdate()
         {

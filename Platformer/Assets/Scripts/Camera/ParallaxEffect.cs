@@ -11,6 +11,7 @@ namespace GameCamera
 
         private float _previousTargetPosition;
 
+
         private void Start()
         {
             _previousTargetPosition = _target.position.x;

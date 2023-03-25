@@ -20,7 +20,7 @@ namespace Player
 
         public void OnFixedUpdate()
         {
-            _playerEntity.Move(GetHorizontalDirection());
+            _playerEntity.Move(GetMoveDirection());
 
             if (IsAttack)
                 _playerEntity.Attack();
@@ -39,7 +39,7 @@ namespace Player
             }
         }
 
-        private float GetHorizontalDirection()
+        private float GetMoveDirection()
         {
             foreach(var inputSource in _inputSources)
             {

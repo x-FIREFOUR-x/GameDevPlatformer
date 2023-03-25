@@ -13,10 +13,10 @@ namespace Player
         private Rigidbody2D _rigidbody;
 
 
-        [SerializeField] private PlayerAnimatorController _animator;
+        [SerializeField] private AnimationController _animator;
 
 
-        [SerializeField] private MovementData _movementData;
+        [SerializeField] private MoveData _moveData;
         private Mover _mover;
 
         [SerializeField] private JumpData _jumperData;
@@ -34,7 +34,7 @@ namespace Player
         {
             _rigidbody = GetComponent<Rigidbody2D>();
 
-            _mover = new Mover(_rigidbody, _movementData);
+            _mover = new Mover(_rigidbody, _moveData);
             _jumper = new Jumper(_rigidbody, _jumperData);
             _roller = new Roller(_rigidbody, GetComponent<BoxCollider2D>(), _rollData);
             _attacker = new Attacker(_attackData);

@@ -8,13 +8,13 @@ namespace Movement.Controller
     {
         private readonly Rigidbody2D _rigidbody;
         private readonly Transform _transform;
-        private readonly MovementData _movementData;
+        private readonly MoveData _movementData;
 
 
         public bool MoveActive { get { return _rigidbody.velocity.x != 0; } }
 
 
-        public Mover(Rigidbody2D rigidbody, MovementData movementData)
+        public Mover(Rigidbody2D rigidbody, MoveData movementData)
         {
             _rigidbody = rigidbody;
             _transform = _rigidbody.transform;

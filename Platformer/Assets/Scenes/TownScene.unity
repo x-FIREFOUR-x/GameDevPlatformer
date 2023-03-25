@@ -5339,6 +5339,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1572705057}
     - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _moveData.FaceRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _moveData.MoveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: _rollData.RollSpeed
       value: 6
       objectReference: {fileID: 0}
