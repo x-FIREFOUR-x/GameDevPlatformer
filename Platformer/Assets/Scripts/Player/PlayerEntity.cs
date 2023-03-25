@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using Player.Animation;
+
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]

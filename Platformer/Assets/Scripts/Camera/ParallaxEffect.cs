@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-namespace Camera
+namespace GameCamera
 {
     public class ParallaxEffect : MonoBehaviour
     {
