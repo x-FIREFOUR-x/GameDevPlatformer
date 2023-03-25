@@ -9,7 +9,7 @@ namespace Player.InputReader
         [SerializeField] private Button _attackButton;
         [SerializeField] private Button _jumpButton;
         [SerializeField] private Button _rollButton;
-        [SerializeField] private Button _blockButton;
+        [SerializeField] private PressButton _blockButton;
 
         public float HorizontalDirection => _joystick.Horizontal;
         public bool Attack { get; private set; }
@@ -22,7 +22,9 @@ namespace Player.InputReader
             _attackButton.onClick.AddListener(() => Attack = true);
             _jumpButton.onClick.AddListener(() => Jump = true);
             _rollButton.onClick.AddListener(() => Roll = true);
-            //_blockButton.onClick.AddListener(() => Block = true);
+
+            _blockButton.buttonPressed.AddListener(() => Block = true);
+            _blockButton.buttonUnpressed.AddListener(() => Block = false);
         }
 
         public void ResetOneTimeActions()
@@ -30,7 +32,6 @@ namespace Player.InputReader
             Attack = false;
             Jump = false;
             Roll = false;
-            //Block = false;
         }
 
         private void OnDestroy()
@@ -38,6 +39,9 @@ namespace Player.InputReader
             _attackButton.onClick.RemoveAllListeners();
             _jumpButton.onClick.RemoveAllListeners();
             _rollButton.onClick.RemoveAllListeners();
+
+            _blockButton.buttonPressed.RemoveAllListeners();
+            _blockButton.buttonUnpressed.RemoveAllListeners();
         }
     }
 }
