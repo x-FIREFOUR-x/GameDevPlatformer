@@ -1654,7 +1654,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1ab9b09e0790c4990b531abe01f588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonPressed: 0
+  buttonPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  buttonUnpressed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &752138156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4179,7 +4184,7 @@ MonoBehaviour:
   _attackButton: {fileID: 1098362669}
   _jumpButton: {fileID: 904854100}
   _rollButton: {fileID: 1570408858}
-  _blockButton: {fileID: 0}
+  _blockButton: {fileID: 743575096}
 --- !u!1 &1684565403
 GameObject:
   m_ObjectHideFlags: 0
