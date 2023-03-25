@@ -18,25 +18,13 @@ namespace Animation
         private AnimationType _lastShowAttackAnim = AnimationType.Attack;
 
 
-        public void UpdateAnimations(PlayerEntity player)
+        public void UpdateAnimationsAttack(bool attackActive)
         {
-            PlayAnimation(AnimationType.Idle, true);
-            PlayAnimation(AnimationType.Run, player.MoveActive);
-            PlayAnimation(AnimationType.Jump, player.JumpActive);
-            PlayAnimation(AnimationType.Fall, player.FallActive);
-            PlayAnimation(AnimationType.Roll, player.RollActive);
-            PlayAnimation(AnimationType.BlockIdle, player.BlockActive);
-
-            UpdateAnimationsAttack(player);
-        }
-
-        private void UpdateAnimationsAttack(PlayerEntity player)
-        {
-            if(!player.AttackActive)
+            if(!attackActive)
             {
                 for (int i = (int)_firstAttackAnimation; i <= (int)_lastAttackAnimation; i++)
                 {
-                    PlayAnimation((AnimationType)i, player.AttackActive);
+                    PlayAnimation((AnimationType)i, attackActive);
                 }
             }
             else
@@ -44,14 +32,14 @@ namespace Animation
                 if(!(_currentAnimationType >= _firstAttackAnimation && _currentAnimationType <= _lastAttackAnimation))
                 {
                     AnimationType randomAttackAnim = RandomAttackAnimation();
-                    PlayAnimation(randomAttackAnim, player.AttackActive);
+                    PlayAnimation(randomAttackAnim, attackActive);
 
                     _lastShowAttackAnim = randomAttackAnim;
                 }
             }
         }
         
-        private void PlayAnimation(AnimationType animationType, bool active)
+        public void PlayAnimation(AnimationType animationType, bool active)
         {
             if (!active)
             {

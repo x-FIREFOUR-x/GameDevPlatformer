@@ -1,6 +1,6 @@
 ﻿namespace Animation
 {
-    enum AnimationType
+    public enum AnimationType
     {
         Idle = 0,
         Run = 1,
