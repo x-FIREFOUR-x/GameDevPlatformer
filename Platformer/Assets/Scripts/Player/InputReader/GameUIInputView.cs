@@ -22,7 +22,7 @@ namespace Player.InputReader
             _attackButton.onClick.AddListener(() => Attack = true);
             _jumpButton.onClick.AddListener(() => Jump = true);
             _rollButton.onClick.AddListener(() => Roll = true);
-            _blockButton.onClick.AddListener(() => Block = true);
+            //_blockButton.onClick.AddListener(() => Block = true);
         }
 
         public void ResetOneTimeActions()
@@ -30,6 +30,7 @@ namespace Player.InputReader
             Attack = false;
             Jump = false;
             Roll = false;
+            //Block = false;
         }
 
         private void OnDestroy()
