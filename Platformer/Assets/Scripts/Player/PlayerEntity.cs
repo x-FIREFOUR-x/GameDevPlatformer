@@ -1,12 +1,13 @@
 using UnityEngine;
 
+
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
     public class PlayerEntity : MonoBehaviour
     {
-        [SerializeField] private PlayerAnimatorController _animator;
+        [SerializeField] private Animation.PlayerAnimatorController _animator;
 
         private Rigidbody2D _rigidbody;
 
