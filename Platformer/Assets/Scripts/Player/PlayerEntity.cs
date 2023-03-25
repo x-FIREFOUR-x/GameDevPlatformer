@@ -1,5 +1,6 @@
 using UnityEngine;
 
+using Player.Animation;
 
 namespace Player
 {
@@ -7,7 +8,7 @@ namespace Player
     [RequireComponent(typeof(BoxCollider2D))]
     public class PlayerEntity : MonoBehaviour
     {
-        [SerializeField] private Animation.PlayerAnimatorController _animator;
+        [SerializeField] private PlayerAnimatorController _animator;
 
         private Rigidbody2D _rigidbody;
 
