@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 using Player;
 using InputReader;
+using Services.Updater;
 
 class GameLevelInitializer: MonoBehaviour
 {
@@ -10,16 +12,24 @@ class GameLevelInitializer: MonoBehaviour
     [SerializeField] private GameUIInputView _ganeUIInputView;
 
     private ExternalDevicesInputReader _externalDevicesInput;
-    private PlayerBrain _playerBrain;
+    private PlayerSystem _playerSystem;
+    private ProjectUpdater _projectUpdater;
 
-    private bool _onPause = true;
+    private List<IDisposable> _disposables;
 
 
     private void Awake()
     {
-        _externalDevicesInput = new ExternalDevicesInputReader();
+        _disposables = new List<IDisposable>();
+        if (ProjectUpdater.Instance == null)
+            _projectUpdater = new GameObject().AddComponent<ProjectUpdater>();
+        else
+            _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
 
-        _playerBrain = new PlayerBrain(_playerEntity, new List<IEentityInputSource>
+        _externalDevicesInput = new ExternalDevicesInputReader();
+        _disposables.Add(_externalDevicesInput);
+
+        _playerSystem = new PlayerSystem(_playerEntity, new List<IEntityInputSource>
         {
             _ganeUIInputView,
             _externalDevicesInput
@@ -28,22 +38,20 @@ class GameLevelInitializer: MonoBehaviour
 
     private void Update()
     {
-        if (_onPause)
-            return;
-
-        _externalDevicesInput.OnUpdate();
+        if (Input.GetKeyDown(KeyCode.Escape))
+            _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
     }
 
-    private void FixedUpdate()
+    private void OnDestroy()
     {
-        if (_onPause)
-            return;
-
-        _playerBrain.OnFixedUpdate();
+        foreach (var disposable in _disposables)
+        {
+            disposable.Dispose();
+        }
     }
 
-    public void PauseOff()
+    public void StartLevel()
     {
-        _onPause = false;
+        _projectUpdater.IsPaused = false;
     }
 }

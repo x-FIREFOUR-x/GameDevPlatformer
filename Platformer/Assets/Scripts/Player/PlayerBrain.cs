@@ -1,24 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using InputReader;
+using Services.Updater;
 
 namespace Player
 {
-    class PlayerBrain
+    class PlayerBrain: IDisposable
     {
         private readonly PlayerEntity _playerEntity;
 
-        List<IEentityInputSource> _inputSources;
+        List<IEntityInputSource> _inputSources;
 
 
-        public PlayerBrain(PlayerEntity playerEntity, List<IEentityInputSource> inputSources)
+        public PlayerBrain(PlayerEntity playerEntity, List<IEntityInputSource> inputSources)
         {
             _playerEntity = playerEntity;
             _inputSources = inputSources;
+
+            ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
 
-        public void OnFixedUpdate()
+        public void Dispose() => ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+
+        private void OnFixedUpdate()
         {
             _playerEntity.Move(GetMoveDirection());
 

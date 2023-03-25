@@ -32,7 +32,7 @@ namespace GameCamera
 
             if (_currentBlend == _blends.Length)
             {
-                _gameLevelInitializer.PauseOff();
+                _gameLevelInitializer.StartLevel();
                 this.enabled = false;
             }
         }

@@ -1,7 +1,7 @@
 ﻿
 namespace InputReader
 {
-    interface IEentityInputSource
+    public interface IEntityInputSource
     {
         float HorizontalDirection { get; }
         bool Attack { get; }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace InputReader
 {
-    class GameUIInputView : MonoBehaviour, IEentityInputSource
+    class GameUIInputView : MonoBehaviour, IEntityInputSource
     {
         [SerializeField] private Joystick _joystick;
         [SerializeField] private Button _attackButton;
