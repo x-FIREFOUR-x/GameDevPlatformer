@@ -1,5 +1,5 @@
 ﻿
-namespace Player.InputReader
+namespace InputReader
 {
     interface IEentityInputSource
     {

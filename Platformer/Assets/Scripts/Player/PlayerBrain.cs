@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Player.InputReader
+using InputReader;
+
+namespace Player
 {
     class PlayerBrain
     {

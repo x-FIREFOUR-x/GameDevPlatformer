@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Player.InputReader
+namespace InputReader
 {
     class GameUIInputView : MonoBehaviour, IEentityInputSource
     {

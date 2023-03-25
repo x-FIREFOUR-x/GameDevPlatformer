@@ -2,7 +2,7 @@
 using UnityEngine;
 
 using Player;
-using Player.InputReader;
+using InputReader;
 
 class GameLevelInitializer: MonoBehaviour
 {

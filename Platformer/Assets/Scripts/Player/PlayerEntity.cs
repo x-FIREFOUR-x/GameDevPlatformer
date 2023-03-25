@@ -1,6 +1,6 @@
 using UnityEngine;
 
-using Player.Animation;
+using Animation;
 
 namespace Player
 {
