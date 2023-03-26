@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameCamera
+namespace Core.GameCamera
 {
     public class CamerasSwitcher : MonoBehaviour
     {

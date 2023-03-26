@@ -4,54 +4,57 @@ using UnityEngine;
 
 using Player;
 using InputReader;
-using Services.Updater;
+using Core.Services.Updater;
 
-class GameLevelInitializer: MonoBehaviour
+namespace Core
 {
-    [SerializeField] private PlayerEntity _playerEntity;
-    [SerializeField] private GameUIInputView _ganeUIInputView;
-
-    private ExternalDevicesInputReader _externalDevicesInput;
-    private PlayerSystem _playerSystem;
-    private ProjectUpdater _projectUpdater;
-
-    private List<IDisposable> _disposables;
-
-
-    private void Awake()
+    class GameLevelInitializer : MonoBehaviour
     {
-        _disposables = new List<IDisposable>();
-        if (ProjectUpdater.Instance == null)
-            _projectUpdater = new GameObject().AddComponent<ProjectUpdater>();
-        else
-            _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
+        [SerializeField] private PlayerEntity _playerEntity;
+        [SerializeField] private GameUIInputView _ganeUIInputView;
 
-        _externalDevicesInput = new ExternalDevicesInputReader();
-        _disposables.Add(_externalDevicesInput);
+        private ExternalDevicesInputReader _externalDevicesInput;
+        private PlayerSystem _playerSystem;
+        private ProjectUpdater _projectUpdater;
 
-        _playerSystem = new PlayerSystem(_playerEntity, new List<IEntityInputSource>
+        private List<IDisposable> _disposables;
+
+
+        private void Awake()
+        {
+            _disposables = new List<IDisposable>();
+            if (ProjectUpdater.Instance == null)
+                _projectUpdater = new GameObject().AddComponent<ProjectUpdater>();
+            else
+                _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
+
+            _externalDevicesInput = new ExternalDevicesInputReader();
+            _disposables.Add(_externalDevicesInput);
+
+            _playerSystem = new PlayerSystem(_playerEntity, new List<IEntityInputSource>
         {
             _ganeUIInputView,
             _externalDevicesInput
         });
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
-    }
-
-    private void OnDestroy()
-    {
-        foreach (var disposable in _disposables)
-        {
-            disposable.Dispose();
         }
-    }
 
-    public void StartLevel()
-    {
-        _projectUpdater.IsPaused = false;
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var disposable in _disposables)
+            {
+                disposable.Dispose();
+            }
+        }
+
+        public void StartLevel()
+        {
+            _projectUpdater.IsPaused = false;
+        }
     }
 }

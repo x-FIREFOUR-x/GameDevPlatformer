@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Services.Updater
+namespace Core.Services.Updater
 {
     public interface IProjectUpdater
     {

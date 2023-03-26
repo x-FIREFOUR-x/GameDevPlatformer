@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using InputReader;
-using Services.Updater;
+using Core.Services.Updater;
 
 namespace Player
 {

@@ -1,9 +1,8 @@
 
 using UnityEngine;
 
-using Player;
 
-namespace Animation
+namespace Core.Animation
 {
     public class AnimationController : MonoBehaviour
     {

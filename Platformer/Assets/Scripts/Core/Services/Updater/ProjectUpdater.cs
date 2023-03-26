@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace Services.Updater
+namespace Core.Services.Updater
 {
     public class ProjectUpdater: MonoBehaviour, IProjectUpdater
     {

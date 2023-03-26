@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-using Services.Updater;
+using Core.Services.Updater;
 
 namespace InputReader
 {

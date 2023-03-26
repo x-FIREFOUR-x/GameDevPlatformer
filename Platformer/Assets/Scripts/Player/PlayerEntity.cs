@@ -1,6 +1,6 @@
 using UnityEngine;
 
-using Animation;
+using Core.Animation;
 using Movement.Data;
 using Movement.Controller;
 
