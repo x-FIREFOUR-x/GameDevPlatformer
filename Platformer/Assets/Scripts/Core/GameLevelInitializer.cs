@@ -5,6 +5,7 @@ using UnityEngine;
 using Player;
 using InputReader;
 using Core.Services.Updater;
+using StatsSystem;
 
 namespace Core
 {
@@ -12,6 +13,7 @@ namespace Core
     {
         [SerializeField] private PlayerEntity _playerEntity;
         [SerializeField] private GameUIInputView _ganeUIInputView;
+        [SerializeField] private StatsStorage _statsStorage;
 
         private ExternalDevicesInputReader _externalDevicesInput;
         private PlayerSystem _playerSystem;
@@ -32,10 +34,11 @@ namespace Core
             _disposables.Add(_externalDevicesInput);
 
             _playerSystem = new PlayerSystem(_playerEntity, new List<IEntityInputSource>
-        {
-            _ganeUIInputView,
-            _externalDevicesInput
-        });
+            {
+                _ganeUIInputView,
+                _externalDevicesInput
+            });
+            _disposables.Add(_playerSystem);
         }
 
         private void Update()

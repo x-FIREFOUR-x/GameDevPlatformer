@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 using Movement.Data;
+using StatsSystem;
+using StatsSystem.Enum;
 
 namespace Movement.Controller
 {
@@ -10,15 +12,18 @@ namespace Movement.Controller
         private readonly Transform _transform;
         private readonly MoveData _movementData;
 
+        private readonly IStatValueGiver _statValueGiver;
 
         public bool MoveActive { get { return _rigidbody.velocity.x != 0; } }
 
 
-        public Mover(Rigidbody2D rigidbody, MoveData movementData)
+        public Mover(Rigidbody2D rigidbody, MoveData movementData, IStatValueGiver startValueGiver)
         {
             _rigidbody = rigidbody;
             _transform = _rigidbody.transform;
             _movementData = movementData;
+
+            _statValueGiver = startValueGiver;
         }
 
         public void Move(float direction, bool isCanMove)
@@ -26,7 +31,7 @@ namespace Movement.Controller
             Vector2 velocity = _rigidbody.velocity;
             if (isCanMove)
             {
-                velocity.x = direction * _movementData.MoveSpeed;
+                velocity.x = direction * _statValueGiver.GetStatValue(StatType.Speed);
                 SetDirectionSprite(direction);
             }
             else

@@ -3,6 +3,7 @@ using UnityEngine;
 using Core.Animation;
 using Movement.Data;
 using Movement.Controller;
+using StatsSystem;
 
 namespace Player
 {
@@ -17,24 +18,21 @@ namespace Player
 
 
         [SerializeField] private MoveData _moveData;
-        private Mover _mover;
-
         [SerializeField] private JumpData _jumperData;
-        private Jumper _jumper;
-
         [SerializeField] private RollData _rollData;
-        private Roller _roller;
-
         [SerializeField] private AttackData _attackData;
-        private Attacker _attacker;
 
+        private Mover _mover;
+        private Jumper _jumper;
+        private Roller _roller;
+        private Attacker _attacker;
         private Blocker _blocker;
 
-        private void Start()
+        public void Initialize(IStatValueGiver statValueGiver)
         {
             _rigidbody = GetComponent<Rigidbody2D>();
 
-            _mover = new Mover(_rigidbody, _moveData);
+            _mover = new Mover(_rigidbody, _moveData, statValueGiver);
             _jumper = new Jumper(_rigidbody, _jumperData);
             _roller = new Roller(_rigidbody, GetComponent<BoxCollider2D>(), _rollData);
             _attacker = new Attacker(_attackData);
