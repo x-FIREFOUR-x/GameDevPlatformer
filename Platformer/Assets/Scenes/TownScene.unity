@@ -4231,6 +4231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerEntity: {fileID: 1572705059}
   _ganeUIInputView: {fileID: 1673820770}
+  _statsStorage: {fileID: 11400000, guid: d388bc32f6e8bee4e9ead371e1e886af, type: 2}
 --- !u!4 &1695902169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
@@ -5339,6 +5340,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1572705057}
     - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _moveData.FaceRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _moveData.MoveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollData.RollSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: _sizeRollCollider.x
       value: 0.84
       objectReference: {fileID: 0}
@@ -5347,11 +5360,51 @@ PrefabInstance:
       value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _jumperData.JumpForce
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: _offsetRollCollider.x
       value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: _offsetRollCollider.y
+      value: 0.425
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _attackData.TimeAttack
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollData.RollDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _movementData.FaceRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _movementData.MoveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _jumperData.GravityScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollData.SizeRollCollider.x
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollData.SizeRollCollider.y
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollData.OffsetRollCollider.x
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _rollData.OffsetRollCollider.y
       value: 0.425
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
