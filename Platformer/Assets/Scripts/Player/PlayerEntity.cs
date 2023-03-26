@@ -33,7 +33,7 @@ namespace Player
             _rigidbody = GetComponent<Rigidbody2D>();
 
             _mover = new Mover(_rigidbody, _moveData, statValueGiver);
-            _jumper = new Jumper(_rigidbody, _jumperData);
+            _jumper = new Jumper(_rigidbody, _jumperData, statValueGiver);
             _roller = new Roller(_rigidbody, GetComponent<BoxCollider2D>(), _rollData);
             _attacker = new Attacker(_attackData);
             _blocker = new Blocker();
