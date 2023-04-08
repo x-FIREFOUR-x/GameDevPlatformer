@@ -20,7 +20,7 @@ namespace StatsSystem
             Stat = stat;
             StatModificatorType = statModificatorType;
             Duration = duration;
-            this.StartTime = startTime;
+            StartTime = startTime;
         }
     }
 }

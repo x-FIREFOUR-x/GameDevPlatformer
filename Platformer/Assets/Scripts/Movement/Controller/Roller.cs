@@ -8,17 +8,15 @@ namespace Movement.Controller
     {
         private readonly Transform _transform;
 
-        private BoxCollider2D _collider;
+        private readonly BoxCollider2D _collider;
         private Vector2 _offsetFullCollider;
         private Vector2 _sizeFullCollider;
 
-        private RollData _rollData;
+        private readonly RollData _rollData;
 
         private float _remainingRoleDistance;
 
-
         public bool RollActive { get; private set; }
-
 
         public Roller(Rigidbody2D _rigidbody, BoxCollider2D collider, RollData rollData)
         {
@@ -30,7 +28,6 @@ namespace Movement.Controller
 
             _rollData = rollData;
         }
-
 
         public void Roll(bool isCanRoll)
         {
@@ -52,7 +49,7 @@ namespace Movement.Controller
                 float directionFace = _transform.right.x;
 
                 Vector3 position = _transform.position;
-                position.x = position.x + distance * directionFace;
+                position.x += distance * directionFace;
                 _transform.position = position;
 
                 if (_remainingRoleDistance <= 0)

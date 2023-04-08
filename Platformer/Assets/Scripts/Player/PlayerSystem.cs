@@ -15,7 +15,6 @@ namespace Player
         private readonly PlayerBrain _playerBrain;
         private readonly List<IDisposable> _disposables;
         
-
         public PlayerSystem(PlayerEntity playerEntity, List<IEntityInputSource> inputSources)
         {
             _disposables = new List<IDisposable>();

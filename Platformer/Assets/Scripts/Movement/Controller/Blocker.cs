@@ -6,7 +6,6 @@ namespace Movement.Controller
     {
         public bool BlockActive { get; private set; }
 
-
         public void Block(bool activeBlock)
         {
             BlockActive = activeBlock;

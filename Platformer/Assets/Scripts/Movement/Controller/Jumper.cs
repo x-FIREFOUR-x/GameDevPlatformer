@@ -16,7 +16,6 @@ namespace Movement.Controller
         public bool JumpActive { get { return _rigidbody.velocity.y > 0; } }
         public bool FallActive { get { return _rigidbody.velocity.y < 0; } }
 
-
         public Jumper(Rigidbody2D rigidbody, JumpData jumpData, IStatValueGiver startValueGiver)
         {
             _rigidbody = rigidbody;

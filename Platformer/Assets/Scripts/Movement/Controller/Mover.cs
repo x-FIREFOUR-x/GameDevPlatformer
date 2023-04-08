@@ -16,7 +16,6 @@ namespace Movement.Controller
 
         public bool MoveActive { get { return _rigidbody.velocity.x != 0; } }
 
-
         public Mover(Rigidbody2D rigidbody, MoveData movementData, IStatValueGiver startValueGiver)
         {
             _rigidbody = rigidbody;

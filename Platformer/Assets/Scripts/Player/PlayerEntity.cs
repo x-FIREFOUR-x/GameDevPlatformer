@@ -13,9 +13,7 @@ namespace Player
     {
         private Rigidbody2D _rigidbody;
 
-
         [SerializeField] private AnimationController _animator;
-
 
         [SerializeField] private MoveData _moveData;
         [SerializeField] private JumpData _jumperData;
@@ -59,35 +57,33 @@ namespace Player
             _animator.UpdateAnimationsAttack(_attacker.AttackActive);
         }
 
-
-        public void Move(float direction) => _mover.Move(direction, IsCanMove());
-        public void Jump() => _jumper.Jump(IsCanJump());
-        public void Roll() => _roller.Roll(IsCanRoll());
-        public void Block(bool activeBlock) => _blocker.Block(activeBlock && IsCanBlock());
-        public void Attack() => _attacker.Attack(IsCanAttack());
+        public void Move(float direction) => _mover.Move(direction, CanMove());
+        public void Jump() => _jumper.Jump(CanJump());
+        public void Roll() => _roller.Roll(CanRoll());
+        public void Block(bool activeBlock) => _blocker.Block(activeBlock && CanBlock());
+        public void Attack() => _attacker.Attack(CanAttack());
         
-
-        private bool IsCanMove()
+        private bool CanMove()
         {
             return !_blocker.BlockActive && !_roller.RollActive;
         }
 
-        private bool IsCanJump()
+        private bool CanJump()
         {
             return !_jumper.JumpActive && !_jumper.FallActive && !_blocker.BlockActive && !_roller.RollActive && !_attacker.AttackActive;
         }
 
-        private bool IsCanRoll()
+        private bool CanRoll()
         {
             return !_blocker.BlockActive && !_roller.RollActive && !_attacker.AttackActive;
         }
 
-        private bool IsCanBlock()
+        private bool CanBlock()
         {
             return !_jumper.JumpActive && !_jumper.FallActive && !_roller.RollActive && !_attacker.AttackActive;
         }
 
-        private bool IsCanAttack()
+        private bool CanAttack()
         {
             return !_jumper.JumpActive && !_jumper.FallActive && !_roller.RollActive && !_attacker.AttackActive;
         }

@@ -10,9 +10,7 @@ namespace Movement.Controller
 
         private float _remainingTimeAttack;
 
-
         public bool AttackActive { get; private set; }
-
 
         public Attacker(AttackData attackData)
         {

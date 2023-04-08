@@ -14,7 +14,6 @@ namespace InputReader
         public bool Roll { get; private set; }
         public bool Block => Input.GetButton("Fire2");
 
-    
         public ExternalDevicesInputReader()
         {
             ProjectUpdater.Instance.UpdateCalled += OnUpdate;

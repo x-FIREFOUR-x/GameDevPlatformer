@@ -11,7 +11,6 @@ namespace Core.GameCamera
 
         private float _previousTargetPosition;
 
-
         private void Start()
         {
             _previousTargetPosition = _target.position.x;
@@ -23,7 +22,7 @@ namespace Core.GameCamera
             foreach (var layer in _layers)
             {
                 Vector2 layerPosition = layer.Transform.position;
-                layerPosition.x = layerPosition.x + deltaMovement * layer.Speed;
+                layerPosition.x += deltaMovement * layer.Speed;
                 layer.Transform.position = layerPosition;
             }
 
@@ -37,5 +36,4 @@ namespace Core.GameCamera
             [field: SerializeField] public float Speed { get; private set; }
         }
     }
-
 }

@@ -11,8 +11,7 @@ namespace Player
     {
         private readonly PlayerEntity _playerEntity;
 
-        List<IEntityInputSource> _inputSources;
-
+        private readonly List<IEntityInputSource> _inputSources;
 
         public PlayerBrain(PlayerEntity playerEntity, List<IEntityInputSource> inputSources)
         {

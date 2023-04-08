@@ -1,6 +1,4 @@
-
 using UnityEngine;
-
 
 namespace Core.Animation
 {
@@ -10,12 +8,10 @@ namespace Core.Animation
 
         private AnimationType _currentAnimationType;
 
-
-        private AnimationType _firstAttackAnimation = AnimationType.Attack;
-        private AnimationType _lastAttackAnimation = AnimationType.Attack3;
+        private readonly AnimationType _firstAttackAnimation = AnimationType.Attack;
+        private readonly AnimationType _lastAttackAnimation = AnimationType.Attack3;
 
         private AnimationType _lastShowAttackAnim = AnimationType.Attack;
-
 
         public void UpdateAnimationsAttack(bool attackActive)
         {
@@ -57,7 +53,6 @@ namespace Core.Animation
             PlayAnimation(_currentAnimationType);
         }
 
-
         private void PlayAnimation(AnimationType animationType)
         {
             _animator.SetInteger(nameof(AnimationType), (int)animationType);
@@ -79,5 +74,4 @@ namespace Core.Animation
             return (AnimationType)randomAttackAnim;
         }
     }
-
 }

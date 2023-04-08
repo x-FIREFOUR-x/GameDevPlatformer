@@ -15,7 +15,6 @@ namespace Core.GameCamera
         private float _time = 0;
         private float _timeChangeCameras;
 
-
         private void Start()
         {
             _blends = _cameraBrain.m_CustomBlends.m_CustomBlends;
@@ -62,5 +61,4 @@ namespace Core.GameCamera
             return null;
         }
     }
-
 }
