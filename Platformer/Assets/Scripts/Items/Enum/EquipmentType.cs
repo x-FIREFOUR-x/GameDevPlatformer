@@ -6,6 +6,6 @@
         Helmet = 1,
         Chest = 2,
         Shield = 3,
-        BothHands = 4
+        Weapon = 4
     }
 }

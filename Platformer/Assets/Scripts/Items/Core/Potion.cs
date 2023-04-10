@@ -6,11 +6,9 @@ namespace Items.Core
 {
     public class Potion : Item
     {
-        private readonly StatsController _statsController;
-        private readonly StatChangingItemDescriptor _itemDescriptor;
         private int _amount;
         
-        public override int Amount => -1;
+        public override int Amount => _amount;
 
         public Potion(ItemDescriptor descriptor, StatsController statsController) :
             base(descriptor)

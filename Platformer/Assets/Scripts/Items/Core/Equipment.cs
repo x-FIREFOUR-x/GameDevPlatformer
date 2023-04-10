@@ -7,9 +7,6 @@ namespace Items.Core
 {
     public class Equipment : Item
     {
-        private readonly StatsController _statsController;
-        private readonly StatChangingItemDescriptor _itemDescriptor;
-
         private bool _equipped;
 
         public override int Amount => -1;
