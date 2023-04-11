@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Object
+  - Item
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -58,6 +58,9 @@ TagManager:
     locked: 0
   - name: ObjectsMap
     uniqueID: 1450513371
+    locked: 0
+  - name: Item
+    uniqueID: 3850964343
     locked: 0
   - name: Entity
     uniqueID: 394262339
