@@ -19,12 +19,8 @@ namespace Items.Behaviour
         [SerializeField] private float _dropRotation;
         [SerializeField] private Transform _itemTransform;
 
-        private Sequence _sequence;
-
         [field: SerializeField] public float InteractionDistance;
         public Vector2 Position => _itemTransform.position;
-
-        public event Action<SceneItem> ItemClicked;
 
         private bool _textEnabled = true;
         public bool TextEnabled 
@@ -38,6 +34,10 @@ namespace Items.Behaviour
                 _canvas.enabled = false;
             } 
         }
+
+        private Sequence _sequence;
+
+        public event Action<SceneItem> ItemClicked;
 
         private void Awake() => _button.onClick.AddListener(() => ItemClicked?.Invoke(this));
 
