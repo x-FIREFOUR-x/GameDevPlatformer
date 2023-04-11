@@ -9,6 +9,7 @@ namespace Items
     public class ItemsFactory
     {
         private readonly StatsController _statsController;
+        
         public ItemsFactory(StatsController statsController) => _statsController = statsController;
 
         public Item CreateItem(ItemDescriptor descriptor)
