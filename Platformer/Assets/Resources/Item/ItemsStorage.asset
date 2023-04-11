@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: ItemsStorage
   m_EditorClassIdentifier: 
   <ItemScriptables>k__BackingField:
-  - {fileID: 11400000, guid: 06138725ba4e83941b1a0fabf0e1bb6a, type: 2}
+  - {fileID: 11400000, guid: c9e3a392910364241a759ec3c33d66a7, type: 2}
+  - {fileID: 11400000, guid: 1a3d1b754b8a97b4283a15ca340a823c, type: 2}
+  - {fileID: 11400000, guid: 7b2e61b7ee7eb4c4284f09978ff9cd29, type: 2}
+  - {fileID: 11400000, guid: 27e16b35bfc15d34fa7e99069eb8ff03, type: 2}
+  - {fileID: 11400000, guid: 0b767f4589674fb4aac3fdb49d53b9e0, type: 2}
+  - {fileID: 11400000, guid: 24b46b81cc0f8a145b1b975605219be4, type: 2}
+  - {fileID: 11400000, guid: 32538a26faa69b44d964b6265ec4d154, type: 2}
