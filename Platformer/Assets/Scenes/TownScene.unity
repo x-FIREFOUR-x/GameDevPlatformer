@@ -4231,6 +4231,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerEntity: {fileID: 1572705059}
   _ganeUIInputView: {fileID: 1673820770}
+  _rarityDescriptorsStorage: {fileID: 11400000, guid: f872a3885c466fa41a3a31670988fd4b, type: 2}
+  _whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _itemsStorage: {fileID: 11400000, guid: 06ca9570270819f4c95e7db976bb90ac, type: 2}
   _statsStorage: {fileID: 11400000, guid: d388bc32f6e8bee4e9ead371e1e886af, type: 2}
 --- !u!4 &1695902169 stripped
 Transform:

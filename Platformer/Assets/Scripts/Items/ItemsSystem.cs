@@ -55,7 +55,7 @@ namespace Items
             Debug.Log($"Adding item {item.Descriptor.ItemId} to inventory");
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickItem;
-            Object.Destroy(sceneItem);
+            Object.Destroy(sceneItem.gameObject);
         }
     }
 }
