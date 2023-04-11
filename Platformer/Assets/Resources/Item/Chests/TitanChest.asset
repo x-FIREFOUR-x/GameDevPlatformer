@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2cbc8b00ea24f33902f771e942c09ba, type: 3}
-  m_Name: ManticoreHelmet Epic
+  m_Name: TitanChest
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 1
-    <Type>k__BackingField: 1
-    <ItemSprite>k__BackingField: {fileID: 21300000, guid: 9d4ad9585d881b9469236aa4e598a8b1, type: 3}
-    <ItemRarity>k__BackingField: 3
+    <ItemId>k__BackingField: 52
+    <Type>k__BackingField: 2
+    <ItemSprite>k__BackingField: {fileID: 21300000, guid: 28b103e16acf21b45afc90eb7afb7e42, type: 3}
+    <ItemRarity>k__BackingField: 2
     <Price>k__BackingField: 300
     <Level>k__BackingField: 3
     <Stats>k__BackingField:
