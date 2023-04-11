@@ -13,10 +13,11 @@ namespace Items
         private Transform _transform;
         private List<IItemRarityColor> _colors;
         private LayerMask _whatIsPlayer;
+        private ItemsFactory _itemsFactory;
 
         private Dictionary<SceneItem, Item> _itemsOnScene;
 
-        public ItemsSystem(List<IItemRarityColor> colors, LayerMask whatIsPlayer)
+        public ItemsSystem(List<IItemRarityColor> colors, LayerMask whatIsPlayer, ItemsFactory itemsFactory)
         {
             _sceneItem = Resources.Load<SceneItem>($"{nameof(ItemsSystem)}/{nameof(SceneItem)}");
             _itemsOnScene = new Dictionary<SceneItem, Item>();
@@ -25,11 +26,13 @@ namespace Items
             _transform = gameObject.transform;
             _colors = colors;
             _whatIsPlayer = whatIsPlayer;
+            _itemsFactory = itemsFactory;
         }
 
         public void DropItem(ItemDescriptor descriptor, Vector2 position)
         {
-            
+            Item item = _itemsFactory.CreateItem(descriptor);
+            DropItem(item, position);
         }
 
         private void DropItem(Item item, Vector2 position)
@@ -52,8 +55,7 @@ namespace Items
             Debug.Log($"Adding item {item.Descriptor.ItemId} to inventory");
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickItem;
-            Object.Destroy(sceneItem);
+            Object.Destroy(sceneItem.gameObject);
         }
-
     }
 }
