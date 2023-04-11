@@ -451,3 +451,4 @@ MonoBehaviour:
   _dropRadius: 2
   _dropRotation: 540
   _itemTransform: {fileID: 4948326977673198636}
+  InteractionDistance: 2
