@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NephritisChest
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 53
+    <ItemId>k__BackingField: 54
     <Type>k__BackingField: 2
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: 131ae7d5c3bf62f4ca9d47f57e1ef952, type: 3}
     <ItemRarity>k__BackingField: 2

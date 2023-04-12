@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DragonChest
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 56
+    <ItemId>k__BackingField: 57
     <Type>k__BackingField: 2
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: e29f293938fc0494d87d11a7532e32ea, type: 3}
     <ItemRarity>k__BackingField: 4

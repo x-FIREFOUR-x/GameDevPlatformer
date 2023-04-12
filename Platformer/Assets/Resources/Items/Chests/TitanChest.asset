@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TitanChest
   m_EditorClassIdentifier: 
   _itemDescriptor:
-    <ItemId>k__BackingField: 52
+    <ItemId>k__BackingField: 53
     <Type>k__BackingField: 2
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: 28b103e16acf21b45afc90eb7afb7e42, type: 3}
     <ItemRarity>k__BackingField: 2
