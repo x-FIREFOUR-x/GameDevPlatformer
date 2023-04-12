@@ -38,7 +38,6 @@
         SwampSpear = 155,
         IronAxe = 156,
         IronSword = 157,
-
         AssasinDagger = 158,
         OldAxe = 159,
         WarHammer = 160,
@@ -48,6 +47,12 @@
         DwarfAxe = 164,
         MountainSword = 165,
 
+        Harpoon = 166,
+        BerserkAxe = 167,
+        VikingAxe = 168,
+        MegaKnife = 169,
+        Katana = 170,
+        ShiningSword = 171,
 
         //Potions
         SomePotion = 251
