@@ -39,6 +39,15 @@
         IronAxe = 156,
         IronSword = 157,
 
+        AssasinDagger = 158,
+        OldAxe = 159,
+        WarHammer = 160,
+        SteelAxe = 161,
+        BalancedSword = 162,
+        DwarfHammer = 163,
+        DwarfAxe = 164,
+        MountainSword = 165,
+
 
         //Potions
         SomePotion = 251
