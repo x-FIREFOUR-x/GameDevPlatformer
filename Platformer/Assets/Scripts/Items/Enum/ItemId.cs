@@ -46,13 +46,16 @@
         DwarfHammer = 163,
         DwarfAxe = 164,
         MountainSword = 165,
-
         Harpoon = 166,
         BerserkAxe = 167,
         VikingAxe = 168,
         MegaKnife = 169,
         Katana = 170,
         ShiningSword = 171,
+        DestroyerWorlds = 172,
+        Mjolnir = 173,
+        ShadowSword = 174,
+        DragonBreath = 175,
 
         //Potions
         SomePotion = 251
