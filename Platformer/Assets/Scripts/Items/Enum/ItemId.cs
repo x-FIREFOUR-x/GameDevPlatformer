@@ -5,7 +5,13 @@
         None = 0,
 
         //Helmets
-        SomeHelmet = 1,
+        LightHelmet = 1,
+        ScoutHelmet = 2,
+        TitanHelmet = 3,
+        NephritisHelmet = 4,
+        DarkHelmet = 5,
+        ShiningHelmet = 6,
+        DragonHelmet = 7,
 
         //Chests
         LightChest = 50,
