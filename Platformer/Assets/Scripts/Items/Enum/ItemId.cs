@@ -22,7 +22,7 @@
         ShiningChest = 56,
         DragonChest = 57,
 
-        //Weapons
+        //Shields
         WoodenShield = 101,
         IronShield = 102,
         SteelShield = 103,
@@ -31,9 +31,16 @@
         VibraniumShield = 106,
 
         //Weapons
-        SomeWeapon = 150,
+        Knife = 151,
+        WoodenClub = 152,
+        WoodenHammer = 153,
+        BronzeDagger = 154,
+        SwampSpear = 155,
+        IronAxe = 156,
+        IronSword = 157,
+
 
         //Potions
-        SomePotion = 200
+        SomePotion = 251
     }
 }
