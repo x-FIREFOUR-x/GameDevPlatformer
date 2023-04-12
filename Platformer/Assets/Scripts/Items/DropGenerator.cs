@@ -41,9 +41,10 @@ namespace Items
             float chance = Random.Range(0, 100);
             return chance switch
             {
-                <= 65 => ItemRarity.Common,
-                > 65 and <= 90 => ItemRarity.Rare,
-                > 90 and <= 100 => ItemRarity.Epic,
+                <= 55 => ItemRarity.Common,
+                > 55 and <= 85 => ItemRarity.Rare,
+                > 85 and <= 95 => ItemRarity.Epic,
+                > 95 and <= 100 => ItemRarity.Legendary,
                 _ => ItemRarity.Common
             };
         }
