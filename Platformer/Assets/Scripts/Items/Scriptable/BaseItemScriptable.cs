@@ -1,5 +1,6 @@
-﻿using Items.Data;
-using UnityEngine;
+﻿using UnityEngine;
+
+using Items.Data;
 
 namespace Items.Scriptable
 {

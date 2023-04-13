@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Movement.Controller
+﻿namespace Movement.Controller
 {
     public class Blocker
     {

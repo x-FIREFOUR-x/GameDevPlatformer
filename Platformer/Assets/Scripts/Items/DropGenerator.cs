@@ -1,19 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+
 using Core.Services.Updater;
 using Items.Data;
 using Items.Enum;
 using Player;
-using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Items
 {
     public class DropGenerator
     {
-        private PlayerEntity _playerEntity;
-        private List<ItemDescriptor> _itemDescriptors;
-        private ItemsSystem _itemsSystem;
+        private readonly PlayerEntity _playerEntity;
+        private readonly List<ItemDescriptor> _itemDescriptors;
+        private readonly ItemsSystem _itemsSystem;
 
         public DropGenerator(List<ItemDescriptor> itemDescriptors, PlayerEntity playerEntity, ItemsSystem itemsSystem)
         {
@@ -26,7 +26,7 @@ namespace Items
         private void DropRandomItem(ItemRarity rarity)
         {
             List<ItemDescriptor> items = _itemDescriptors.Where(item => item.ItemRarity == rarity).ToList();
-            ItemDescriptor itemDescriptor = items[Random.Range(0, items.Count)];
+            ItemDescriptor itemDescriptor = items[UnityEngine.Random.Range(0, items.Count)];
             _itemsSystem.DropItem(itemDescriptor, _playerEntity.transform.position + UnityEngine.Vector3.one);
         }
 

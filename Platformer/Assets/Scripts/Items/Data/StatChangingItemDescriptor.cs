@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 using Items.Enum;
 using StatsSystem;
-using UnityEngine;
 
 namespace Items.Data
 {
