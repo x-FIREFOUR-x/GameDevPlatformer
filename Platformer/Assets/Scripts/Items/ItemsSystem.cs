@@ -19,7 +19,7 @@ namespace Items
 
         public ItemsSystem(List<IItemRarityColor> colors, LayerMask whatIsPlayer, ItemsFactory itemsFactory)
         {
-            _sceneItem = Resources.Load<SceneItem>($"{nameof(ItemsSystem)}/{nameof(SceneItem)}");
+            _sceneItem = Resources.Load<SceneItem>($"{"Prefabs"}/{"Items"}/{nameof(SceneItem)}");
             _itemsOnScene = new Dictionary<SceneItem, Item>();
             GameObject gameObject = new GameObject();
             gameObject.name = nameof(ItemsSystem);
