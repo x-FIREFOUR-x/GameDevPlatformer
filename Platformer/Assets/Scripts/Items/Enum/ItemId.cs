@@ -58,6 +58,11 @@
         DragonBreath = 175,
 
         //Potions
-        SomePotion = 251
+        HealPotion = 251,
+        ManaPotion = 252,
+        SpeedPotion = 253,
+        JumpPotion = 254,
+        RagePotion = 255,
+        EndurancePotion = 256
     }
 }
