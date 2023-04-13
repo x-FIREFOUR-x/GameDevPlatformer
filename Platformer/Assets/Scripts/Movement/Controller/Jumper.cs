@@ -13,8 +13,14 @@ namespace Movement.Controller
 
         private readonly IStatValueGiver _statValueGiver;
 
-        public bool JumpActive { get { return _rigidbody.velocity.y > 0; } }
-        public bool FallActive { get { return _rigidbody.velocity.y < 0; } }
+        public bool JumpActive
+        {
+            get { return (_rigidbody.velocity.y > 0 && !IsGrounded()); }
+        }
+        public bool FallActive
+        {
+            get { return (_rigidbody.velocity.y < 0 && !IsGrounded()); }
+        }
 
         public Jumper(Rigidbody2D rigidbody, JumpData jumpData, IStatValueGiver startValueGiver)
         {
@@ -31,6 +37,11 @@ namespace Movement.Controller
 
             _rigidbody.AddForce(Vector2.up * _statValueGiver.GetStatValue(StatType.JumpForce));
             _rigidbody.gravityScale = _jumpData.GravityScale;
+        }
+        
+        public bool IsGrounded()
+        {
+            return Physics2D.OverlapCircle(_jumpData.GroundCheck.position, 0.2f, _jumpData.GroundLayer);
         }
     }
 }

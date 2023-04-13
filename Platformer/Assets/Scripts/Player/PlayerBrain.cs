@@ -7,7 +7,7 @@ using Core.Services.Updater;
 
 namespace Player
 {
-    class PlayerBrain: IDisposable
+    class PlayerBrain : IDisposable
     {
         private readonly PlayerEntity _playerEntity;
 
