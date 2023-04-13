@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace Items.Behaviour
 {
-    public class SceneItem: MonoBehaviour
+    public class SceneItem : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _sprite;
         [SerializeField] private TMP_Text _text;

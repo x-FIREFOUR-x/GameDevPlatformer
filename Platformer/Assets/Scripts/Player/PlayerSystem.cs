@@ -8,7 +8,7 @@ using StatsSystem;
 
 namespace Player
 {
-    public class PlayerSystem: IDisposable
+    public class PlayerSystem : IDisposable
     {
         private readonly PlayerEntity _playerEntity;
         private readonly PlayerBrain _playerBrain;

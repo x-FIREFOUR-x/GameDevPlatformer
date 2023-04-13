@@ -1,10 +1,9 @@
 ﻿using System;
-
 using UnityEngine;
 
 namespace Core.Services.Updater
 {
-    public class ProjectUpdater: MonoBehaviour, IProjectUpdater
+    public class ProjectUpdater : MonoBehaviour, IProjectUpdater
     {
         public static IProjectUpdater Instance;
         public event Action UpdateCalled;

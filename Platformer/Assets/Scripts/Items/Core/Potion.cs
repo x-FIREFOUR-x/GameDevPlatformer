@@ -1,6 +1,7 @@
-﻿using Items.Data;
+﻿using UnityEngine;
+
+using Items.Data;
 using StatsSystem;
-using UnityEngine;
 
 namespace Items.Core
 {

@@ -258,10 +258,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -492,10 +488,6 @@ PrefabInstance:
     - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_Name
       value: Crate
-      objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
@@ -763,10 +755,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -905,10 +893,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -952,10 +936,6 @@ PrefabInstance:
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2037712912100087900, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
@@ -1297,10 +1277,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrateStack (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4835808725944703947, guid: 6cfdface5848f1c498c0401b3f7b82e0, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 5895256005165104433, guid: 6cfdface5848f1c498c0401b3f7b82e0, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1525,17 +1501,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1101259361}
     m_Modifications:
-    - target: {fileID: 943286205662170852, guid: 6cfdface5848f1c498c0401b3f7b82e0, type: 3}
-      propertyPath: m_SortingOrder
-      value: -3
-      objectReference: {fileID: 0}
     - target: {fileID: 4835808725944703947, guid: 6cfdface5848f1c498c0401b3f7b82e0, type: 3}
       propertyPath: m_Name
       value: CrateStack (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4835808725944703947, guid: 6cfdface5848f1c498c0401b3f7b82e0, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5895256005165104433, guid: 6cfdface5848f1c498c0401b3f7b82e0, type: 3}
       propertyPath: m_RootOrder
@@ -1690,10 +1658,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -1751,10 +1715,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1765,7 +1725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.51
+      value: 4.082
       objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1798,10 +1758,6 @@ PrefabInstance:
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2037712912100087900, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_SortingOrder
-      value: -2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
@@ -1893,10 +1849,6 @@ PrefabInstance:
     - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_Name
       value: Crate (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
@@ -2091,10 +2043,6 @@ PrefabInstance:
     - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_Name
       value: Crate (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
@@ -2810,10 +2758,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2857,10 +2801,6 @@ PrefabInstance:
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2037712912100087900, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
@@ -3297,10 +3237,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -3481,10 +3417,6 @@ PrefabInstance:
     - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_Name
       value: Crate (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
@@ -3672,10 +3604,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 1047239858908718497, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -3686,7 +3614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.069
+      value: 2.51
       objectReference: {fileID: 0}
     - target: {fileID: 1380945520278497426, guid: ca7c5ba93999ad748aef78f1a752497b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4436,6 +4364,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 130256023}
     m_Modifications:
+    - target: {fileID: 8113130739266935900, guid: 524080538faa3e14e8bccc8e30bac3aa, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8113130739266935901, guid: 524080538faa3e14e8bccc8e30bac3aa, type: 3}
       propertyPath: m_RootOrder
       value: 8

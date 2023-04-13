@@ -1,7 +1,6 @@
 ﻿using Items.Data;
 using Items.Enum;
 using StatsSystem;
-using UnityEngine;
 
 namespace Items.Core
 {

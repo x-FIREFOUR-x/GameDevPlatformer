@@ -1,5 +1,6 @@
-using Items.Enum;
 using UnityEngine;
+
+using Items.Enum;
 
 namespace Items.Rarity
 {
