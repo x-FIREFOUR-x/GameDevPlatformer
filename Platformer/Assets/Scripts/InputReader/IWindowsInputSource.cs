@@ -2,7 +2,7 @@
 
 namespace InputReader
 {
-    interface IWindowsInputSource
+    public interface IWindowsInputSource
     {
         event Action InventoryRequested;
     }
