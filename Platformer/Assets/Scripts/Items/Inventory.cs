@@ -19,8 +19,7 @@ namespace Items
         public Inventory(List<Item> backPackItems, List<Equipment> equipmentList)
         {
             EquipmentList = equipmentList ?? new List<Equipment>();
-
-            BackPackItems = backPackItems ?? new List<Item>(InventorySize);
+            BackPackItems = backPackItems ?? new List<Item>();
         }
 
         public void AddItemToBackPack(Item item)
