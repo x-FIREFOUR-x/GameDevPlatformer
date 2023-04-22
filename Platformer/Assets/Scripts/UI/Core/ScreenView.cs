@@ -4,9 +4,9 @@ namespace UI.Core
 {
     public abstract class ScreenView : MonoBehaviour
     {
-        [SerializeField] private Canvas _root;
+        [SerializeField] private Canvas _canvas;
 
-        public virtual void Show() => _root.enabled = true;
-        public virtual void Hide() => _root.enabled = false;
+        public virtual void Show() => _canvas.enabled = true;
+        public virtual void Hide() => _canvas.enabled = false;
     }
 }
