@@ -11,14 +11,14 @@ namespace Items
         public const int InventorySize = 30;
         
         public List<Item> BackPackItems { get;  }
-        public List<Equipment> EquipmentList { get; }
+        public List<Equipment> EquipmentItems { get; }
 
         public event Action BackPackChanged;
         public event Action EquipmentChanged;
 
         public Inventory(List<Item> backPackItems, List<Equipment> equipmentList)
         {
-            EquipmentList = equipmentList ?? new List<Equipment>();
+            EquipmentItems = equipmentList ?? new List<Equipment>();
             BackPackItems = backPackItems ?? new List<Item>();
         }
 
@@ -36,13 +36,13 @@ namespace Items
 
         public void Equip(Equipment equipment)
         {
-            EquipmentList.Add(equipment);
+            EquipmentItems.Add(equipment);
             EquipmentChanged?.Invoke();
         }
         
         public void UnEquip(Equipment equipment)
         {
-            EquipmentList.Remove(equipment);
+            EquipmentItems.Remove(equipment);
             EquipmentChanged?.Invoke();
         }
     }
