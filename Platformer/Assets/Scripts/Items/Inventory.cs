@@ -8,7 +8,7 @@ namespace Items
 {
     public class Inventory
     {
-        public const int InventorySize = 30;
+        public const int BackPackMaxSize = 30;
         
         public List<Item> BackPackItems { get;  }
         public List<Equipment> EquipmentItems { get; }
