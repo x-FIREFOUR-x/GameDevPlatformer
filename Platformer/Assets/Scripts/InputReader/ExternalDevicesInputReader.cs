@@ -6,7 +6,7 @@ using Core.Services.Updater;
 
 namespace InputReader
 {
-    public class ExternalDevicesInputReader : IEntityInputSource, IDisposable
+    public class ExternalDevicesInputReader : IEntityInputSource, IWindowsInputSource, IDisposable
     {
         public float HorizontalDirection => Input.GetAxisRaw("Horizontal");
         public bool Attack { get; private set; }
@@ -18,6 +18,8 @@ namespace InputReader
         {
             ProjectUpdater.Instance.UpdateCalled += OnUpdate;
         }
+
+        public event Action InventoryRequested;
 
         public void ResetOneTimeActions()
         {
@@ -36,6 +38,9 @@ namespace InputReader
 
             if (Input.GetButtonDown("Debug Multiplier"))
                 Roll = true;
+
+            if (Input.GetKeyDown(KeyCode.E))
+                InventoryRequested?.Invoke();
         }
 
         public void Dispose() => ProjectUpdater.Instance.UpdateCalled -= OnUpdate;
