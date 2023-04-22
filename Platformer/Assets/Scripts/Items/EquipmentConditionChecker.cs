@@ -16,7 +16,7 @@ namespace Items
         public bool TryReplaceEquipment(Equipment equipment, out Equipment oldEquipment,
             List<Equipment> currentEquipments)
         {
-            oldEquipment = currentEquipments.Find(slot => slot .EquipmentType == equipment.EquipmentType);
+            oldEquipment = currentEquipments.Find(slot => slot.EquipmentType == equipment.EquipmentType);
 
             switch (equipment.EquipmentType)
             {
