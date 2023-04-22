@@ -15,10 +15,11 @@ namespace Items
         private readonly List<IItemRarityColor> _colors;
         private readonly LayerMask _whatIsPlayer;
         private readonly ItemsFactory _itemsFactory;
+        private readonly Inventory _inventory;
 
         private readonly Dictionary<SceneItem, Item> _itemsOnScene;
 
-        public ItemsSystem(List<IItemRarityColor> colors, LayerMask whatIsPlayer, ItemsFactory itemsFactory)
+        public ItemsSystem(List<IItemRarityColor> colors, LayerMask whatIsPlayer, ItemsFactory itemsFactory, Inventory inventory)
         {
             _sceneItem = Resources.Load<SceneItem>($"{"Prefabs"}/{"Items"}/{nameof(SceneItem)}");
             _itemsOnScene = new Dictionary<SceneItem, Item>();
@@ -28,6 +29,7 @@ namespace Items
             _colors = colors;
             _whatIsPlayer = whatIsPlayer;
             _itemsFactory = itemsFactory;
+            _inventory = inventory;
         }
 
         public void DropItem(ItemDescriptor descriptor, Vector2 position)
@@ -53,7 +55,12 @@ namespace Items
                 return;
 
             Item item = _itemsOnScene[sceneItem];
-            Debug.Log($"Adding item {item.Descriptor.ItemId} to inventory");
+            if(_inventory.BackPackItems.Count >= Inventory.InventorySize)
+            {
+                return;
+            }
+
+            _inventory.AddItemToBackPack(item);
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickItem;
             Object.Destroy(sceneItem.gameObject);
