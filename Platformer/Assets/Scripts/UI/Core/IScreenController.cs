@@ -6,8 +6,8 @@ namespace UI.Core
 {
     public interface IScreenController
     {
-        public event Action CloseRequested;
         public event Action<ScreenType> OpenScreenRequested;
+        public event Action CloseScreenRequested;
 
         void Initialize();
 
