@@ -1,4 +1,5 @@
 ﻿using System;
+
 using UI.Enum;
 
 namespace UI.Core
@@ -15,9 +16,9 @@ namespace UI.Core
         public virtual void Initialize() => View.Show();
         public virtual void Complete() => View.Hide();
 
-        protected void RequestClose() => CloseScreenRequested?.Invoke();
+        protected void RequestCloseScreen() => CloseScreenRequested?.Invoke();
 
-        protected void RequestScreen(ScreenType characterScreenType) =>
-            OpenScreenRequested?.Invoke(characterScreenType);
+        protected void RequestOpenScreen(ScreenType screenType) =>
+            OpenScreenRequested?.Invoke(screenType);
     }
 }   
