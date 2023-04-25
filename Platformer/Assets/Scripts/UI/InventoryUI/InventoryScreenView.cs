@@ -20,7 +20,7 @@ namespace UI.InventoryUI
         
         [field: SerializeField] public Image MovingImage { get; private set; }
         public List<ItemSlot> BackPackSlots { get; private set; }
-        public List<ItemSlot> EquipmentSlots { get; private set; }
+        public List<EquipmentSlot> EquipmentSlots { get; private set; }
 
         public event Action CloseClicked;
 
@@ -28,7 +28,7 @@ namespace UI.InventoryUI
         {
             _closeButton.onClick.AddListener(() => CloseClicked?.Invoke());
             BackPackSlots = GetComponentsInChildren<ItemSlot>().ToList();
-            EquipmentSlots = GetComponentsInChildren<ItemSlot>().ToList();
+            EquipmentSlots = GetComponentsInChildren<EquipmentSlot>().ToList();
         }
 
         private void OnDestroy()
