@@ -28,7 +28,7 @@ namespace UI.InventoryUI
         {
             _closeButton.onClick.AddListener(() => CloseClicked?.Invoke());
             ItemSlots = GetComponentsInChildren<ItemSlot>().ToList();
-            EquipmentSlots = GetComponentsInChildren<EquipmentSlot>().ToList();
+            EquipmentSlots = GetComponentsInChildren<ItemSlot>().ToList();
         }
 
         private void OnDestroy()
