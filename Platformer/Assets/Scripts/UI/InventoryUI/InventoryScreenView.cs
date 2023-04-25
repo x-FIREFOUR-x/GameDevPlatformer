@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Items.Enum;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Items.Enum;
 using UI.Core;
 using UI.InventoryUI.Element;
 

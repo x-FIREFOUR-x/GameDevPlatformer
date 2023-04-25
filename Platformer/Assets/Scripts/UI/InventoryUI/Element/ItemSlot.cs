@@ -1,8 +1,9 @@
 ﻿using System;
-using Items.Enum;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
+using Items.Enum;
 
 using Items.Enum;
 
