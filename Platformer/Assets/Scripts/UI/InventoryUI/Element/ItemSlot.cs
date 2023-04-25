@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using Items.Enum;
+
 namespace UI.InventoryUI.Element
 {
     public class ItemSlot : MonoBehaviour
@@ -15,6 +17,8 @@ namespace UI.InventoryUI.Element
         [SerializeField] private TMP_Text _itemAmount;
         
         [SerializeField] private Button _slotButton;
+
+        [field: SerializeField] public EquipmentType EquipmentType { get; private set; }
 
         public event Action<ItemSlot> SlotClearClicked;
         public event Action<ItemSlot> SlotClicked;
