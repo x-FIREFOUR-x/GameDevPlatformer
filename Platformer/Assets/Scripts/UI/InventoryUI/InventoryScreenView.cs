@@ -20,7 +20,7 @@ namespace UI.InventoryUI
         
         [field: SerializeField] public Image MovingImage { get; private set; }
         public List<ItemSlot> ItemSlots { get; private set; }
-        public List<EquipmentSlot> EquipmentSlots { get; private set; }
+        public List<ItemSlot> EquipmentSlots { get; private set; }
 
         public event Action CloseClicked;
 
