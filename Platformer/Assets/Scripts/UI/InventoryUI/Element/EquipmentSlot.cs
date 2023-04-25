@@ -1,6 +1,6 @@
 ﻿namespace UI.InventoryUI.Element
 {
-    public class EquipmentSlot
+    public class EquipmentSlot : ItemSlot
     {
         
     }
