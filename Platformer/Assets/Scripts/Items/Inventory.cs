@@ -28,10 +28,11 @@ namespace Items
             BackPackChanged?.Invoke();
         }
 
-        public void RemoveItemFromBackPack(Item item)
+        public void RemoveItemFromBackPack(Item item, bool toWorld) 
         {
             BackPackItems[BackPackItems.IndexOf(item)] = null;
             BackPackChanged?.Invoke();
+            if(toWorld) Debug.Log("Item Dropped"); //temp
         }
 
         public void Equip(Equipment equipment)
@@ -40,10 +41,11 @@ namespace Items
             EquipmentChanged?.Invoke();
         }
         
-        public void UnEquip(Equipment equipment)
+        public void UnEquip(Equipment equipment, bool toWorld)
         {
             EquipmentItems.Remove(equipment);
             EquipmentChanged?.Invoke();
+            if(toWorld) Debug.Log("Item Dropped"); //temp
         }
     }
 }

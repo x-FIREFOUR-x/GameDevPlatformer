@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Items.Enum;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,15 +21,15 @@ namespace UI.InventoryUI
         
         [field: SerializeField] public Image MovingImage { get; private set; }
         public List<ItemSlot> BackPackSlots { get; private set; }
-        public List<EquipmentSlot> EquipmentSlots { get; private set; }
+        public List<ItemSlot> EquipmentSlots { get; private set; }
 
         public event Action CloseClicked;
 
         private void Awake()
         {
             _closeButton.onClick.AddListener(() => CloseClicked?.Invoke());
-            BackPackSlots = GetComponentsInChildren<ItemSlot>().ToList();
-            EquipmentSlots = GetComponentsInChildren<EquipmentSlot>().ToList();
+            BackPackSlots = GetComponentsInChildren<ItemSlot>().Where(slot => slot.EquipmentType == EquipmentType.None).ToList();
+            EquipmentSlots = GetComponentsInChildren<ItemSlot>().Where(slot => slot.EquipmentType != EquipmentType.None).ToList();
         }
 
         private void OnDestroy()

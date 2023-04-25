@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+
 using Items;
 using Items.Core;
 using Items.Data;
 using Items.Enum;
 using UI.Core;
 using UI.InventoryUI.Element;
-using UnityEngine;
 
 namespace UI.InventoryUI
 {
@@ -16,7 +17,7 @@ namespace UI.InventoryUI
         private readonly List<RarityDescriptor> _rarityDescriptors;
 
         private readonly Dictionary<ItemSlot, Item> _backPackSlots;
-        private readonly Dictionary<EquipmentSlot, Equipment> _equipmentSlots;
+        private readonly Dictionary<ItemSlot, Equipment> _equipmentSlots;
 
         private readonly EquipmentConditionChecker _equipmentConditionChecker;
 
@@ -29,7 +30,7 @@ namespace UI.InventoryUI
             _rarityDescriptors = rarityDescriptors;
             _emptyBackSprite = GetBackSprite(ItemRarity.None);
             _backPackSlots = new Dictionary<ItemSlot, Item>();
-            _equipmentSlots = new Dictionary<EquipmentSlot, Equipment>();
+            _equipmentSlots = new Dictionary<ItemSlot, Equipment>();
             _equipmentConditionChecker = new EquipmentConditionChecker();
         }
 
@@ -72,7 +73,7 @@ namespace UI.InventoryUI
         private void InitializeEquipment()
         {
             var equipment = View.EquipmentSlots;
-            foreach (EquipmentSlot slot in equipment)
+            foreach (ItemSlot slot in equipment)
             {
                 var item = _inventory.EquipmentItems.Find(equip => equip.EquipmentType == slot.EquipmentType);
                 _equipmentSlots.Add(slot,item);
@@ -86,12 +87,56 @@ namespace UI.InventoryUI
         
         private void UseSlot(ItemSlot slot)
         {
-            throw new System.NotImplementedException();
+            Equipment equipment;
+            if (slot.EquipmentType != EquipmentType.None &&
+                _inventory.BackPackItems.Any(backPackSlot => backPackSlot == null))
+            {
+                equipment = _equipmentSlots[slot];
+                _inventory.UnEquip(equipment, false);
+                _inventory.AddItemToBackPack(equipment);
+                equipment?.Use();
+                return;
+            }
+
+            Item item = _backPackSlots[slot];
+
+            if (item is Potion potion)
+            {
+                potion.Use();
+                if(potion.Amount <= 0)
+                    _inventory.RemoveItemFromBackPack(item, false);
+                
+                return;
+            }
+
+            if (item is not Equipment equip)
+                return;
+            
+            equipment = equip;
+
+            if (!_equipmentConditionChecker.IsEquipmentConditionFits(equipment, _inventory.EquipmentItems)
+                || !_equipmentConditionChecker.TryReplaceEquipment(equipment, out var prevEquipment,
+                    _inventory.EquipmentItems))
+                return;
+            
+            _inventory.RemoveItemFromBackPack(equipment,false);
+            if (prevEquipment != null)
+            {
+                _inventory.AddItemToBackPack(prevEquipment);
+                prevEquipment.Use();
+            }
+            
+            _inventory.Equip((equipment));
+            equipment.Use();
         }
 
-        private void ClearSlot(ItemSlot obj)
+        private void ClearSlot(ItemSlot slot)
         {
-            throw new System.NotImplementedException();
+            if(_backPackSlots.TryGetValue(slot, out Item item))
+                _inventory.RemoveItemFromBackPack(item,true);
+            
+            if(slot.EquipmentType == EquipmentType.None && _equipmentSlots.TryGetValue(slot, out Equipment equipment))
+                _inventory.UnEquip(equipment,true);
         }
         
         private void UpdateBackPack()
