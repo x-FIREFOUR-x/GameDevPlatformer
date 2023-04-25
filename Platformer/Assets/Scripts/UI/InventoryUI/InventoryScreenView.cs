@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Items.Enum;
 using UI.Core;
 using UI.InventoryUI.Element;
 
@@ -27,8 +28,8 @@ namespace UI.InventoryUI
         private void Awake()
         {
             _closeButton.onClick.AddListener(() => CloseClicked?.Invoke());
-            BackPackSlots = GetComponentsInChildren<ItemSlot>().ToList();
-            EquipmentSlots = GetComponentsInChildren<ItemSlot>().ToList();
+            BackPackSlots = GetComponentsInChildren<ItemSlot>().Where(slot => slot.EquipmentType == EquipmentType.None).ToList();
+            EquipmentSlots = GetComponentsInChildren<ItemSlot>().Where(slot => slot.EquipmentType != EquipmentType.None).ToList();
         }
 
         private void OnDestroy()
