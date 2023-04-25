@@ -5,8 +5,6 @@ using TMPro;
 
 using Items.Enum;
 
-using Items.Enum;
-
 namespace UI.InventoryUI.Element
 {
     public class ItemSlot : MonoBehaviour
