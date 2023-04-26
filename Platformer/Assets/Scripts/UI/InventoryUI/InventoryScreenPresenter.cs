@@ -92,7 +92,8 @@ namespace UI.InventoryUI
             if (slot.EquipmentType != EquipmentType.None)
             {
                 equipment = _equipmentSlots[slot];
-                if (!_inventory.TryAddItemToBackPack(equipment)) return;
+                if (!_inventory.TryAddItemToBackPack(equipment)) 
+                    return;
                 _inventory.UnEquip(equipment, true);
 
                 equipment?.Use();
