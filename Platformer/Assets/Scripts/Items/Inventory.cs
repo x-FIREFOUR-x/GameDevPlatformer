@@ -17,6 +17,7 @@ namespace Items
 
         public event Action BackPackChanged;
         public event Action EquipmentChanged;
+        public event Action<Item, Vector2> ItemDropped;
 
         public Inventory(List<Item> backPackItems, List<Equipment> equipmentList, Transform player)
         {
@@ -47,7 +48,9 @@ namespace Items
         {
             BackPackItems[BackPackItems.IndexOf(item)] = null;
             BackPackChanged?.Invoke();
-            if(toWorld) Debug.Log("Item Dropped"); //temp
+
+            if (toWorld)
+                ItemDropped?.Invoke(item, _player.position);
         }
 
         public void Equip(Equipment equipment)
@@ -60,7 +63,9 @@ namespace Items
         {
             EquipmentItems.Remove(equipment);
             EquipmentChanged?.Invoke();
-            if(toWorld) Debug.Log("Item Dropped"); //temp
+
+            if (toWorld)
+                ItemDropped?.Invoke(equipment, _player.position);
         }
     }
 }

@@ -7,7 +7,6 @@ using UI.Core;
 using UI.InventoryUI;
 using InputReader;
 using Items;
-using Items.Storage;
 using Items.Data;
 
 namespace UI

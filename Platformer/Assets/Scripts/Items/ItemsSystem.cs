@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ using Items.Rarity;
 
 namespace Items
 {
-    public class ItemsSystem
+    public class ItemsSystem : IDisposable
     {
         private readonly SceneItem _sceneItem;
         private readonly Transform _transform;
@@ -30,6 +31,12 @@ namespace Items
             _whatIsPlayer = whatIsPlayer;
             _itemsFactory = itemsFactory;
             _inventory = inventory;
+            _inventory.ItemDropped += DropItem;
+        }
+
+        public void Dispose()
+        {
+            _inventory.ItemDropped -= DropItem;
         }
 
         public void DropItem(ItemDescriptor descriptor, Vector2 position)
@@ -40,7 +47,7 @@ namespace Items
 
         private void DropItem(Item item, Vector2 position)
         {
-            SceneItem sceneItem = Object.Instantiate(_sceneItem, _transform);
+            SceneItem sceneItem = UnityEngine.Object.Instantiate(_sceneItem, _transform);
             sceneItem.SetItem(item.Descriptor.ItemSprite, item.Descriptor.ItemId.ToString(),
                 _colors.Find(color => color.ItemRarity == item.Descriptor.ItemRarity).Color);
             sceneItem.PlayAnimationDrop(position);
@@ -60,7 +67,7 @@ namespace Items
                 return;
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickItem;
-            Object.Destroy(sceneItem.gameObject);
+            UnityEngine.Object.Destroy(sceneItem.gameObject);
         }
     }
 }
