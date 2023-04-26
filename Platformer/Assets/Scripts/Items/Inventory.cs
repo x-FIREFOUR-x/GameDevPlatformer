@@ -8,7 +8,7 @@ namespace Items
 {
     public class Inventory
     {
-        public const int BackPackMaxSize = 16;
+        public const int BackPackMaxSize = 24;
 
         private readonly Transform _player;
         
