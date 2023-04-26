@@ -89,13 +89,11 @@ namespace UI.InventoryUI
         private void UseSlot(ItemSlot slot)
         {
             Equipment equipment;
-            if (slot.EquipmentType != EquipmentType.None &&
-                _inventory.BackPackItems.Any(backPackSlot => backPackSlot == null))
+            if (slot.EquipmentType != EquipmentType.None)
             {
                 equipment = _equipmentSlots[slot];
-
-                bool addedItemToBackPack = _inventory.TryAddItemToBackPack(equipment);
-                _inventory.UnEquip(equipment, !addedItemToBackPack);
+                if (!_inventory.TryAddItemToBackPack(equipment)) return;
+                _inventory.UnEquip(equipment, true);
 
                 equipment?.Use();
                 return;
