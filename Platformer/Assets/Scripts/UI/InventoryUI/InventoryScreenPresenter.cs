@@ -32,6 +32,7 @@ namespace UI.InventoryUI
             _backPackSlots = new Dictionary<ItemSlot, Item>();
             _equipmentSlots = new Dictionary<ItemSlot, Equipment>();
             _equipmentConditionChecker = new EquipmentConditionChecker();
+            view.CloseClicked += RequestCloseScreen;
         }
 
         public override void Initialize()
