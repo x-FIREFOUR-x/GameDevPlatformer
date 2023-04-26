@@ -36,7 +36,7 @@ namespace UI.InventoryUI
 
         public override void Initialize()
         {
-            View.MovingImage.gameObject.SetActive(false);
+            //View.MovingImage.gameObject.SetActive(false);
             InitializeBackPack();
             InitializeEquipment();
             _inventory.BackPackChanged += UpdateBackPack;
@@ -93,8 +93,10 @@ namespace UI.InventoryUI
                 _inventory.BackPackItems.Any(backPackSlot => backPackSlot == null))
             {
                 equipment = _equipmentSlots[slot];
-                _inventory.UnEquip(equipment, false);
-                _inventory.AddItemToBackPack(equipment);
+
+                bool addedItemToBackPack = _inventory.TryAddItemToBackPack(equipment);
+                _inventory.UnEquip(equipment, !addedItemToBackPack);
+
                 equipment?.Use();
                 return;
             }
@@ -120,14 +122,16 @@ namespace UI.InventoryUI
                     _inventory.EquipmentItems))
                 return;
             
-            _inventory.RemoveItemFromBackPack(equipment,false);
+            
+            _inventory.RemoveItemFromBackPack(equipment, false);
             if (prevEquipment != null)
             {
-                _inventory.AddItemToBackPack(prevEquipment);
+                _inventory.UnEquip(prevEquipment, false);
+                _inventory.TryAddItemToBackPack((Item)prevEquipment);
                 prevEquipment.Use();
             }
             
-            _inventory.Equip((equipment));
+            _inventory.Equip(equipment);
             equipment.Use();
         }
 
