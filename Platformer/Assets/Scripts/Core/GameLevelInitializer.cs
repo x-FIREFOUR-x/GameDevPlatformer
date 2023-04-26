@@ -70,9 +70,6 @@ namespace Core
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
-
-            if (Input.GetKeyDown(KeyCode.Q))
-                _uiContext.CloseCurrentScreen();
         }
 
         private void OnDestroy()

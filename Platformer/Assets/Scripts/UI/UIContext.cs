@@ -30,7 +30,7 @@ namespace UI
             _data = data;
             foreach (IWindowsInputSource inputSource in _inputSources)
             {
-                inputSource.InventoryRequested += OpenInventory;
+                inputSource.InventoryRequested += HandleInventory;
             }
 
             GameObject container = new GameObject()
@@ -50,7 +50,7 @@ namespace UI
         {
             foreach (IWindowsInputSource inputSource in _inputSources)
             {
-                inputSource.InventoryRequested -= OpenInventory;
+                inputSource.InventoryRequested -= HandleInventory;
             }
 
             foreach (IScreenController screenControllers in _controllers.Values)
@@ -60,7 +60,17 @@ namespace UI
             }
         }
 
-        private void OpenInventory() => OpenScreen(ScreenType.Inventory);
+        private void HandleInventory()
+        {
+            _controllers.TryGetValue(ScreenType.Inventory, out IScreenController screenController);
+            if (_currentController != null && screenController == _currentController)
+            {
+                CloseCurrentScreen();
+                return;
+            }
+            
+            OpenScreen(ScreenType.Inventory);
+        }
 
         private void OpenScreen(ScreenType screenType)
         {
