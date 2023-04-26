@@ -388,7 +388,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 126, y: 126}
+  m_SizeDelta: {x: 63, y: 63}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7848106244155736961
 MonoBehaviour:
@@ -430,7 +430,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 7848106244155736963}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -490,6 +490,7 @@ MonoBehaviour:
   _itemIcon: {fileID: 7848106243377851971}
   _itemAmount: {fileID: 7848106243643826303}
   _slotButton: {fileID: 7848106244155736961}
+  <EquipmentType>k__BackingField: 0
 --- !u!1 &7848106244204864363
 GameObject:
   m_ObjectHideFlags: 0
