@@ -55,10 +55,9 @@ namespace Items
                 return;
 
             Item item = _itemsOnScene[sceneItem];
-            if(_inventory.BackPackItems.Count >= Inventory.BackPackMaxSize)
-                return;
 
-            _inventory.AddItemToBackPack(item);
+            if (!_inventory.TryAddItemToBackPack(item))
+                return;
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickItem;
             Object.Destroy(sceneItem.gameObject);
