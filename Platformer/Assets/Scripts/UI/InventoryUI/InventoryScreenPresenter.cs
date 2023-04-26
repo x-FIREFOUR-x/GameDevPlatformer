@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ using UI.InventoryUI.Element;
 
 namespace UI.InventoryUI
 {
-    public class InventoryScreenPresenter : ScreenController<InventoryScreenView>
+    public class InventoryScreenPresenter : ScreenController<InventoryScreenView>, IDisposable
     {
         private readonly Inventory _inventory;
         private readonly List<RarityDescriptor> _rarityDescriptors;
@@ -32,9 +33,14 @@ namespace UI.InventoryUI
             _backPackSlots = new Dictionary<ItemSlot, Item>();
             _equipmentSlots = new Dictionary<ItemSlot, Equipment>();
             _equipmentConditionChecker = new EquipmentConditionChecker();
-            view.CloseClicked += RequestCloseScreen;
+            View.CloseClicked += RequestCloseScreen;
         }
-
+        
+        public void Dispose()
+        {
+            View.CloseClicked -= RequestCloseScreen;
+        }
+        
         public override void Initialize()
         {
             //View.MovingImage.gameObject.SetActive(false);
@@ -191,5 +197,6 @@ namespace UI.InventoryUI
 
         private Sprite GetBackSprite(ItemRarity rarity) =>
             _rarityDescriptors.Find(descriptor => descriptor.ItemRarity == rarity).Sprite;
+        
     }
 }
