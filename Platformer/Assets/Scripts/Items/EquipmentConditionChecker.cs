@@ -8,15 +8,20 @@ namespace Items
 {
     public class EquipmentConditionChecker
     {
-        public bool IsEquipmentConditionFits(Equipment equipment, List<Equipment> currentEquipment)
-        {
-            // will be updated at next epics
-            return true;
-        }
-
         public bool TryReplaceEquipment(Equipment equipment, out Equipment oldEquipment,
-            List<Equipment> currentEquipments)
+            List<Equipment> currentEquipments, int countPotion)
         {
+            if (equipment.EquipmentType == EquipmentType.Potion)
+            {
+                int currentCountPotion = currentEquipments.FindAll(slot => slot.EquipmentType == equipment.EquipmentType).Count;
+
+                if (currentCountPotion < countPotion)
+                {
+                    oldEquipment = null;
+                    return true;
+                }
+            }
+
             oldEquipment = currentEquipments.Find(slot => slot.EquipmentType == equipment.EquipmentType);
 
             switch (equipment.EquipmentType)
@@ -25,6 +30,7 @@ namespace Items
                 case EquipmentType.Chest:
                 case EquipmentType.Shield:
                 case EquipmentType.Weapon:
+                case EquipmentType.Potion:
                     return true;
                 case EquipmentType.None:
                 default:

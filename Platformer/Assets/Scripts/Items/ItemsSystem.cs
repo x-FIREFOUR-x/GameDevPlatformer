@@ -63,8 +63,10 @@ namespace Items
 
             Item item = _itemsOnScene[sceneItem];
 
-            if (!_inventory.TryAddItemToBackPack(item))
+            if (_inventory.IsFullBackPack())
                 return;
+
+            _inventory.AddItemToInventory(item);
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickItem;
             UnityEngine.Object.Destroy(sceneItem.gameObject);

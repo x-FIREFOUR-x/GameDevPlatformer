@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Items.Core;
 using UnityEngine;
+using Items.Enum;
 
 namespace Items
 {
     public class Inventory
     {
         public const int BackPackMaxSize = 24;
+        public const int MaxCountEquipmentPotion = 2;
 
         private readonly Transform _player;
         
@@ -32,16 +35,21 @@ namespace Items
                 BackPackItems.Add(null);
         }
 
-        public bool TryAddItemToBackPack(Item item)
+        public bool IsFullBackPack()
         {
-            var index = BackPackItems.FindIndex(element => element == null);
+            return !BackPackItems.Any(item => item == null);
+        }
 
-            if (index > BackPackMaxSize || index < 0)
-                return false;
+        public void AddItemToInventory(Item item)
+        {
+            if (TryAddItemToStackExistItem(item))
+                return;
+
+            var index = BackPackItems.FindIndex(element => element == null);
 
             BackPackItems[index] = item;
             BackPackChanged?.Invoke();
-            return true;
+            
         }
 
         public void RemoveItemFromBackPack(Item item, bool toWorld) 
@@ -66,6 +74,24 @@ namespace Items
 
             if (toWorld)
                 ItemDropped?.Invoke(equipment, _player.position);
+        }
+
+        private bool TryAddItemToStackExistItem(Item item)
+        {
+            if (item.Descriptor.Type == ItemType.Potion)
+            {
+                var existItem = BackPackItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId);
+
+                if (existItem == null)
+                    existItem = EquipmentItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId);
+
+                if (existItem != null)
+                {
+                    ((Potion)existItem).AddToStack(1);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

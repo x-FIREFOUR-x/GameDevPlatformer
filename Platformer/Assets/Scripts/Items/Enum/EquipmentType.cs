@@ -8,6 +8,5 @@
         Shield = 3,
         Weapon = 4,
         Potion = 5,
-        Potion2 = 6,
     }
 }
