@@ -94,7 +94,7 @@ namespace UI.InventoryUI
                 equipment = _equipmentSlots[slot];
                 if (!_inventory.TryAddItemToBackPack(equipment)) 
                     return;
-                _inventory.UnEquip(equipment, true);
+                _inventory.UnEquip(equipment, false);
 
                 equipment?.Use();
                 return;
