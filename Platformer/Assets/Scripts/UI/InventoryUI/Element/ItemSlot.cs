@@ -37,7 +37,7 @@ namespace UI.InventoryUI.Element
             _emptyBackground.gameObject.SetActive(false);
             _itemBackground.sprite = itemBackSprite;
             
-            ClearButton.gameObject.SetActive(true);
+            ClearButton.gameObject.SetActive(EquipmentType == EquipmentType.None);
             _itemAmount.gameObject.SetActive(amount > 0);
             _itemAmount.text = amount.ToString();
         }

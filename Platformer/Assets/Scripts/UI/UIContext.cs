@@ -4,8 +4,11 @@ using UnityEngine;
 
 using UI.Enum;
 using UI.Core;
+using UI.InventoryUI;
 using InputReader;
 using Items;
+using Items.Storage;
+using Items.Data;
 
 namespace UI
 {
@@ -19,6 +22,7 @@ namespace UI
         private readonly Data _data;
 
         private IScreenController _currentController;
+
 
         public UIContext(List<IWindowsInputSource> inputSources, Data data)
         {
@@ -77,11 +81,13 @@ namespace UI
 
         private IScreenController GetController(ScreenType screenType)
         {
-            //TODO: InventoryScreenPresenter
-            throw screenType switch
+            
+            switch (screenType)
             {
-                ScreenType.Inventory => new NullReferenceException($"Presenter for {screenType} isn't created yet"),
-                _ => new NullReferenceException(),
+                case ScreenType.Inventory:
+                    return new InventoryScreenPresenter((InventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors);
+                default:
+                    throw new NullReferenceException();
             };
         }
 
@@ -94,10 +100,12 @@ namespace UI
         public struct Data
         {
             public Inventory Inventory { get; }
+            public List<RarityDescriptor> RarityDescriptors { get; }
 
-            public Data(Inventory inventory)
+            public Data(Inventory inventory, List<RarityDescriptor> rarityDescriptors)
             {
                 Inventory = inventory;
+                RarityDescriptors = rarityDescriptors;
             }
         }
     }

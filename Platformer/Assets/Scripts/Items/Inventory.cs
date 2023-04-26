@@ -8,7 +8,9 @@ namespace Items
 {
     public class Inventory
     {
-        public const int BackPackMaxSize = 30;
+        public const int BackPackMaxSize = 16;
+
+        private readonly Transform _player;
         
         public List<Item> BackPackItems { get;  }
         public List<Equipment> EquipmentItems { get; }
@@ -16,16 +18,29 @@ namespace Items
         public event Action BackPackChanged;
         public event Action EquipmentChanged;
 
-        public Inventory(List<Item> backPackItems, List<Equipment> equipmentList)
+        public Inventory(List<Item> backPackItems, List<Equipment> equipmentList, Transform player)
         {
+            _player = player;
             EquipmentItems = equipmentList ?? new List<Equipment>();
-            BackPackItems = backPackItems ?? new List<Item>();
+
+            if (backPackItems != null)
+                return;
+
+            BackPackItems = new List<Item>();
+            for (int i = 0; i < BackPackMaxSize; i++)
+                BackPackItems.Add(null);
         }
 
-        public void AddItemToBackPack(Item item)
+        public bool TryAddItemToBackPack(Item item)
         {
-            BackPackItems.Add(item);
+            var index = BackPackItems.FindIndex(element => element == null);
+
+            if (index > BackPackMaxSize || index < 0)
+                return false;
+
+            BackPackItems[index] = item;
             BackPackChanged?.Invoke();
+            return true;
         }
 
         public void RemoveItemFromBackPack(Item item, bool toWorld) 
