@@ -15,7 +15,7 @@ namespace Items
 
         private readonly Transform _player;
         
-        public List<Item> BackPackItems { get;  }
+        public List<Item> BackPackItems { get; }
         public List<Equipment> EquipmentItems { get; }
 
         public event Action BackPackChanged;
@@ -38,6 +38,15 @@ namespace Items
         public bool IsFullBackPack()
         {
             return !BackPackItems.Any(item => item == null);
+        }
+
+        public bool CanAddItemToStackExistItem(Item item)
+        {
+            if (item.Descriptor.Type != ItemType.Potion)
+                return false;
+
+            return BackPackItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId) != null 
+                || EquipmentItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId) != null;
         }
 
         public void AddItemToInventory(Item item)

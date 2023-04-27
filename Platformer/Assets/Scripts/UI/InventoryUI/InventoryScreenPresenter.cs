@@ -36,7 +36,6 @@ namespace UI.InventoryUI
 
         public override void Initialize()
         {
-            //View.MovingImage.gameObject.SetActive(false);
             InitializeBackPack();
             InitializeEquipment();
             _inventory.BackPackChanged += UpdateBackPack;

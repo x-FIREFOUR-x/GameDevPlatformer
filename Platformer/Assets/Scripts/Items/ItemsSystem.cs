@@ -63,7 +63,7 @@ namespace Items
 
             Item item = _itemsOnScene[sceneItem];
 
-            if (_inventory.IsFullBackPack())
+            if (_inventory.IsFullBackPack() && !_inventory.CanAddItemToStackExistItem(item))
                 return;
 
             _inventory.AddItemToInventory(item);
