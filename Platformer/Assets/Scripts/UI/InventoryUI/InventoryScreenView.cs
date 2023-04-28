@@ -19,7 +19,6 @@ namespace UI.InventoryUI
         [SerializeField] private Transform _backPackContainer;
         [SerializeField] private Transform _equipmentContainer;
         
-        [field: SerializeField] public Image MovingImage { get; private set; }
         public List<ItemSlot> BackPackSlots { get; private set; }
         public List<ItemSlot> EquipmentSlots { get; private set; }
 

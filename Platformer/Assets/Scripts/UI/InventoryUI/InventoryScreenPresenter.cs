@@ -43,7 +43,6 @@ namespace UI.InventoryUI
         
         public override void Initialize()
         {
-            //View.MovingImage.gameObject.SetActive(false);
             InitializeBackPack();
             InitializeEquipment();
             _inventory.BackPackChanged += UpdateBackPack;
@@ -80,10 +79,21 @@ namespace UI.InventoryUI
         private void InitializeEquipment()
         {
             var equipment = View.EquipmentSlots;
+            List<Equipment> setPotions = new List<Equipment>(); 
             foreach (ItemSlot slot in equipment)
             {
-                var item = _inventory.EquipmentItems.Find(equip => equip.EquipmentType == slot.EquipmentType);
-                _equipmentSlots.Add(slot,item);
+                Equipment item;
+                if (slot.EquipmentType == EquipmentType.Potion)
+                {
+                    item = _inventory.EquipmentItems.Find(equip => equip.EquipmentType == slot.EquipmentType && setPotions.IndexOf(equip) == -1);
+                    if (item != null)
+                        setPotions.Add(item);
+                }
+                else
+                {
+                    item = _inventory.EquipmentItems.Find(equip => equip.EquipmentType == slot.EquipmentType);
+                }
+                _equipmentSlots.Add(slot, item);
 
                 if (item == null)
                     continue;
@@ -99,46 +109,37 @@ namespace UI.InventoryUI
             if (slot.EquipmentType != EquipmentType.None)
             {
                 equipment = _equipmentSlots[slot];
-                if (!_inventory.TryAddItemToBackPack(equipment)) 
+                if (_inventory.IsFullBackPack())
                     return;
-                _inventory.UnEquip(equipment, false);
 
-                equipment?.Use();
+                _inventory.UnEquip(equipment, false);
+                _inventory.AddItemToInventory(equipment);
+
                 return;
             }
 
             Item item = _backPackSlots[slot];
-
-            if (item is Potion potion)
-            {
-                potion.Use();
-                if(potion.Amount <= 0)
-                    _inventory.RemoveItemFromBackPack(item, false);
-                
-                return;
-            }
 
             if (item is not Equipment equip)
                 return;
             
             equipment = equip;
 
-            if (!_equipmentConditionChecker.IsEquipmentConditionFits(equipment, _inventory.EquipmentItems)
-                || !_equipmentConditionChecker.TryReplaceEquipment(equipment, out var prevEquipment,
-                    _inventory.EquipmentItems))
+            if (!_equipmentConditionChecker.TryReplaceEquipment(equipment, out var prevEquipment,
+                    _inventory.EquipmentItems, Inventory.MaxCountEquipmentPotion))
                 return;
             
             
             _inventory.RemoveItemFromBackPack(equipment, false);
             if (prevEquipment != null)
             {
+                if (_inventory.IsFullBackPack())
+                    return;
                 _inventory.UnEquip(prevEquipment, false);
-                _inventory.TryAddItemToBackPack((Item)prevEquipment);
-                prevEquipment.Use();
+                _inventory.AddItemToInventory((Item)prevEquipment);
             }
             
             _inventory.Equip(equipment);
-            equipment.Use();
         }
 
         private void ClearSlot(ItemSlot slot)

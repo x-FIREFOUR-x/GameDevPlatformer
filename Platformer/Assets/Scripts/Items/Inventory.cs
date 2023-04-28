@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 using Items.Core;
-using UnityEngine;
+using Items.Enum;
 
 namespace Items
 {
     public class Inventory
     {
         public const int BackPackMaxSize = 24;
+        public const int MaxCountEquipmentPotion = 2;
 
         private readonly Transform _player;
         
-        public List<Item> BackPackItems { get;  }
+        public List<Item> BackPackItems { get; }
         public List<Equipment> EquipmentItems { get; }
 
         public event Action BackPackChanged;
@@ -32,16 +35,30 @@ namespace Items
                 BackPackItems.Add(null);
         }
 
-        public bool TryAddItemToBackPack(Item item)
+        public bool IsFullBackPack()
         {
-            var index = BackPackItems.FindIndex(element => element == null);
+            return !BackPackItems.Any(item => item == null);
+        }
 
-            if (index > BackPackMaxSize || index < 0)
+        public bool CanAddItemToStackExistItem(Item item)
+        {
+            if (item.Descriptor.Type != ItemType.Potion)
                 return false;
+
+            return BackPackItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId) != null 
+                || EquipmentItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId) != null;
+        }
+
+        public void AddItemToInventory(Item item)
+        {
+            if (TryAddItemToStackExistItem(item))
+                return;
+
+            var index = BackPackItems.FindIndex(element => element == null);
 
             BackPackItems[index] = item;
             BackPackChanged?.Invoke();
-            return true;
+            
         }
 
         public void RemoveItemFromBackPack(Item item, bool toWorld) 
@@ -66,6 +83,21 @@ namespace Items
 
             if (toWorld)
                 ItemDropped?.Invoke(equipment, _player.position);
+        }
+
+        private bool TryAddItemToStackExistItem(Item item)
+        {
+            if (item.Descriptor.Type != ItemType.Potion)
+                return false;
+
+            Item existItem = BackPackItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId);
+            existItem ??= EquipmentItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId);
+
+            if (existItem == null)
+                return false;
+
+            ((Potion)existItem).AddToStack(1);
+            return true;
         }
     }
 }
