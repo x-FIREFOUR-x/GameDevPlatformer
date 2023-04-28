@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 using Items.Core;
-using UnityEngine;
 using Items.Enum;
 
 namespace Items
@@ -87,20 +87,17 @@ namespace Items
 
         private bool TryAddItemToStackExistItem(Item item)
         {
-            if (item.Descriptor.Type == ItemType.Potion)
-            {
-                var existItem = BackPackItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId);
+            if (item.Descriptor.Type != ItemType.Potion)
+                return false;
 
-                if (existItem == null)
-                    existItem = EquipmentItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId);
+            Item existItem = BackPackItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId);
+            existItem ??= EquipmentItems.Find(element => element?.Descriptor.ItemId == item.Descriptor.ItemId);
 
-                if (existItem != null)
-                {
-                    ((Potion)existItem).AddToStack(1);
-                    return true;
-                }
-            }
-            return false;
+            if (existItem == null)
+                return false;
+
+            ((Potion)existItem).AddToStack(1);
+            return true;
         }
     }
 }
