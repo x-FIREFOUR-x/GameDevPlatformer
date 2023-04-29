@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 using InputReader;
+using Items;
 using StatsSystem;
 
 namespace Player
@@ -15,7 +16,8 @@ namespace Player
         private readonly List<IDisposable> _disposables;
         
         public StatsController StatsController { get; }
-        
+        public Inventory Inventory { get;  }
+
         public PlayerSystem(PlayerEntity playerEntity, List<IEntityInputSource> inputSources)
         {
             _disposables = new List<IDisposable>();
@@ -30,6 +32,8 @@ namespace Player
 
             _playerBrain = new PlayerBrain(_playerEntity, inputSources);
             _disposables.Add(_playerBrain);
+
+            Inventory = new Inventory(null, null, _playerEntity.transform);
         }
 
         public void Dispose()

@@ -2,20 +2,17 @@
 
 using Items.Data;
 using StatsSystem;
+using Items.Enum;
 
 namespace Items.Core
 {
-    public class Potion : Item
+    public class Potion : Equipment
     {
-        private int _amount;
-        
         public override int Amount => _amount;
 
-        public Potion(ItemDescriptor descriptor, StatsController statsController) :
-            base(descriptor)
+        public Potion(ItemDescriptor descriptor, StatsController statsController, EquipmentType equipmentType) :
+            base(descriptor, statsController, equipmentType)
         {
-            _itemDescriptor = descriptor as StatChangingItemDescriptor;
-            _statsController = statsController;
             _amount = 1;
         }
 

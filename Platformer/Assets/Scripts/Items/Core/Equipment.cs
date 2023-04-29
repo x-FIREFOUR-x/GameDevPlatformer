@@ -8,9 +8,10 @@ namespace Items.Core
     {
         private bool _equipped;
 
-        public override int Amount => -1;
+        protected int _amount = -1;
+        public override int Amount => _amount;
         
-        public EquipmentType EquipmentType { get;  }
+        public EquipmentType EquipmentType { get; }
 
         public Equipment(ItemDescriptor descriptor, StatsController statsController, EquipmentType equipmentType) :
             base(descriptor)

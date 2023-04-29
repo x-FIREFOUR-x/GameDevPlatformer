@@ -18,7 +18,7 @@ namespace Items
             switch (descriptor.Type)
             {
                 case ItemType.Potion:
-                    return new Potion(descriptor, _statsController);
+                    return new Potion(descriptor, _statsController, GetEquipmentType(descriptor));
                 case ItemType.Chest:
                 case ItemType.Helmet:
                 case ItemType.Weapon:
@@ -42,6 +42,7 @@ namespace Items
                 case ItemType.Weapon:
                     return EquipmentType.Weapon;
                 case ItemType.Potion:
+                    return EquipmentType.Potion;
                 default:
                     return EquipmentType.None;
             }

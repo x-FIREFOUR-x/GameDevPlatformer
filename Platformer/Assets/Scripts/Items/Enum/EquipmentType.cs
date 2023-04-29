@@ -6,6 +6,7 @@
         Helmet = 1,
         Chest = 2,
         Shield = 3,
-        Weapon = 4
+        Weapon = 4,
+        Potion = 5,
     }
 }

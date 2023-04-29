@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,17 +9,18 @@ using Items.Rarity;
 
 namespace Items
 {
-    public class ItemsSystem
+    public class ItemsSystem : IDisposable
     {
         private readonly SceneItem _sceneItem;
         private readonly Transform _transform;
         private readonly List<IItemRarityColor> _colors;
         private readonly LayerMask _whatIsPlayer;
         private readonly ItemsFactory _itemsFactory;
+        private readonly Inventory _inventory;
 
         private readonly Dictionary<SceneItem, Item> _itemsOnScene;
 
-        public ItemsSystem(List<IItemRarityColor> colors, LayerMask whatIsPlayer, ItemsFactory itemsFactory)
+        public ItemsSystem(List<IItemRarityColor> colors, LayerMask whatIsPlayer, ItemsFactory itemsFactory, Inventory inventory)
         {
             _sceneItem = Resources.Load<SceneItem>($"{"Prefabs"}/{"Items"}/{nameof(SceneItem)}");
             _itemsOnScene = new Dictionary<SceneItem, Item>();
@@ -28,6 +30,13 @@ namespace Items
             _colors = colors;
             _whatIsPlayer = whatIsPlayer;
             _itemsFactory = itemsFactory;
+            _inventory = inventory;
+            _inventory.ItemDropped += DropItem;
+        }
+
+        public void Dispose()
+        {
+            _inventory.ItemDropped -= DropItem;
         }
 
         public void DropItem(ItemDescriptor descriptor, Vector2 position)
@@ -38,7 +47,7 @@ namespace Items
 
         private void DropItem(Item item, Vector2 position)
         {
-            SceneItem sceneItem = Object.Instantiate(_sceneItem, _transform);
+            SceneItem sceneItem = UnityEngine.Object.Instantiate(_sceneItem, _transform);
             sceneItem.SetItem(item.Descriptor.ItemSprite, item.Descriptor.ItemId.ToString(),
                 _colors.Find(color => color.ItemRarity == item.Descriptor.ItemRarity).Color);
             sceneItem.PlayAnimationDrop(position);
@@ -53,10 +62,14 @@ namespace Items
                 return;
 
             Item item = _itemsOnScene[sceneItem];
-            Debug.Log($"Adding item {item.Descriptor.ItemId} to inventory");
+
+            if (_inventory.IsFullBackPack() && !_inventory.CanAddItemToStackExistItem(item))
+                return;
+
+            _inventory.AddItemToInventory(item);
             _itemsOnScene.Remove(sceneItem);
             sceneItem.ItemClicked -= TryPickItem;
-            Object.Destroy(sceneItem.gameObject);
+            UnityEngine.Object.Destroy(sceneItem.gameObject);
         }
     }
 }

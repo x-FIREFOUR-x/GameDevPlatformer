@@ -1,15 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace InputReader
 {
-    class GameUIInputView : MonoBehaviour, IEntityInputSource
+    class GameUIInputView : MonoBehaviour, IEntityInputSource, IWindowsInputSource
     {
         [SerializeField] private Joystick _joystick;
         [SerializeField] private Button _attackButton;
         [SerializeField] private Button _jumpButton;
         [SerializeField] private Button _rollButton;
         [SerializeField] private PressButton _blockButton;
+
+        [SerializeField] private Button _inventoryButton;
+
+        public event Action InventoryRequested;
 
         public float HorizontalDirection => _joystick.Horizontal;
         public bool Attack { get; private set; }
@@ -25,6 +30,8 @@ namespace InputReader
 
             _blockButton.buttonPressed.AddListener(() => Block = true);
             _blockButton.buttonUnpressed.AddListener(() => Block = false);
+
+            _inventoryButton.onClick.AddListener(() => InventoryRequested?.Invoke());
         }
 
         public void ResetOneTimeActions()
@@ -42,6 +49,8 @@ namespace InputReader
 
             _blockButton.buttonPressed.RemoveAllListeners();
             _blockButton.buttonUnpressed.RemoveAllListeners();
+
+            _inventoryButton.onClick.RemoveAllListeners();
         }
     }
 }
