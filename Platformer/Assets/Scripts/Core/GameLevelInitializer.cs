@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 using Player;
 using InputReader;
 using Core.Services.Updater;
+using Items;
+using Items.Data;
+using Items.Rarity;
+using Items.Storage;
 using StatsSystem;
+using UI;
 
 namespace Core
 {
@@ -13,11 +19,17 @@ namespace Core
     {
         [SerializeField] private PlayerEntity _playerEntity;
         [SerializeField] private GameUIInputView _ganeUIInputView;
+        [SerializeField] private ItemRarityDescriptorsStorage _rarityDescriptorsStorage;
+        [SerializeField] private LayerMask _whatIsPlayer;
+        [SerializeField] private ItemStorage _itemsStorage;
         [SerializeField] private StatsStorage _statsStorage;
 
         private ExternalDevicesInputReader _externalDevicesInput;
         private PlayerSystem _playerSystem;
         private ProjectUpdater _projectUpdater;
+        private DropGenerator _dropGenerator;
+        private ItemsSystem _itemsSystem;
+        private UIContext _uiContext;
 
         private List<IDisposable> _disposables;
 
@@ -39,6 +51,19 @@ namespace Core
                 _externalDevicesInput
             });
             _disposables.Add(_playerSystem);
+
+            ItemsFactory itemsFactory = new ItemsFactory(_playerSystem.StatsController);
+            List<IItemRarityColor> rarityColors =
+                _rarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
+            _itemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, _playerSystem.Inventory);
+            List<ItemDescriptor> descriptors =
+                _itemsStorage.ItemScriptables.Select(scriptable => scriptable.ItemDescriptor).ToList();
+            _dropGenerator = new DropGenerator(descriptors, _playerEntity, _itemsSystem);
+
+            UIContext.Data data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors);
+            _uiContext = new UIContext(
+                new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput },
+                data);
         }
 
         private void Update()
