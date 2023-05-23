@@ -16,13 +16,13 @@ namespace Movement.Controller
 
         public bool MoveActive { get { return _rigidbody.velocity.x != 0; } }
 
-        public Mover(Rigidbody2D rigidbody, MoveData movementData, IStatValueGiver startValueGiver)
+        public Mover(Rigidbody2D rigidbody, MoveData movementData, IStatValueGiver statValueGiver)
         {
             _rigidbody = rigidbody;
             _transform = _rigidbody.transform;
             _movementData = movementData;
 
-            _statValueGiver = startValueGiver;
+            _statValueGiver = statValueGiver;
         }
 
         public void Move(float direction, bool isCanMove)
