@@ -9,13 +9,13 @@ namespace Player
 {
     class PlayerBrain : IDisposable
     {
-        private readonly PlayerEntity _playerEntity;
+        private readonly PlayerEntityBehaviour _playerEntityBehaviour;
 
         private readonly List<IEntityInputSource> _inputSources;
 
-        public PlayerBrain(PlayerEntity playerEntity, List<IEntityInputSource> inputSources)
+        public PlayerBrain(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources)
         {
-            _playerEntity = playerEntity;
+            _playerEntityBehaviour = playerEntityBehaviour;
             _inputSources = inputSources;
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
@@ -25,18 +25,18 @@ namespace Player
 
         private void OnFixedUpdate()
         {
-            _playerEntity.Move(GetMoveDirection());
+            _playerEntityBehaviour.Move(GetMoveDirection());
 
             if (IsAttack)
-                _playerEntity.Attack();
+                _playerEntityBehaviour.Attack();
 
             if (IsJump)
-                _playerEntity.Jump();
+                _playerEntityBehaviour.Jump();
 
             if (IsRoll)
-                _playerEntity.Roll();
+                _playerEntityBehaviour.Roll();
 
-            _playerEntity.Block(IsBlock());
+            _playerEntityBehaviour.Block(IsBlock());
 
             foreach (var inputSource in _inputSources)
             {

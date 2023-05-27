@@ -11,13 +11,13 @@ namespace Items
 {
     public class DropGenerator
     {
-        private readonly PlayerEntity _playerEntity;
+        private readonly PlayerEntityBehaviour _playerEntityBehaviour;
         private readonly List<ItemDescriptor> _itemDescriptors;
         private readonly ItemsSystem _itemsSystem;
 
-        public DropGenerator(List<ItemDescriptor> itemDescriptors, PlayerEntity playerEntity, ItemsSystem itemsSystem)
+        public DropGenerator(List<ItemDescriptor> itemDescriptors, PlayerEntityBehaviour playerEntityBehaviour, ItemsSystem itemsSystem)
         {
-            _playerEntity = playerEntity;
+            _playerEntityBehaviour = playerEntityBehaviour;
             _itemDescriptors = itemDescriptors;
             _itemsSystem = itemsSystem;
             ProjectUpdater.Instance.UpdateCalled += Update;
@@ -27,7 +27,7 @@ namespace Items
         {
             List<ItemDescriptor> items = _itemDescriptors.Where(item => item.ItemRarity == rarity).ToList();
             ItemDescriptor itemDescriptor = items[UnityEngine.Random.Range(0, items.Count)];
-            _itemsSystem.DropItem(itemDescriptor, _playerEntity.transform.position + UnityEngine.Vector3.one);
+            _itemsSystem.DropItem(itemDescriptor, _playerEntityBehaviour.transform.position + UnityEngine.Vector3.one);
         }
 
         private void Update()
