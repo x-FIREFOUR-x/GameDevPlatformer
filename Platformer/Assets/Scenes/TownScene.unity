@@ -1814,6 +1814,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f3001c71cd780d468d3fec3965ad714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &784348084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4376251333676912599, guid: 4b90badacc47760428af352369253d53, type: 3}
+  m_PrefabInstance: {fileID: 8617698486145366418}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1558ffd3445177649be45b66150aefb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &857495960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4238,7 +4249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4992bfefe158904e91fc32ec29543fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerEntity: {fileID: 784348083}
+  _playerEntityBehaviour: {fileID: 784348083}
   _ganeUIInputView: {fileID: 1673820770}
   _rarityDescriptorsStorage: {fileID: 11400000, guid: f872a3885c466fa41a3a31670988fd4b, type: 2}
   _whatIsPlayer:
@@ -5527,6 +5538,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3.0559373
       objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: Animator
+      value: 
+      objectReference: {fileID: 784348084}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: Animator2
+      value: 
+      objectReference: {fileID: 784348084}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_RootOrder
       value: 7
