@@ -2,6 +2,7 @@
 
 using Core.Animation;
 using Movement.Controller;
+using Movement.Controller.Movers;
 using Movement.Data;
 using StatsSystem;
 
@@ -14,15 +15,15 @@ namespace NPC.Behaviour
         [SerializeField] private MoveData _moveData;
 
         protected Rigidbody2D Rigidbody;
-        protected Mover Mover;
+        protected BaseMover BaseMover;
         
         public virtual void Initialize(IStatValueGiver statValueGiver)
         {
             Rigidbody = GetComponent<Rigidbody2D>();
-            Mover = new Mover(Rigidbody, _moveData, statValueGiver);
+            BaseMover = new VelocityMover(Rigidbody);
         }
         
-        public virtual void Move(float direction) => Mover.Move(direction, true);
+        public virtual void Move(float direction) => BaseMover.Move(direction, true);
         
     }
 }
