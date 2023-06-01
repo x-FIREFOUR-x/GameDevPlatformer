@@ -4,24 +4,23 @@ using System.Linq;
 
 using InputReader;
 using Core.Services.Updater;
+using NPC.Controller;
 using StatsSystem;
 using StatsSystem.Enum;
 
 namespace Player
 {
-    class PlayerBrain : IDisposable
+    class PlayerEntity : Entity, IDisposable
     {
         private readonly PlayerEntityBehaviour _playerEntityBehaviour;
 
         private readonly List<IEntityInputSource> _inputSources;
-        
-        private readonly IStatValueGiver _statValueGiver;
-        
-        public PlayerBrain(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources, IStatValueGiver statValueGiver)
+
+        public PlayerEntity(PlayerEntityBehaviour playerEntityBehaviour, StatsController statValueGiver, List<IEntityInputSource> inputSources)
+        : base(playerEntityBehaviour, statValueGiver)
         {
             _playerEntityBehaviour = playerEntityBehaviour;
             _inputSources = inputSources;
-            _statValueGiver = statValueGiver;
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
@@ -30,13 +29,13 @@ namespace Player
 
         private void OnFixedUpdate()
         {
-            _playerEntityBehaviour.Move(GetMoveDirection() * _statValueGiver.GetStatValue(StatType.Speed));
+            _playerEntityBehaviour.Move(GetMoveDirection() * StatsController.GetStatValue(StatType.Speed));
 
             if (IsAttack)
                 _playerEntityBehaviour.Attack();
 
             if (IsJump)
-                _playerEntityBehaviour.Jump(_statValueGiver.GetStatValue(StatType.JumpForce));
+                _playerEntityBehaviour.Jump(StatsController.GetStatValue(StatType.JumpForce));
 
             if (IsRoll)
                 _playerEntityBehaviour.Roll();

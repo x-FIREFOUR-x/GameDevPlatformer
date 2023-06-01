@@ -12,7 +12,7 @@ namespace Player
     public class PlayerSystem : IDisposable
     {
         private readonly PlayerEntityBehaviour _playerEntityBehaviour;
-        private readonly PlayerBrain _playerBrain;
+        private readonly PlayerEntity _playerEntity;
         private readonly List<IDisposable> _disposables;
         
         public StatsController StatsController { get; }
@@ -30,8 +30,8 @@ namespace Player
             _playerEntityBehaviour = playerEntityBehaviour;
             _playerEntityBehaviour.Initialize();
 
-            _playerBrain = new PlayerBrain(_playerEntityBehaviour, inputSources, StatsController);
-            _disposables.Add(_playerBrain);
+            _playerEntity = new PlayerEntity(_playerEntityBehaviour, inputSources, StatsController);
+            _disposables.Add(_playerEntity);
 
             Inventory = new Inventory(null, null, _playerEntityBehaviour.transform);
         }
