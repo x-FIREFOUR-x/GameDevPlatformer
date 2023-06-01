@@ -7,21 +7,19 @@ using Movement.Data;
 namespace NPC.Behaviour
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class BaseEntityBehaviour : MonoBehaviour
+    public abstract class BaseEntityBehaviour : MonoBehaviour
     {
         [SerializeField] protected AnimationController Animator;
-        [SerializeField] private MoveData _moveData;
 
         protected Rigidbody2D Rigidbody;
-        protected BaseMover BaseMover;
+        protected BaseMover Mover;
         
         public virtual void Initialize()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
-            BaseMover = new VelocityMover(Rigidbody);
+            Mover = new VelocityMover(Rigidbody);
         }
         
-        public virtual void Move(float direction) => BaseMover.Move(direction, true);
-        
+        public abstract void Move(float direction);
     }
 }
