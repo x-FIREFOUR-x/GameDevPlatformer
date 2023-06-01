@@ -7,9 +7,9 @@ namespace Movement.Controller
 {
     public class PositionMover : BaseMover
     {
-        public override bool MoveActive => _destination != Rigidbody.position;
-        
         private Vector2 _destination;
+        
+        public override bool MoveActive => _destination != Rigidbody.position;
 
         public PositionMover(Rigidbody2D rigidbody) : base(rigidbody) { }
 

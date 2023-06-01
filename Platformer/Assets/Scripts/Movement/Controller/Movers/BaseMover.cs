@@ -6,10 +6,10 @@ namespace Movement.Controller.Movers
 {
     public abstract class BaseMover
     {
+        protected readonly Rigidbody2D Rigidbody;
+        
         public Direction Direction { get; private set; }
         public abstract bool MoveActive { get; }
-        
-        protected readonly Rigidbody2D Rigidbody;
         
         public BaseMover(Rigidbody2D rigidbody)
         {
