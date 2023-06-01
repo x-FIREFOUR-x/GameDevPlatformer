@@ -28,9 +28,9 @@ namespace Player
             _disposables.Add(StatsController);
 
             _playerEntityBehaviour = playerEntityBehaviour;
-            _playerEntityBehaviour.Initialize(StatsController);
+            _playerEntityBehaviour.Initialize();
 
-            _playerBrain = new PlayerBrain(_playerEntityBehaviour, inputSources);
+            _playerBrain = new PlayerBrain(_playerEntityBehaviour, inputSources, StatsController);
             _disposables.Add(_playerBrain);
 
             Inventory = new Inventory(null, null, _playerEntityBehaviour.transform);

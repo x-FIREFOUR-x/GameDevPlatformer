@@ -4,6 +4,8 @@ using System.Linq;
 
 using InputReader;
 using Core.Services.Updater;
+using StatsSystem;
+using StatsSystem.Enum;
 
 namespace Player
 {
@@ -12,11 +14,14 @@ namespace Player
         private readonly PlayerEntityBehaviour _playerEntityBehaviour;
 
         private readonly List<IEntityInputSource> _inputSources;
-
-        public PlayerBrain(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources)
+        
+        private readonly IStatValueGiver _statValueGiver;
+        
+        public PlayerBrain(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources, IStatValueGiver statValueGiver)
         {
             _playerEntityBehaviour = playerEntityBehaviour;
             _inputSources = inputSources;
+            _statValueGiver = statValueGiver;
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
@@ -25,13 +30,13 @@ namespace Player
 
         private void OnFixedUpdate()
         {
-            _playerEntityBehaviour.Move(GetMoveDirection());
+            _playerEntityBehaviour.Move(GetMoveDirection() * _statValueGiver.GetStatValue(StatType.Speed));
 
             if (IsAttack)
                 _playerEntityBehaviour.Attack();
 
             if (IsJump)
-                _playerEntityBehaviour.Jump();
+                _playerEntityBehaviour.Jump(_statValueGiver.GetStatValue(StatType.JumpForce));
 
             if (IsRoll)
                 _playerEntityBehaviour.Roll();

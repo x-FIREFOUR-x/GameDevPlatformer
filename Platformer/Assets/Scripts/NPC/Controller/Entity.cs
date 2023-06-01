@@ -15,7 +15,7 @@ namespace NPC.Controller
         protected Entity(BaseEntityBehaviour entityBehaviour, StatsController statsController)
         {
             _entityBehaviour = entityBehaviour;
-            _entityBehaviour.Initialize(statsController);
+            _entityBehaviour.Initialize();
             StatsController = statsController;
         }
         
