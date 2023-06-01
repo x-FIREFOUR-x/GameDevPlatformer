@@ -16,7 +16,7 @@ namespace Player
 
         private readonly List<IEntityInputSource> _inputSources;
 
-        public PlayerEntity(PlayerEntityBehaviour playerEntityBehaviour, StatsController statValueGiver, List<IEntityInputSource> inputSources)
+        public PlayerEntity(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources, StatsController statValueGiver )
         : base(playerEntityBehaviour, statValueGiver)
         {
             _playerEntityBehaviour = playerEntityBehaviour;
