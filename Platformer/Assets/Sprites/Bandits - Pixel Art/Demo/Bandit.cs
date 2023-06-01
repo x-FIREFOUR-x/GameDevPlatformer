@@ -1,4 +1,4 @@
-﻿Busing UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class Bandit : MonoBehaviour {
