@@ -17,13 +17,16 @@ namespace Movement.Controller.Movers
             if (isCanMove)
             {
                 velocity.x = horizontalMovement;
-                SetDirection(horizontalMovement > 0 ? Direction.Right : Direction.Left);
+                if (horizontalMovement != 0)
+                {
+                    SetDirection(horizontalMovement > 0 ? Direction.Right : Direction.Left);
+                }
             }
             else
             {
                 velocity.x = 0;
             }
-
+            
             Rigidbody.velocity = velocity;
         }
     }
