@@ -24,7 +24,7 @@ namespace Movement.Controller.Movers
             {
                 velocity.x = 0;
             }
-
+            
             Rigidbody.velocity = velocity;
         }
     }
