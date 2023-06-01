@@ -1,16 +1,16 @@
-﻿using Movement.Data;
+﻿using UnityEngine;
+
 using Movement.Enums;
-using UnityEngine;
 
 namespace Movement.Controller.Movers
 {
     public abstract class BaseMover
     {
-        protected readonly Rigidbody2D Rigidbody;
         public Direction Direction { get; private set; }
-
         public abstract bool MoveActive { get; }
-
+        
+        protected readonly Rigidbody2D Rigidbody;
+        
         public BaseMover(Rigidbody2D rigidbody)
         {
             Direction = Direction.Right;
@@ -25,7 +25,7 @@ namespace Movement.Controller.Movers
                 return;
             
             Rigidbody.transform.Rotate(0, 180, 0);
-            Direction = Direction == Direction.Right ? Direction.Left : Direction.Right;
+            Direction = newDirection;
         }
     }
 }

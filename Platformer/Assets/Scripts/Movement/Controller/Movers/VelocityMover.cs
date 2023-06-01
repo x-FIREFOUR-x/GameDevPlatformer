@@ -5,8 +5,8 @@ namespace Movement.Controller.Movers
 {
     public class VelocityMover : BaseMover
     {
-        private Vector2 _movement;
         public override bool MoveActive => Rigidbody.velocity.x != 0;
+        private Vector2 _movement;
         
         public VelocityMover(Rigidbody2D rigidbody) : base(rigidbody){}
 

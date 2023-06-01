@@ -1,13 +1,15 @@
-﻿using Movement.Controller.Movers;
+﻿using UnityEngine;
+
+using Movement.Controller.Movers;
 using Movement.Enums;
-using UnityEngine;
 
 namespace Movement.Controller
 {
     public class PositionMover : BaseMover
     {
-        private Vector2 _destination;
         public override bool MoveActive => _destination != Rigidbody.position;
+        
+        private Vector2 _destination;
 
         public PositionMover(Rigidbody2D rigidbody) : base(rigidbody) { }
 
