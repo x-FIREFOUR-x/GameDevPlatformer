@@ -41,7 +41,7 @@ namespace Player
         public void UpdateAnimations()
         {
             Animator.PlayAnimation(AnimationType.Idle, true);
-            Animator.PlayAnimation(AnimationType.Run, BaseMover.MoveActive);
+            Animator.PlayAnimation(AnimationType.Run, Mover.MoveActive);
             Animator.PlayAnimation(AnimationType.Jump, _jumper.JumpActive);
             Animator.PlayAnimation(AnimationType.Fall, _jumper.FallActive);
             Animator.PlayAnimation(AnimationType.Roll, _roller.RollActive);
@@ -50,14 +50,8 @@ namespace Player
             Animator.UpdateAnimationsAttack(_attacker.AttackActive);
         }
 
-        public override void Move(float direction)
-        {
-            if (CanMove())
-            {
-                base.Move(direction);
-            }
-        }
-        public void Jump(float jumpForce) => _jumper.Jump(CanJump(),jumpForce);
+        public override void Move(float direction) => Mover.Move(direction, CanMove());
+        public void Jump(float jumpForce) => _jumper.Jump(CanJump(), jumpForce);
         public void Roll() => _roller.Roll(CanRoll());
         public void Block(bool activeBlock) => _blocker.Block(activeBlock && CanBlock());
         public void Attack() => _attacker.Attack(CanAttack());
