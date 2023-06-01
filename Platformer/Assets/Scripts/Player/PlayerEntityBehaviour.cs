@@ -21,10 +21,10 @@ namespace Player
         private Attacker _attacker;
         private Blocker _blocker;
 
-        public override void Initialize(IStatValueGiver statValueGiver)
+        public override void Initialize()
         {
-            base.Initialize(statValueGiver);
-            _jumper = new Jumper(Rigidbody, _jumperData, statValueGiver);
+            base.Initialize();
+            _jumper = new Jumper(Rigidbody, _jumperData);
             _roller = new Roller(Rigidbody, GetComponent<BoxCollider2D>(), _rollData);
             _attacker = new Attacker(_attackData);
             _blocker = new Blocker();
@@ -57,7 +57,7 @@ namespace Player
                 base.Move(direction);
             }
         }
-        public void Jump() => _jumper.Jump(CanJump());
+        public void Jump(float jumpForce) => _jumper.Jump(CanJump(),jumpForce);
         public void Roll() => _roller.Roll(CanRoll());
         public void Block(bool activeBlock) => _blocker.Block(activeBlock && CanBlock());
         public void Attack() => _attacker.Attack(CanAttack());

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 
 using Core.Animation;
-using Movement.Controller;
 using Movement.Controller.Movers;
 using Movement.Data;
-using StatsSystem;
 
 namespace NPC.Behaviour
 {
@@ -17,7 +15,7 @@ namespace NPC.Behaviour
         protected Rigidbody2D Rigidbody;
         protected BaseMover BaseMover;
         
-        public virtual void Initialize(IStatValueGiver statValueGiver)
+        public virtual void Initialize()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
             BaseMover = new VelocityMover(Rigidbody);
