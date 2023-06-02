@@ -38,10 +38,9 @@ namespace Player
             _attacker.UpdateAtack();
         }
 
-        public void UpdateAnimations()
+        override protected void UpdateAnimations()
         {
-            Animator.PlayAnimation(AnimationType.Idle, true);
-            Animator.PlayAnimation(AnimationType.Run, Mover.MoveActive);
+            base.UpdateAnimations();
             Animator.PlayAnimation(AnimationType.Jump, _jumper.JumpActive);
             Animator.PlayAnimation(AnimationType.Fall, _jumper.FallActive);
             Animator.PlayAnimation(AnimationType.Roll, _roller.RollActive);
