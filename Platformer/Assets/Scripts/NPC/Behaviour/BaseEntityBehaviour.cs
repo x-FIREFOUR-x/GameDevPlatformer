@@ -19,7 +19,12 @@ namespace NPC.Behaviour
             Rigidbody = GetComponent<Rigidbody2D>();
             Mover = new VelocityMover(Rigidbody);
         }
-        
+
+        protected virtual void UpdateAnimations()
+        {
+            Animator.PlayAnimation(AnimationType.Idle, true);
+            Animator.PlayAnimation(AnimationType.Run, Mover.MoveActive);
+        }
         public abstract void Move(float direction);
     }
 }

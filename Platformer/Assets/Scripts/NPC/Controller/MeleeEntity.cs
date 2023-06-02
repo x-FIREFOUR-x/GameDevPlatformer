@@ -9,11 +9,11 @@ namespace NPC.Controller
 {
     public class MeleeEntity : Entity
     {
-        private readonly BaseEntityBehaviour _meleeEntityBehaviour;
+        private readonly MeleeEntityBehaviour _meleeEntityBehaviour;
         private readonly Seeker _pathSeeker;
         private readonly Vector2 _moveDelta;
 
-        public MeleeEntity(BaseEntityBehaviour entityBehaviour, StatsController statsController) :
+        public MeleeEntity(MeleeEntityBehaviour entityBehaviour, StatsController statsController) :
             base(entityBehaviour, statsController)
         {
             _pathSeeker = entityBehaviour.GetComponent<Seeker>();
