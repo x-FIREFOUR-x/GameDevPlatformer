@@ -31,9 +31,14 @@ namespace NPC.Spawn
         public Entity GetEntityBrain(EntityId entityId, Vector2 position)
         {
             var data = _entitiesSpawnerStorage.EntitiesData.Find(element => element.Id == entityId);
+
+            if (data == null)
+            {
+                throw new InvalidOperationException("No entity in storage with this id!");
+            }
             
-            var baseEntityBehaviour = Object.Instantiate(data.EntityBehaviourPrefab, position, Quaternion.identity);
-            baseEntityBehaviour.transform.SetParent(_entitiesContainer);
+            var entityBehaviour = Object.Instantiate(data.EntityBehaviourPrefab, position, Quaternion.identity);
+            entityBehaviour.transform.SetParent(_entitiesContainer);
             
             var stats = data.Stats.Select(stat => stat.GetCopy()).ToList();
             var statsController = new StatsController(stats);
@@ -42,7 +47,7 @@ namespace NPC.Spawn
             {
                 case EntityId.LightBandit:
                 case EntityId.HeavyBandit:
-                    return new MeleeEntity(baseEntityBehaviour as MeleeEntityBehaviour, statsController);
+                    return new MeleeEntity(entityBehaviour as MeleeEntityBehaviour, statsController);
                 case EntityId.None:
                 default:
                     throw new NotImplementedException();

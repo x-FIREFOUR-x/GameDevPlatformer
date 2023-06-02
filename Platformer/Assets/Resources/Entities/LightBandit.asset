@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f48e5321535433599d81c92f189888a, type: 3}
   m_Name: LightBandit
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 0
+  <Id>k__BackingField: 1
   <Stats>k__BackingField: []
-  <EntityBehaviourPrefab>k__BackingField: {fileID: 0}
+  <EntityBehaviourPrefab>k__BackingField: {fileID: 1793852178780157164, guid: e105e3499568d2d469032dea9e5c5909, type: 3}
