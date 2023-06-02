@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using UnityEngine;
+using Object = UnityEngine.Object;
+
+using StatsSystem;
 using NPC.Behaviour;
 using NPC.Controller;
 using NPC.Data;
 using NPC.Enum;
-using StatsSystem;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace NPC.Spawn
 {
