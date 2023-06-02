@@ -10,6 +10,8 @@ using Items;
 using Items.Data;
 using Items.Rarity;
 using Items.Storage;
+using NPC.Enum;
+using NPC.Spawn;
 using StatsSystem;
 using UI;
 using UnityEngine.Serialization;
@@ -24,6 +26,7 @@ namespace Core
         [SerializeField] private LayerMask _whatIsPlayer;
         [SerializeField] private ItemStorage _itemsStorage;
         [SerializeField] private StatsStorage _statsStorage;
+        [SerializeField] private Transform _pointOfSpawn;
 
         private ExternalDevicesInputReader _externalDevicesInput;
         private PlayerSystem _playerSystem;
@@ -31,6 +34,7 @@ namespace Core
         private DropGenerator _dropGenerator;
         private ItemsSystem _itemsSystem;
         private UIContext _uiContext;
+        private EntitySpawner _entitySpawner;
 
         private List<IDisposable> _disposables;
 
@@ -64,12 +68,17 @@ namespace Core
             _uiContext = new UIContext(
                 new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput },
                 data);
+
+            _entitySpawner = new EntitySpawner();
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
+            
+            if (Input.GetKeyDown(KeyCode.M))
+                _entitySpawner.SpawnEntity(EntityId.HeavyBandit, _pointOfSpawn.position);
         }
 
         private void OnDestroy()
