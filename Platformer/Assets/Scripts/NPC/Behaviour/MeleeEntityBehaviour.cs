@@ -7,10 +7,11 @@ using Movement.Enums;
 
 namespace NPC.Behaviour
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public class MeleeEntityBehaviour : BaseEntityBehaviour
     {
         [SerializeField] private AttackData _attackData;
-        [SerializeField] private Collider2D _entityCollider;
+        private Collider2D _entityCollider;
         
         [field: SerializeField] public LayerMask TargetsMask { get; private set; }
         [field: SerializeField] public Vector2 TargetSearchBox { get; private set; }
