@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System;
 
 using Movement.Controller.Movers;
 using Movement.Enums;
-
 
 namespace Movement.Controller
 {
