@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
+using System;
 
 using Movement.Controller.Movers;
 using Movement.Enums;
+
 
 namespace Movement.Controller
 {
     public class PositionMover : BaseMover
     {
         private Vector2 _destination;
-        
-        public override bool MoveActive => _destination != Rigidbody.position;
 
-        public PositionMover(Rigidbody2D rigidbody) : base(rigidbody) { }
+        public override bool MoveActive => _destination.x != Rigidbody.position.x;
+
+
+        public PositionMover(Rigidbody2D rigidbody) : base(rigidbody) 
+        {
+            _destination = Rigidbody.position;
+        }
 
         public override void Move(float horizontalMovement, bool isCanMove)
         {

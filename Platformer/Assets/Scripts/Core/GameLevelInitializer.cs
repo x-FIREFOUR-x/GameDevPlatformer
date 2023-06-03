@@ -78,7 +78,7 @@ namespace Core
                 _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
             
             if (Input.GetKeyDown(KeyCode.M))
-                _entitySpawner.SpawnEntity(EntityId.LightBandit, _pointOfSpawn.position);
+                _entitySpawner.SpawnEntity(EntityId.HeavyBandit, _pointOfSpawn.position);
         }
 
         private void OnDestroy()
