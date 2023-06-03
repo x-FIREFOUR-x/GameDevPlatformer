@@ -42,7 +42,7 @@ namespace UI
     
         public void CloseCurrentScreen()
         {
-            _currentController.Complete();
+            _currentController?.Complete();
             _currentController = null;
         }
 
