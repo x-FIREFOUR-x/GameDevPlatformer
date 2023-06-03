@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 467637774457261783}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2119696261}
   - component: {fileID: 8617698486661253665}
   - component: {fileID: 4376251333676912599}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: PlayerEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ MonoBehaviour:
     <GroundCheck>k__BackingField: {fileID: 467637774457261783}
     <GroundLayer>k__BackingField:
       serializedVersion: 2
-      m_Bits: 64
+      m_Bits: 192
   _rollData:
     RollSpeed: 6
     RollDistance: 2.5

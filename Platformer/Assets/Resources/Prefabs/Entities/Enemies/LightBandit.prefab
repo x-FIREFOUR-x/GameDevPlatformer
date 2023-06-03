@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1585221211}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: -8228197280075447282}
   - component: {fileID: 1793852178780157164}
   - component: {fileID: -6866939978275696797}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: LightBandit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
