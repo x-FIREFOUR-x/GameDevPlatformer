@@ -30,8 +30,8 @@ namespace NPC.Controller
             StatsController.Dispose();
             _entityBehaviour.DamageTaken -= OnDamageTaken;
         }
-        
-        protected abstract void VisualiseHp(float currentHp);
+
+        protected abstract void VisualiseHP(float currentHp);
         
         private void OnDamageTaken(float damage)
         {
@@ -43,7 +43,7 @@ namespace NPC.Controller
                 return;
             
             _currentHp = Mathf.Clamp(_currentHp - damageThroughDefence, 0, _currentHp); 
-            VisualiseHp(_currentHp);
+            VisualiseHP(_currentHp);
         }
     }
 }

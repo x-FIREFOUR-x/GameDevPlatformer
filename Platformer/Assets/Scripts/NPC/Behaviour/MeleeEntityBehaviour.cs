@@ -19,6 +19,8 @@ namespace NPC.Behaviour
         [field: SerializeField] public Vector2 TargetSearchBox { get; private set; }
         [field: SerializeField] public Slider HpBar { get; private set; }
 
+        [field: SerializeField] public Slider HPBar { get; private set; }
+
         private Attacker _attacker;
         
         public event Action AttackSequenceEnded;

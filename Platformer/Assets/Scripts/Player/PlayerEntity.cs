@@ -23,13 +23,11 @@ namespace Player
             _inputSources = inputSources;
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
+
+            VisualiseHP(StatsController.GetStatValue(StatType.Health));
         }
 
         public void Dispose() => ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
-        protected override void VisualiseHp(float currentHp)
-        {
-            throw new NotImplementedException();
-        }
 
         private void OnFixedUpdate()
         {
@@ -78,6 +76,14 @@ namespace Player
             }
 
             return false;
+        }
+
+        protected sealed override void VisualiseHP(float currentHp)
+        {
+            if (_playerEntityBehaviour.statsUIView.HPBar.maxValue < currentHp)
+                _playerEntityBehaviour.statsUIView.HPBar.maxValue = currentHp;
+
+            _playerEntityBehaviour.statsUIView.HPBar.value = currentHp;
         }
     }
 }
