@@ -26,6 +26,10 @@ namespace Player
         }
 
         public void Dispose() => ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+        protected override void VisualiseHp(float currentHp)
+        {
+            throw new NotImplementedException();
+        }
 
         private void OnFixedUpdate()
         {

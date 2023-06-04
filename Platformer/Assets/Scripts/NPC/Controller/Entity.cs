@@ -2,6 +2,8 @@
 
 using NPC.Behaviour;
 using StatsSystem;
+using StatsSystem.Enum;
+using UnityEngine;
 
 namespace NPC.Controller
 {
@@ -10,6 +12,8 @@ namespace NPC.Controller
         private readonly BaseEntityBehaviour _entityBehaviour;
         protected readonly StatsController StatsController;
 
+        private float _currentHp;
+        
         public event Action<Entity> Died;
         
         protected Entity(BaseEntityBehaviour entityBehaviour, StatsController statsController)
@@ -17,9 +21,29 @@ namespace NPC.Controller
             _entityBehaviour = entityBehaviour;
             _entityBehaviour.Initialize();
             StatsController = statsController;
+            _currentHp = statsController.GetStatValue(StatType.Health);
+            _entityBehaviour.DamageTaken += OnDamageTaken;
         }
         
-        public virtual void Dispose() => StatsController.Dispose();
+        public virtual void Dispose()
+        {
+            StatsController.Dispose();
+            _entityBehaviour.DamageTaken -= OnDamageTaken;
+        }
         
+        protected abstract void VisualiseHp(float currentHp);
+        
+        private void OnDamageTaken(float damage)
+        {
+            // TODO: check for correctness after adding processing stats of equipped items 
+            float defence = StatsController.GetStatValue(StatType.Defence);
+            float damageThroughDefence = damage - defence;
+            
+            if (damageThroughDefence <= 0)
+                return;
+            
+            _currentHp = Mathf.Clamp(_currentHp - damageThroughDefence, 0, _currentHp); 
+            VisualiseHp(_currentHp);
+        }
     }
 }
