@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 using Movement.Controller;
 using Movement.Data;
 using Movement.Enums;
 using Core.Animation;
-using UnityEngine.UI;
 
 namespace NPC.Behaviour
 {
