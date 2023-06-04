@@ -75,5 +75,10 @@ namespace Player
 
             return false;
         }
+
+        protected sealed override void VisualHp(float currentHp)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

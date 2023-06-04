@@ -20,6 +20,8 @@ namespace NPC.Controller
         }
         
         public virtual void Dispose() => StatsController.Dispose();
+
+        protected abstract void VisualHp(float currentHp);
         
     }
 }
