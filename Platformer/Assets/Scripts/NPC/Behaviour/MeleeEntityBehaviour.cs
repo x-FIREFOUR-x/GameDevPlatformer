@@ -6,23 +6,22 @@ using Movement.Controller;
 using Movement.Data;
 using Movement.Enums;
 using Core.Animation;
+using Fight;
 
 namespace NPC.Behaviour
 {
     [RequireComponent(typeof(BoxCollider2D))]
     public class MeleeEntityBehaviour : BaseEntityBehaviour
     {
-        [SerializeField] private AttackData _attackData;
         private Collider2D _entityCollider;
+        [SerializeField] private Transform _attackPoint;
+        [SerializeField] private float _attackRadius;
         
         [field: SerializeField] public LayerMask TargetsMask { get; private set; }
         [field: SerializeField] public Vector2 TargetSearchBox { get; private set; }
-        [field: SerializeField] public Slider HpBar { get; private set; }
-
         [field: SerializeField] public Slider HPBar { get; private set; }
-
-        private Attacker _attacker;
         
+        public event Action<IDamageable> Attacked;
         public event Action AttackSequenceEnded;
 
         public Vector2 Size => _entityCollider.bounds.size;
@@ -32,14 +31,13 @@ namespace NPC.Behaviour
             base.Initialize();
             _entityCollider = GetComponent<BoxCollider2D>();
             Mover = new PositionMover(Rigidbody);
-            _attacker = new Attacker(_attackData);
         }
 
         private void Update()
         {
             UpdateAnimations();
         }
-
+        
         public override void Move(float direction)
         {
             Mover.Move(direction, true);
@@ -50,29 +48,28 @@ namespace NPC.Behaviour
             ((PositionMover)Mover).Move(direction, finalDirection);
         }
 
-        public void Attack()
+        public void StartAttack() => Animator.SetAnimationState(AnimationType.Attack, true, Attack, EndAttack);
+        
+        private void Attack()
         {
-            Animator.PlayAnimation(AnimationType.Attack, true);
-            _attacker.Attack(true);
-            EndAttack();
+            var targetCollider = Physics2D.OverlapCircle(_attackPoint.position, _attackRadius, TargetsMask);
+            if (targetCollider != null && targetCollider.TryGetComponent(out IDamageable damageable))
+            {
+                Debug.Log(damageable);
+                Attacked?.Invoke(damageable);
+            }
+                
         }
+        
+        private void EndAttack() => AttackSequenceEnded?.Invoke();
 
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(transform.position, TargetSearchBox);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_attackPoint.position, _attackRadius);
         }
 
         public void SetDirection(Direction direction) => Mover.SetDirection(direction);
-
-        private void EndAttack()
-        {
-            Invoke(nameof(EndAttackSequence), _attackData.TimeAttack);
-        }
-
-        private void EndAttackSequence()
-        {
-            Animator.PlayAnimation(AnimationType.Attack, false);
-            AttackSequenceEnded?.Invoke();
-        }
     }
 }

@@ -233,14 +233,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 3183289995125207812}
   _attackData:
-    TimeAttack: 1
+    TimeAttack: 10
   _attackPoint: {fileID: 7281766644778668259}
   _attackRadius: 0.2
   <TargetsMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 512
   <TargetSearchBox>k__BackingField: {x: 7, y: 4}
-  <HpBar>k__BackingField: {fileID: 0}
   <HPBar>k__BackingField: {fileID: 7493430741717140257}
 --- !u!114 &3183289995125207812
 MonoBehaviour:

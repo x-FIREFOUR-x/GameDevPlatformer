@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Core.Animation
@@ -10,6 +11,8 @@ namespace Core.Animation
 
         private readonly AnimationType _firstAttackAnimation = AnimationType.Attack;
         private readonly AnimationType _lastAttackAnimation = AnimationType.Attack3;
+        private Action _animationAction;
+        private Action _animationEndAction;
 
         private AnimationType _lastShowAttackAnim = AnimationType.Attack;
 
@@ -32,6 +35,42 @@ namespace Core.Animation
                     _lastShowAttackAnim = randomAttackAnim;
                 }
             }
+        }
+        
+        public bool SetAnimationState(AnimationType animationType, bool active, Action animationAction = null, Action endAnimationAction = null)
+        {
+            if (!active)
+            {
+                if (_currentAnimationType == AnimationType.Idle || _currentAnimationType != animationType)
+                    return false;
+                
+                OnAnimationEnded();
+                return false;
+            }
+
+            if (_currentAnimationType >= animationType)
+                return false;
+
+            _animationAction = animationAction;
+            _animationEndAction = endAnimationAction;
+            SetAnimation(animationType);
+            return true;
+        }
+
+        protected void OnActionRequested() => _animationAction?.Invoke();
+        
+        private void OnAnimationEnded()
+        {
+            _animationEndAction?.Invoke();
+            _animationAction = null;
+            _animationEndAction = null;
+            SetAnimation(AnimationType.Idle);
+        }
+
+        private void SetAnimation(AnimationType animationType)
+        {
+            _currentAnimationType = animationType;
+            PlayAnimation(_currentAnimationType);
         }
         
         public void PlayAnimation(AnimationType animationType, bool active)
