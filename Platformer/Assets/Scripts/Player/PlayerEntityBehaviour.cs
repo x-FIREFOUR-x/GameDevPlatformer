@@ -14,6 +14,8 @@ namespace Player
         [SerializeField] private JumpData _jumperData;
         [SerializeField] private RollData _rollData;
         [SerializeField] private AttackData _attackData;
+
+        [field: SerializeField] public PlayerStatsUIView statsUIView { get; private set; }
         
         private Jumper _jumper;
         private Roller _roller;
