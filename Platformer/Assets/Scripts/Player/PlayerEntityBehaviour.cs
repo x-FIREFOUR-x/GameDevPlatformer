@@ -4,7 +4,6 @@ using Core.Animation;
 using Movement.Data;
 using Movement.Controller;
 using NPC.Behaviour;
-using StatsSystem;
 
 namespace Player
 {

@@ -234,8 +234,8 @@ MonoBehaviour:
     TimeAttack: 1
   <TargetsMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 256
-  <TargetSearchBox>k__BackingField: {x: 4, y: 1}
+    m_Bits: 512
+  <TargetSearchBox>k__BackingField: {x: 6, y: 1}
 --- !u!114 &-6866939978275696797
 MonoBehaviour:
   m_ObjectHideFlags: 0
