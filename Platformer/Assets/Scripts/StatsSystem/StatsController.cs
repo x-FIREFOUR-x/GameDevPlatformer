@@ -31,11 +31,11 @@ namespace StatsSystem
             if (statToChange == null)
                 return;
 
-            var addedValue = modificator.StatModificatorType == StatModificatorType.Additive ?
+            var newValue = modificator.StatModificatorType == StatModificatorType.Additive ?
                 statToChange + modificator.Stat :
                 statToChange * modificator.Stat;
 
-            statToChange.SetStatValue(statToChange + addedValue);
+            statToChange.SetStatValue(newValue);
             if (modificator.Duration < 0)
                 return;
 
@@ -45,7 +45,7 @@ namespace StatsSystem
             }
             else
             {
-                var addedStat = new Stat(modificator.Stat.Type, -addedValue);
+                var addedStat = new Stat(modificator.Stat.Type, -newValue);
                 var tempModificator = new StatModificator(addedStat, StatModificatorType.Additive, modificator.Duration, Time.time);
 
                 _activeModificators.Add(tempModificator);
