@@ -237,6 +237,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   <TargetSearchBox>k__BackingField: {x: 7, y: 4}
+  <HpBar>k__BackingField: {fileID: 7493430741717140257}
 --- !u!114 &3183289995125207812
 MonoBehaviour:
   m_ObjectHideFlags: 0
