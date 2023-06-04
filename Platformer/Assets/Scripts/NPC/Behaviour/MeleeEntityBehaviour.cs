@@ -5,6 +5,7 @@ using Movement.Controller;
 using Movement.Data;
 using Movement.Enums;
 using Core.Animation;
+using UnityEngine.UI;
 
 namespace NPC.Behaviour
 {
@@ -16,6 +17,7 @@ namespace NPC.Behaviour
         
         [field: SerializeField] public LayerMask TargetsMask { get; private set; }
         [field: SerializeField] public Vector2 TargetSearchBox { get; private set; }
+        [field: SerializeField] public Slider HpBar { get; private set; }
 
         private Attacker _attacker;
         
