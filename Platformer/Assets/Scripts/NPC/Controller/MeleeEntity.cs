@@ -35,7 +35,7 @@ namespace NPC.Controller
 
             var speedDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
             _moveDelta = new Vector2(speedDelta, 0);
-            VisualHp(StatsController.GetStatValue(StatType.Health));
+            VisualHP(StatsController.GetStatValue(StatType.Health));
 
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
 
@@ -151,12 +151,12 @@ namespace NPC.Controller
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
         }
 
-        protected sealed override void VisualHp(float currentHp)
+        protected sealed override void VisualHP(float currentHp)
         {
-            if (_meleeEntityBehaviour.HpBar.maxValue < currentHp)
-                _meleeEntityBehaviour.HpBar.maxValue = currentHp;
+            if (_meleeEntityBehaviour.HPBar.maxValue < currentHp)
+                _meleeEntityBehaviour.HPBar.maxValue = currentHp;
 
-            _meleeEntityBehaviour.HpBar.value = currentHp;
+            _meleeEntityBehaviour.HPBar.value = currentHp;
         }
     }
 }

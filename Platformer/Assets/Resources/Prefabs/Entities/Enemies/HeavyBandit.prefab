@@ -237,7 +237,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   <TargetSearchBox>k__BackingField: {x: 7, y: 4}
-  <HpBar>k__BackingField: {fileID: 7493430741717140257}
+  <HPBar>k__BackingField: {fileID: 7493430741717140257}
 --- !u!114 &3183289995125207812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 3230951063916042124}
   - component: {fileID: 7493430741717140257}
   m_Layer: 5
-  m_Name: HealBar
+  m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
