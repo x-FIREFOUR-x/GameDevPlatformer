@@ -32,7 +32,7 @@ namespace NPC.Controller
         {
             _pathSeeker = entityBehaviour.GetComponent<Seeker>();
             _meleeEntityBehaviour = entityBehaviour;
-            
+
             var speedDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
             _moveDelta = new Vector2(speedDelta, 0);
 
@@ -89,6 +89,7 @@ namespace NPC.Controller
 
             var currentPosition = _meleeEntityBehaviour.transform.position;
             var positionPointInPath = _currentPath.vectorPath[_indexCurrentPointInPath];
+            var finalPositionPointInPath = _currentPath.vectorPath[_currentPath.vectorPath.Count - 1];
             var directionPointInPath = positionPointInPath - currentPosition;
 
             if (Mathf.Abs(positionPointInPath.x  - currentPosition.x) < 0.05f)
@@ -110,7 +111,7 @@ namespace NPC.Controller
             }
 
             if (newHorizontalPosition != _meleeEntityBehaviour.transform.position.x)
-                _meleeEntityBehaviour.Move(newHorizontalPosition);
+                _meleeEntityBehaviour.Move(newHorizontalPosition, finalPositionPointInPath.x);
         }
 
         private bool TryAttack()
@@ -119,7 +120,6 @@ namespace NPC.Controller
             if (Mathf.Abs(distance.x) > 0.2f)
                 return false;
 
-            _meleeEntityBehaviour.Move(_destination.x);
             _meleeEntityBehaviour.SetDirection(_meleeEntityBehaviour.transform.position.x > _target.transform.position.x ? Direction.Left : Direction.Right);
             ResetMovement();
 

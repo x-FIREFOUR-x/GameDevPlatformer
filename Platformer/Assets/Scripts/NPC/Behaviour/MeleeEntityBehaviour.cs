@@ -40,6 +40,12 @@ namespace NPC.Behaviour
         {
             Mover.Move(direction, true);
         }
+
+        public void Move(float direction, float finalDirection)
+        {
+            ((PositionMover)Mover).Move(direction, finalDirection);
+        }
+
         public void Attack()
         {
             Animator.PlayAnimation(AnimationType.Attack, true);
