@@ -54,11 +54,7 @@ namespace NPC.Behaviour
         {
             var targetCollider = Physics2D.OverlapCircle(_attackPoint.position, _attackRadius, TargetsMask);
             if (targetCollider != null && targetCollider.TryGetComponent(out IDamageable damageable))
-            {
-                Debug.Log(damageable);
                 Attacked?.Invoke(damageable);
-            }
-                
         }
         
         private void EndAttack() => AttackSequenceEnded?.Invoke();
