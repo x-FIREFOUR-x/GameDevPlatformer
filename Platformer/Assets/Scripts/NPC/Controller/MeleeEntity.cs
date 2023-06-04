@@ -40,8 +40,20 @@ namespace NPC.Controller
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
 
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
-
+            
+            VisualiseHp(StatsController.GetStatValue(StatType.Health));
+            
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdateCalled;
+        }
+        
+        protected sealed override void VisualiseHp(float currentHp)
+        {
+            if (_meleeEntityBehaviour.HpBar.maxValue < currentHp)
+            {
+                _meleeEntityBehaviour.HpBar.maxValue = currentHp;
+            }
+
+            _meleeEntityBehaviour.HpBar.value = currentHp;
         }
 
         private IEnumerator SearchPathCoroutine()
@@ -151,7 +163,7 @@ namespace NPC.Controller
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
         }
 
-        protected sealed override void VisualHP(float currentHp)
+        protected sealed override void VisualiseHp(float currentHp)
         {
             if (_meleeEntityBehaviour.HPBar.maxValue < currentHp)
                 _meleeEntityBehaviour.HPBar.maxValue = currentHp;
