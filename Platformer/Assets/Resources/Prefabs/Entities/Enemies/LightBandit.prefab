@@ -354,6 +354,8 @@ MonoBehaviour:
   Animator: {fileID: -6866939978275696797}
   _attackData:
     TimeAttack: 1
+  _attackPoint: {fileID: 557113210611714114}
+  _attackRadius: 0.2
   <TargetsMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 512
