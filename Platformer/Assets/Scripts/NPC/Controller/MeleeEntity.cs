@@ -91,7 +91,7 @@ namespace NPC.Controller
             var positionPointInPath = _currentPath.vectorPath[_indexCurrentPointInPath];
             var directionPointInPath = positionPointInPath - currentPosition;
 
-            if (positionPointInPath.x  - currentPosition.x < 0.05f)
+            if (Mathf.Abs(positionPointInPath.x  - currentPosition.x) < 0.05f)
             {
                 _indexCurrentPointInPath++;
                 return;

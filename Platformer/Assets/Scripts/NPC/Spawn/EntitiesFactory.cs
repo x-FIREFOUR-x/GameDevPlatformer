@@ -36,8 +36,8 @@ namespace NPC.Spawn
             {
                 throw new InvalidOperationException("No entity in storage with this id!");
             }
-            
-            var entityBehaviour = Object.Instantiate(data.EntityBehaviourPrefab, position, Quaternion.identity);
+
+            var entityBehaviour = Object.Instantiate(data.EntityBehaviourPrefab, position, data.EntityBehaviourPrefab.transform.rotation);
             entityBehaviour.transform.SetParent(_entitiesContainer);
             
             var stats = data.Stats.Select(stat => stat.GetCopy()).ToList();
