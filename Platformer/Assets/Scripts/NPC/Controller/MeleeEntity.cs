@@ -85,7 +85,10 @@ namespace NPC.Controller
         private void OnFixedUpdateCalled()
         {
             if (_isAttack || _target == null || _currentPath == null || TryAttack() || _indexCurrentPointInPath >= _currentPath.vectorPath.Count)
+            {
+                ResetMovement();
                 return;
+            }
 
             var currentPosition = _meleeEntityBehaviour.transform.position;
             var positionPointInPath = _currentPath.vectorPath[_indexCurrentPointInPath];
@@ -138,7 +141,7 @@ namespace NPC.Controller
             _currentPath = null;
             _previousTargetPosition = Vector2.negativeInfinity;
             var position = _meleeEntityBehaviour.transform.position;
-            _meleeEntityBehaviour.Move(position.x);
+            _meleeEntityBehaviour.Move(position.x, position.x);
         }
 
         private void OnAttackEnded()
