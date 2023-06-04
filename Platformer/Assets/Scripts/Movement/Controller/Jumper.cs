@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 
 using Movement.Data;
-using StatsSystem;
-using StatsSystem.Enum;
 
 namespace Movement.Controller
 {
@@ -10,9 +8,7 @@ namespace Movement.Controller
     {
         private readonly Rigidbody2D _rigidbody;
         private readonly JumpData _jumpData;
-
-        private readonly IStatValueGiver _statValueGiver;
-
+        
         public bool JumpActive
         {
             get { return (_rigidbody.velocity.y > 0 && !IsGrounded()); }
@@ -22,20 +18,19 @@ namespace Movement.Controller
             get { return (_rigidbody.velocity.y < 0 && !IsGrounded()); }
         }
 
-        public Jumper(Rigidbody2D rigidbody, JumpData jumpData, IStatValueGiver startValueGiver)
+        public Jumper(Rigidbody2D rigidbody, JumpData jumpData)
         {
             _rigidbody = rigidbody;
             _jumpData = jumpData;
-
-            _statValueGiver = startValueGiver;
+            
         }
 
-        public void Jump(bool isCanJump)
+        public void Jump(bool isCanJump, float jumpForce)
         {
             if (!isCanJump)
                 return;
 
-            _rigidbody.AddForce(Vector2.up * _statValueGiver.GetStatValue(StatType.JumpForce));
+            _rigidbody.AddForce(Vector2.up * jumpForce );
             _rigidbody.gravityScale = _jumpData.GravityScale;
         }
         

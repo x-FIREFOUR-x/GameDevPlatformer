@@ -1,92 +1,79 @@
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-using Core.Animation;
-using Movement.Data;
-using Movement.Controller;
+using InputReader;
+using Core.Services.Updater;
+using NPC.Controller;
 using StatsSystem;
+using StatsSystem.Enum;
 
 namespace Player
 {
-    [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(BoxCollider2D))]
-    public class PlayerEntity : MonoBehaviour
+    class PlayerEntity : Entity, IDisposable
     {
-        private Rigidbody2D _rigidbody;
+        private readonly PlayerEntityBehaviour _playerEntityBehaviour;
 
-        [SerializeField] private AnimationController _animator;
+        private readonly List<IEntityInputSource> _inputSources;
 
-        [SerializeField] private MoveData _moveData;
-        [SerializeField] private JumpData _jumperData;
-        [SerializeField] private RollData _rollData;
-        [SerializeField] private AttackData _attackData;
-
-        private Mover _mover;
-        private Jumper _jumper;
-        private Roller _roller;
-        private Attacker _attacker;
-        private Blocker _blocker;
-
-        public void Initialize(IStatValueGiver statValueGiver)
+        public PlayerEntity(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources, StatsController statValueGiver )
+        : base(playerEntityBehaviour, statValueGiver)
         {
-            _rigidbody = GetComponent<Rigidbody2D>();
+            _playerEntityBehaviour = playerEntityBehaviour;
+            _inputSources = inputSources;
 
-            _mover = new Mover(_rigidbody, _moveData, statValueGiver);
-            _jumper = new Jumper(_rigidbody, _jumperData, statValueGiver);
-            _roller = new Roller(_rigidbody, GetComponent<BoxCollider2D>(), _rollData);
-            _attacker = new Attacker(_attackData);
-            _blocker = new Blocker();
+            ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
         }
 
-        private void Update()
-        {
-            UpdateAnimations();
+        public void Dispose() => ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
 
-            _roller.UpdateRoll();
-            _attacker.UpdateAtack();
+        private void OnFixedUpdate()
+        {
+            _playerEntityBehaviour.Move(GetMoveDirection() * StatsController.GetStatValue(StatType.Speed));
+
+            if (IsAttack)
+                _playerEntityBehaviour.Attack();
+
+            if (IsJump)
+                _playerEntityBehaviour.Jump(StatsController.GetStatValue(StatType.JumpForce));
+
+            if (IsRoll)
+                _playerEntityBehaviour.Roll();
+
+            _playerEntityBehaviour.Block(IsBlock());
+
+            foreach (var inputSource in _inputSources)
+            {
+                inputSource.ResetOneTimeActions();
+            }
         }
 
-        public void UpdateAnimations()
+        private float GetMoveDirection()
         {
-            _animator.PlayAnimation(AnimationType.Idle, true);
-            _animator.PlayAnimation(AnimationType.Run, _mover.MoveActive);
-            _animator.PlayAnimation(AnimationType.Jump, _jumper.JumpActive);
-            _animator.PlayAnimation(AnimationType.Fall, _jumper.FallActive);
-            _animator.PlayAnimation(AnimationType.Roll, _roller.RollActive);
-            _animator.PlayAnimation(AnimationType.BlockIdle, _blocker.BlockActive);
+            foreach(var inputSource in _inputSources)
+            {
+                if (inputSource.HorizontalDirection == 0)
+                    continue;
 
-            _animator.UpdateAnimationsAttack(_attacker.AttackActive);
+                return inputSource.HorizontalDirection;
+            }
+
+            return 0;
         }
 
-        public void Move(float direction) => _mover.Move(direction, CanMove());
-        public void Jump() => _jumper.Jump(CanJump());
-        public void Roll() => _roller.Roll(CanRoll());
-        public void Block(bool activeBlock) => _blocker.Block(activeBlock && CanBlock());
-        public void Attack() => _attacker.Attack(CanAttack());
-        
-        private bool CanMove()
-        {
-            return !_blocker.BlockActive && !_roller.RollActive;
-        }
+        private bool IsAttack => _inputSources.Any(sources => sources.Attack);
+        private bool IsJump => _inputSources.Any(sources => sources.Jump);
+        private bool IsRoll => _inputSources.Any(sources => sources.Roll);
 
-        private bool CanJump()
+        private bool IsBlock()
         {
-            return !_jumper.JumpActive && !_jumper.FallActive && !_blocker.BlockActive && !_roller.RollActive && !_attacker.AttackActive;
-        }
+            foreach (var inputSource in _inputSources)
+            {
+                if (inputSource.Block == true)
+                    return true;
+            }
 
-        private bool CanRoll()
-        {
-            return !_blocker.BlockActive && !_roller.RollActive && !_attacker.AttackActive;
-        }
-
-        private bool CanBlock()
-        {
-            return !_jumper.JumpActive && !_jumper.FallActive && !_roller.RollActive && !_attacker.AttackActive;
-        }
-
-        private bool CanAttack()
-        {
-            return !_jumper.JumpActive && !_jumper.FallActive && !_roller.RollActive && !_attacker.AttackActive;
+            return false;
         }
     }
-
 }

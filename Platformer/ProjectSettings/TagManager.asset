@@ -12,10 +12,10 @@ TagManager:
   - Water
   - UI
   - MapObject
+  - ObstacleObject
   - Item
   - Player
   - Enemy
-  - 
   - 
   - 
   - 
