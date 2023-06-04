@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EntitiesData>k__BackingField:
   - {fileID: 11400000, guid: b26663d6180581e4d8e9679de9086c7f, type: 2}
+  - {fileID: 11400000, guid: d807cb0f63268d34ea06b2a00226fe52, type: 2}
