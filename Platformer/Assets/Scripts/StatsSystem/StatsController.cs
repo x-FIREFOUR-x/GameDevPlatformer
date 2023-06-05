@@ -44,8 +44,8 @@ namespace StatsSystem
                 RemoveModificator(modificator);
             }
             
-            var addedStat = new Stat(modificator.Stat.Type, -newValue);
-            var tempModificator = new StatModificator(addedStat, StatModificatorType.Additive, modificator.Duration, Time.time);
+            var addedStat = new Stat(modificator.Stat.Type, newValue);
+            var tempModificator = new StatModificator(modificator.Stat, modificator.StatModificatorType, modificator.Duration, Time.time);
 
             _activeModificators.Add(tempModificator);
         }
@@ -59,18 +59,12 @@ namespace StatsSystem
 
             var expiredModificator = _activeModificators.Where(modificator => modificator.StartTime + modificator.Duration > Time.time);
 
-
-            Debug.Log(Time.time);
-
             while (expiredModificator.Count() != 0)
                 RemoveModificator(expiredModificator.First());
-                 
         }
 
         private void RemoveModificator(StatModificator modificator)
         {
-            Debug.Log("Here");
-
             var statToChange = _currentStats.Find(stat => stat.Type == modificator.Stat.Type);
 
             if (statToChange == null)
@@ -83,8 +77,6 @@ namespace StatsSystem
                 statToChange * previousModificator.Stat;
 
             statToChange.SetStatValue(newValue);
-
-            Debug.Log(previousModificator);
 
             _activeModificators.Remove(modificator);
         }
