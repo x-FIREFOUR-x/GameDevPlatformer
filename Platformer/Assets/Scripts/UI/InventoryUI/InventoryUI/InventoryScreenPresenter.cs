@@ -71,7 +71,7 @@ namespace UI.InventoryUI.InventoryUI
                 if (item == null)
                     continue;
                 
-                slot.SetItem(item.Descriptor.ItemSprite,GetBackSprite(item.Descriptor.ItemRarity), item.Amount);
+                slot.SetItem(item.Descriptor.ItemSprite,GetBackSprite(item.Descriptor.ItemRarity), item.Descriptor.ItemId, item.Amount);
                 SubscribeToSlotEvents(slot);
             }
         }
@@ -98,7 +98,7 @@ namespace UI.InventoryUI.InventoryUI
                 if (item == null)
                     continue;
                 
-                slot.SetItem(item.Descriptor.ItemSprite, GetBackSprite(item.Descriptor.ItemRarity), item.Amount);
+                slot.SetItem(item.Descriptor.ItemSprite, GetBackSprite(item.Descriptor.ItemRarity), item.Descriptor.ItemId, item.Amount);
                 SubscribeToSlotEvents(slot);
             }
         }
