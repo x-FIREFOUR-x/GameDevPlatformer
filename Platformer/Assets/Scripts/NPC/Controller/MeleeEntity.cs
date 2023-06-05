@@ -6,6 +6,7 @@ using StatsSystem;
 using StatsSystem.Enum;
 using NPC.Behaviour;
 using Core.Services.Updater;
+using Fight;
 using Movement.Enums;
 
 namespace NPC.Controller
@@ -38,12 +39,12 @@ namespace NPC.Controller
             VisualiseHP(StatsController.GetStatValue(StatType.Health));
 
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
+            _meleeEntityBehaviour.Attacked += OnAttacked;
 
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
             
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdateCalled;
         }
-        
 
         private IEnumerator SearchPathCoroutine()
         {
@@ -129,7 +130,7 @@ namespace NPC.Controller
             ResetMovement();
 
             _isAttack = true;
-            _meleeEntityBehaviour.Attack();
+            _meleeEntityBehaviour.StartAttack();
 
             if (_searchCoroutine != null)
                 ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
@@ -146,10 +147,19 @@ namespace NPC.Controller
             _meleeEntityBehaviour.Move(position.x, position.x);
         }
 
+        private void OnAttacked(IDamageable target)
+        {
+            target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
+        }
+
         private void OnAttackEnded()
         {
             _isAttack = false;
-            _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
+            ProjectUpdater.Instance.Invoke(() =>
+            {
+                _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
+            }, StatsController.GetStatValue(StatType.AfterAttackDelay));
+            
         }
 
         protected sealed override void VisualiseHP(float currentHp)
