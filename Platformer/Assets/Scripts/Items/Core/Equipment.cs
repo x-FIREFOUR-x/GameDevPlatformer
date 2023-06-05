@@ -30,16 +30,14 @@ namespace Items.Core
             }
 
             Equip();
-            //Todo: stats when equip 
         }
 
         public void UsePotion()
         {
-            if(EquipmentType == EquipmentType.Potion)
+            _amount--;
+            foreach (var stat in _itemDescriptor.Stats)
             {
-                _amount--;
-
-                //Todo: stats when use potion
+                _statsController.ProcessModificator(stat);
             }
         }
 

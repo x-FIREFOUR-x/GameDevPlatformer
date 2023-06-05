@@ -103,7 +103,6 @@ namespace UI.InventoryUI.QuickInventoryUI
                 Debug.Log("Use point");
                 var equipment = _equipmentSlots[slot];
                 _inventory.UsePotion(equipment);
-                //Todo:
             }
         }
 
