@@ -4,7 +4,8 @@ using UnityEngine;
 
 using UI.Enum;
 using UI.Core;
-using UI.InventoryUI;
+using UI.InventoryUI.InventoryUI;
+using UI.InventoryUI.QuickInventoryUI;
 using InputReader;
 using Items;
 using Items.Data;
@@ -32,6 +33,8 @@ namespace UI
             {
                 inputSource.InventoryRequested += HandleInventory;
             }
+
+            OpenQuickInventory();
 
             GameObject container = new GameObject()
             {
@@ -72,6 +75,16 @@ namespace UI
             OpenScreen(ScreenType.Inventory);
         }
 
+        private void OpenQuickInventory()
+        {
+            if (!_controllers.TryGetValue(ScreenType.QuickInventory, out IScreenController screenControllers))
+            {
+                screenControllers = GetController(ScreenType.QuickInventory);
+                _controllers.Add(ScreenType.QuickInventory, screenControllers);
+                screenControllers.Initialize();
+            }
+        }
+
         private void OpenScreen(ScreenType screenType)
         {
             _currentController?.Complete();
@@ -95,6 +108,8 @@ namespace UI
             {
                 case ScreenType.Inventory:
                     return new InventoryScreenPresenter((InventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors);
+                case ScreenType.QuickInventory:
+                    return new QuickInventoryScreenPresenter((QuickInventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors);
                 default:
                     throw new NullReferenceException();
             };
