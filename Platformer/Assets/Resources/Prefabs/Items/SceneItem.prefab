@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4948326977673198636}
   - component: {fileID: 4948326977673198637}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 4948326978115191995}
   - component: {fileID: 4948326978115191940}
   - component: {fileID: 4948326978115191994}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 4948326978441153119}
   - component: {fileID: 4948326978441153117}
   - component: {fileID: 4948326978441153116}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 4948326978473198227}
   - component: {fileID: 4948326978473198226}
   - component: {fileID: 4948326978473198237}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: SceneItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
