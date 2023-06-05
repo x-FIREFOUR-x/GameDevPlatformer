@@ -639,8 +639,11 @@ MonoBehaviour:
     RollDistance: 2.5
     OffsetRollCollider: {x: -0.05, y: 0.425}
     SizeRollCollider: {x: 0.84, y: 0.72}
-  _attackData:
-    TimeAttack: 0.3
+  _attackPoint: {fileID: 5816299284801588490}
+  _attackRadius: 2
+  <TargetsMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1024
   <statsUIView>k__BackingField: {fileID: 3438427643379494594}
 --- !u!114 &4376251333676912599
 MonoBehaviour:
