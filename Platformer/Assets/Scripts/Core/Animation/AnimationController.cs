@@ -11,7 +11,7 @@ namespace Core.Animation
 
         private readonly AnimationType _firstAttackAnimation = AnimationType.Attack;
         private readonly AnimationType _lastAttackAnimation = AnimationType.Attack3;
-        private Action _animationAction;
+        private Action _animationStartAction;
         private Action _animationEndAction;
 
         private AnimationType _lastShowAttackAnim = AnimationType.Attack;
@@ -37,7 +37,7 @@ namespace Core.Animation
             }
         }
         
-        public bool SetAnimationState(AnimationType animationType, bool active, Action animationAction = null, Action endAnimationAction = null)
+        public bool SetAnimationState(AnimationType animationType, bool active, Action startAnimationAction = null, Action endAnimationAction = null)
         {
             if (!active)
             {
@@ -51,18 +51,18 @@ namespace Core.Animation
             if (_currentAnimationType >= animationType)
                 return false;
 
-            _animationAction = animationAction;
+            _animationStartAction = startAnimationAction;
             _animationEndAction = endAnimationAction;
             SetAnimation(animationType);
             return true;
         }
 
-        protected void OnActionRequested() => _animationAction?.Invoke();
+        protected void OnActionRequested() => _animationStartAction?.Invoke();
         
         private void OnAnimationEnded()
         {
             _animationEndAction?.Invoke();
-            _animationAction = null;
+            _animationStartAction = null;
             _animationEndAction = null;
             SetAnimation(AnimationType.Idle);
         }
