@@ -10,7 +10,7 @@ using Items.Enum;
 using UI.Core;
 using UI.InventoryUI.Element;
 
-namespace UI.InventoryUI
+namespace UI.InventoryUI.InventoryUI
 {
     public class InventoryScreenPresenter : ScreenController<InventoryScreenView>, IDisposable
     {

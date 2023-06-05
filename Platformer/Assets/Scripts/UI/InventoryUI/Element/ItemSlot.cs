@@ -25,7 +25,7 @@ namespace UI.InventoryUI.Element
 
         private void Awake()
         {
-            ClearButton.onClick.AddListener(() => SlotClearClicked?.Invoke(this));
+            ClearButton?.onClick.AddListener(() => SlotClearClicked?.Invoke(this));
             _slotButton.onClick.AddListener(() => SlotClicked?.Invoke(this));
         }
 
@@ -37,7 +37,7 @@ namespace UI.InventoryUI.Element
             _emptyBackground.gameObject.SetActive(false);
             _itemBackground.sprite = itemBackSprite;
             
-            ClearButton.gameObject.SetActive(EquipmentType == EquipmentType.None);
+            ClearButton?.gameObject.SetActive(EquipmentType == EquipmentType.None);
             _itemAmount.gameObject.SetActive(amount > 0);
             _itemAmount.text = amount.ToString();
         }
@@ -49,12 +49,12 @@ namespace UI.InventoryUI.Element
             
             _itemAmount.gameObject.SetActive(false);
             _emptyBackground.gameObject.SetActive(true);
-            ClearButton.gameObject.SetActive(false);
+            ClearButton?.gameObject.SetActive(false);
         }
 
         private void OnDestroy()
         {
-            ClearButton.onClick.RemoveAllListeners();
+            ClearButton?.onClick.RemoveAllListeners();
             _slotButton.onClick.RemoveAllListeners();
         }
     }
