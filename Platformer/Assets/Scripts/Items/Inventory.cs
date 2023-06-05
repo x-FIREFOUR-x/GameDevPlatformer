@@ -73,14 +73,16 @@ namespace Items
         public void Equip(Equipment equipment)
         {
             EquipmentItems.Add(equipment);
-            equipment.Use();
+            if (equipment.EquipmentType != EquipmentType.Potion)
+                equipment.Use();
             EquipmentChanged?.Invoke();
         }
         
         public void UnEquip(Equipment equipment, bool toWorld)
         {
             EquipmentItems.Remove(equipment);
-            equipment.Use();
+            if (equipment.EquipmentType != EquipmentType.Potion)
+                equipment.Use();
             EquipmentChanged?.Invoke();
 
             if (toWorld)
