@@ -7,6 +7,7 @@ using Core.Services.Updater;
 using NPC.Controller;
 using StatsSystem;
 using StatsSystem.Enum;
+using UnityEngine;
 
 namespace Player
 {
@@ -16,15 +17,33 @@ namespace Player
 
         private readonly List<IEntityInputSource> _inputSources;
 
+        private bool _isAttacking;
+        private bool _canAttack = true;
+
         public PlayerEntity(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources, StatsController statValueGiver )
         : base(playerEntityBehaviour, statValueGiver)
         {
             _playerEntityBehaviour = playerEntityBehaviour;
+            _playerEntityBehaviour.AttackEnded += OnAttackEnded;
+            _playerEntityBehaviour.AttackRequested += OnAttackRequested;
             _inputSources = inputSources;
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
 
             VisualiseHP(StatsController.GetStatValue(StatType.Health));
+        }
+
+        private void OnAttackRequested()
+        {
+            //Attack
+        }
+
+        private void OnAttackEnded()
+        {
+            _isAttacking = false;
+            Debug.Log(StatsController.GetStatValue((StatType.AfterAttackDelay)));
+            ProjectUpdater.Instance.Invoke(() =>
+                _canAttack = true, StatsController.GetStatValue((StatType.AfterAttackDelay)));
         }
 
         public void Dispose()
@@ -35,10 +54,18 @@ namespace Player
 
         private void OnFixedUpdate()
         {
+
             _playerEntityBehaviour.Move(GetMoveDirection() * StatsController.GetStatValue(StatType.Speed));
 
-            if (IsAttack)
-                _playerEntityBehaviour.Attack();
+            if (IsAttack && _canAttack)
+            {
+                if (_playerEntityBehaviour.TryStartAttack())
+                {
+                    _isAttacking = true;
+                    _canAttack = false;
+                }
+            }
+                
 
             if (IsJump)
                 _playerEntityBehaviour.Jump(StatsController.GetStatValue(StatType.JumpForce));

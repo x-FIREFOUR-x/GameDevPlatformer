@@ -16,7 +16,7 @@ namespace Core.Animation
 
         private AnimationType _lastShowAttackAnim = AnimationType.Attack;
 
-        public void UpdateAnimationsAttack(bool attackActive)
+        public void  UpdateAnimationsAttack(bool attackActive)
         {
             if(!attackActive)
             {
@@ -53,7 +53,16 @@ namespace Core.Animation
 
             _animationStartAction = startAnimationAction;
             _animationEndAction = endAnimationAction;
-            SetAnimation(animationType);
+
+            if (animationType != AnimationType.Attack2 && animationType != AnimationType.Attack3)
+            {
+                SetAnimation(animationType); 
+            }
+            else
+            {
+                UpdateAnimationsAttack(true);
+            }
+            
             return true;
         }
 
