@@ -88,23 +88,24 @@ namespace UI.InventoryUI.QuickInventoryUI
         private void SubscribeToSlotEvents(ItemSlot slot)
         {
             slot.SlotClicked += UseSlot;
-            slot.SlotClearClicked += ClearSlot;
         }
 
         private void UnsubscribeSlotEvents(ItemSlot slot)
         {
             slot.SlotClicked -= UseSlot;
-            slot.SlotClearClicked -= ClearSlot;
         }
 
         private void UseSlot(ItemSlot slot)
         {
+                
+            if(slot.EquipmentType == EquipmentType.Potion)
+            {
+                Debug.Log("Use point");
+                //Todo:
+            }
         }
 
-        private void ClearSlot(ItemSlot slot)
-        {
-        }
-
+        
         private Sprite GetBackSprite(ItemRarity rarity) =>
             _rarityDescriptors.Find(descriptor => descriptor.ItemRarity == rarity).Sprite;
     }

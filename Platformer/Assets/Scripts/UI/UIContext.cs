@@ -34,13 +34,13 @@ namespace UI
                 inputSource.InventoryRequested += HandleInventory;
             }
 
-            OpenQuickInventory();
-
             GameObject container = new GameObject()
             {
                 name = nameof(UIContext)
             };
             _uiContainer = container.transform;
+
+            OpenQuickInventory();
         }
     
         public void CloseCurrentScreen()
