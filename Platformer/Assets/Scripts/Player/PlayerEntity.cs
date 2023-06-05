@@ -4,6 +4,7 @@ using System.Linq;
 
 using InputReader;
 using Core.Services.Updater;
+using Fight;
 using NPC.Controller;
 using StatsSystem;
 using StatsSystem.Enum;
@@ -25,7 +26,7 @@ namespace Player
         {
             _playerEntityBehaviour = playerEntityBehaviour;
             _playerEntityBehaviour.AttackEnded += OnAttackEnded;
-            _playerEntityBehaviour.AttackRequested += OnAttackRequested;
+            _playerEntityBehaviour.Attacked += OnAttacked;
             _inputSources = inputSources;
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
@@ -33,15 +34,14 @@ namespace Player
             VisualiseHP(StatsController.GetStatValue(StatType.Health));
         }
 
-        private void OnAttackRequested()
+        private void OnAttacked(IDamageable target)
         {
-            //Attack
+            target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
         }
 
         private void OnAttackEnded()
         {
             _isAttacking = false;
-            Debug.Log(StatsController.GetStatValue((StatType.AfterAttackDelay)));
             ProjectUpdater.Instance.Invoke(() =>
                 _canAttack = true, StatsController.GetStatValue((StatType.AfterAttackDelay)));
         }
@@ -50,6 +50,8 @@ namespace Player
         {
             base.Dispose();
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+            _playerEntityBehaviour.AttackEnded -= OnAttackEnded;
+            _playerEntityBehaviour.Attacked -= OnAttacked;
         }
 
         private void OnFixedUpdate()

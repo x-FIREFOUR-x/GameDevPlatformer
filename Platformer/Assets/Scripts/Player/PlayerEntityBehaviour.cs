@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 using Core.Animation;
+using Fight;
 using Movement.Data;
 using Movement.Controller;
 using NPC.Behaviour;
@@ -14,6 +15,11 @@ namespace Player
 
         [SerializeField] private JumpData _jumperData;
         [SerializeField] private RollData _rollData;
+        
+        [SerializeField] private Transform _attackPoint;
+        [SerializeField] private float _attackRadius;
+        
+        [field: SerializeField] public LayerMask TargetsMask { get; private set; }
 
         [field: SerializeField] public PlayerStatsUIView statsUIView { get; private set; }
         
@@ -22,7 +28,7 @@ namespace Player
         private Blocker _blocker;
         private bool _isAttacking;
 
-        public event Action AttackRequested;
+        public event Action<IDamageable> Attacked;
         public event Action AttackEnded;
 
         public override void Initialize()
@@ -68,7 +74,9 @@ namespace Player
         private void OnAttack()
         {
             _isAttacking = true;
-            AttackRequested?.Invoke();
+            var targetCollider = Physics2D.OverlapCircle(_attackPoint.position, _attackRadius, TargetsMask);
+            if (targetCollider != null && targetCollider.TryGetComponent(out IDamageable damageable))
+                Attacked?.Invoke(damageable);
         }
 
         private void OnAttackEnded()

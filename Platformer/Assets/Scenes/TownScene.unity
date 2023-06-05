@@ -5710,6 +5710,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
+      propertyPath: _attackRadius
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_RootOrder
       value: 7
