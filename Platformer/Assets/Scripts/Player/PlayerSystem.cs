@@ -5,6 +5,7 @@ using UnityEngine;
 
 using InputReader;
 using Items;
+using NPC.Controller;
 using StatsSystem;
 
 namespace Player
@@ -25,7 +26,6 @@ namespace Player
             var statsStorage = Resources.Load<StatsStorage>($"Player/{nameof(StatsStorage)}");
             var stats = statsStorage.Stats.Select(stat => stat.GetCopy()).ToList();
             StatsController = new StatsController(stats);
-            _disposables.Add(StatsController);
 
             _playerEntityBehaviour = playerEntityBehaviour;
             _playerEntityBehaviour.Initialize();
@@ -34,12 +34,19 @@ namespace Player
             _disposables.Add(_playerEntity);
 
             Inventory = new Inventory(null, null, _playerEntityBehaviour.transform);
+
+            _playerEntity.Died += OnPlayerDied;
         }
 
         public void Dispose()
         {
             foreach (var disposable in _disposables)
                 disposable.Dispose();
+        }
+
+        private void OnPlayerDied(Entity entity)
+        {
+            Dispose();
         }
     }
 }

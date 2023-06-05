@@ -29,6 +29,14 @@ namespace NPC.Behaviour
         {
             DamageTaken?.Invoke(damage);
         }
+        
+        public void PlayDeath()
+        {
+            Animator.SetAnimationState(AnimationType.Death, true, endAnimationAction: () =>
+            {
+                Destroy(gameObject);
+            });
+        }
 
         protected virtual void UpdateAnimations()
         {

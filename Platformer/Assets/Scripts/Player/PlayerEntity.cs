@@ -27,7 +27,11 @@ namespace Player
             VisualiseHP(StatsController.GetStatValue(StatType.Health));
         }
 
-        public void Dispose() => ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+        public void Dispose()
+        {
+            base.Dispose();
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+        }
 
         private void OnFixedUpdate()
         {

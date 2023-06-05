@@ -45,6 +45,17 @@ namespace NPC.Controller
             
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdateCalled;
         }
+        
+        public override void Dispose()
+        {
+            _meleeEntityBehaviour.AttackSequenceEnded -= OnAttackEnded;
+            _meleeEntityBehaviour.Attacked -= OnAttacked;
+            
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdateCalled;
+            ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
+            
+            base.Dispose();
+        }
 
         private IEnumerator SearchPathCoroutine()
         {
@@ -79,6 +90,10 @@ namespace NPC.Controller
 
         private bool TryGetTarget(out Collider2D target)
         {
+            target = null;
+            if (_meleeEntityBehaviour == null || _meleeEntityBehaviour.transform == null)
+                return false;
+            
             target = Physics2D.OverlapBox(_meleeEntityBehaviour.transform.position, _meleeEntityBehaviour.TargetSearchBox, 0,
                 _meleeEntityBehaviour.TargetsMask);
 
