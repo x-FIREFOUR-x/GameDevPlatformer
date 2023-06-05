@@ -101,6 +101,8 @@ namespace UI.InventoryUI.QuickInventoryUI
             if(slot.EquipmentType == EquipmentType.Potion)
             {
                 Debug.Log("Use point");
+                var equipment = _equipmentSlots[slot];
+                _inventory.UsePotion(equipment);
                 //Todo:
             }
         }

@@ -30,6 +30,17 @@ namespace Items.Core
             }
 
             Equip();
+            //Todo: stats when equip 
+        }
+
+        public void UsePotion()
+        {
+            if(EquipmentType == EquipmentType.Potion)
+            {
+                _amount--;
+
+                //Todo: stats when use potion
+            }
         }
 
         private void Equip()
