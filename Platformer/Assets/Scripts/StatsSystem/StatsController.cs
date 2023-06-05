@@ -39,9 +39,10 @@ namespace StatsSystem
             if (modificator.Duration < 0)
                 return;
 
-            if (_activeModificators.Contains(modificator))
+            var existModificator = _activeModificators.Find(m => m.Stat.Type == modificator.Stat.Type);
+            if (existModificator != null)
             {
-                RemoveModificator(modificator);
+                RemoveModificator(existModificator);
             }
             
             var addedStat = new Stat(modificator.Stat.Type, newValue);
@@ -57,7 +58,7 @@ namespace StatsSystem
             if (_activeModificators.Count == 0)
                 return;
 
-            var expiredModificator = _activeModificators.Where(modificator => modificator.StartTime + modificator.Duration > Time.time);
+            var expiredModificator = _activeModificators.Where(modificator => Time.time > modificator.StartTime + modificator.Duration);
 
             while (expiredModificator.Count() != 0)
                 RemoveModificator(expiredModificator.First());
