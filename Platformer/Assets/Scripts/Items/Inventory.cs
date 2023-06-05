@@ -112,6 +112,7 @@ namespace Items
                 return false;
 
             ((Potion)existItem).AddToStack(1);
+            BackPackChanged?.Invoke();
             return true;
         }
     }

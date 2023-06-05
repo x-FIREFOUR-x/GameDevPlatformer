@@ -30,11 +30,13 @@ namespace UI.InventoryUI.QuickInventoryUI
             _equipmentSlots = new Dictionary<ItemSlot, Equipment>();
 
             _inventory.EquipmentChanged += UpdateEquipment;
+            _inventory.BackPackChanged += UpdateEquipment;
         }
 
         public void Dispose()
         {
             _inventory.EquipmentChanged -= UpdateEquipment;
+            _inventory.BackPackChanged -= UpdateEquipment;
         }
 
         private void UpdateEquipment()
