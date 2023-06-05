@@ -29,13 +29,13 @@ namespace NPC.Controller
         {
             StatsController.Dispose();
             _entityBehaviour.DamageTaken -= OnDamageTaken;
+            _entityBehaviour.PlayDeath();
         }
 
         protected abstract void VisualiseHP(float currentHp);
         
         private void OnDamageTaken(float damage)
         {
-            // TODO: check for correctness after adding processing stats of equipped items 
             float defence = StatsController.GetStatValue(StatType.Defence);
             float damageThroughDefence = damage - defence;
             
@@ -44,6 +44,11 @@ namespace NPC.Controller
             
             _currentHp = Mathf.Clamp(_currentHp - damageThroughDefence, 0, _currentHp); 
             VisualiseHP(_currentHp);
+
+            if (_currentHp <= 0)
+            {
+                Died?.Invoke(this);
+            }
         }
     }
 }

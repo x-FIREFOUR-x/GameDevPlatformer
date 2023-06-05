@@ -40,6 +40,8 @@ namespace NPC.Spawn
         {
             entity.Died -= RemoveEntity;
             _spawnedEntities.Remove(entity);
+            
+            entity.Dispose();
         }
     }
 }
