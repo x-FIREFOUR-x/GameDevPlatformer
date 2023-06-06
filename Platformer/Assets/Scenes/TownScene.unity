@@ -5838,42 +5838,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1231636564304817404, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 76.9471
-      objectReference: {fileID: 0}
-    - target: {fileID: 1231636564304817404, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 11.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1231636564304817404, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 80.73416
-      objectReference: {fileID: 0}
-    - target: {fileID: 1231636564304817404, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -28.324997
-      objectReference: {fileID: 0}
-    - target: {fileID: 2865040534801091050, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 579.4274
-      objectReference: {fileID: 0}
-    - target: {fileID: 2865040534801091050, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 104.2615
-      objectReference: {fileID: 0}
-    - target: {fileID: 2865040534801091050, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 497.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2865040534801091050, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -118.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3438427643379494594, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: <CurrentHPText>k__BackingField
-      value: 
-      objectReference: {fileID: 1970000072}
     - target: {fileID: 5891185884003846244, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
