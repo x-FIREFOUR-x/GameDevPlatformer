@@ -40,8 +40,9 @@ namespace NPC.Controller
                 return;
 
             float currentHp = StatsController.GetStatValue(StatType.Health);
-            float newHpValue = Mathf.Clamp(currentHp - damage, 0, StatsController.GetStatValue(StatType.MaxHealth)); 
-            
+            float newHpValue = Mathf.Clamp(currentHp - damage, 0, StatsController.GetStatValue(StatType.MaxHealth));
+            newHpValue = Mathf.Round(newHpValue);
+
             VisualiseHP(newHpValue, StatsController.GetStatValue(StatType.MaxHealth));
             StatsController.UpdateStat(StatType.Health, newHpValue);
             

@@ -82,17 +82,6 @@ namespace Player
         {
             VisualiseHP(StatsController.GetStatValue(StatType.Health),StatsController.GetStatValue(StatType.MaxHealth));
         }
-
-        private void OnAttacked(IDamageable target)
-        {
-            target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
-        }
-
-        private void OnAttackEnded()
-        {
-            ProjectUpdater.Instance.Invoke(() =>
-                IsAttacking = false, StatsController.GetStatValue((StatType.AfterAttackDelay)));
-        }
         
         private float GetMoveDirection()
         {
