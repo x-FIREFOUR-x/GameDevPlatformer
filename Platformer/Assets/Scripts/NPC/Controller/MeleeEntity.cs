@@ -51,7 +51,11 @@ namespace NPC.Controller
             _meleeEntityBehaviour.Attacked -= OnAttacked;
             
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdateCalled;
-            ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
+
+            if (_searchCoroutine != null)
+            {
+                ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
+            }
             
             base.Dispose();
         }
