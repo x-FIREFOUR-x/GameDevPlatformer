@@ -48,8 +48,7 @@ namespace NPC.Controller
             VisualiseHP(_currentHp);
             _entityBehaviour.PlayHurt();
 
-            IsAttacking = false;
-            //_entityBehaviour.OnEndAttack();
+            _entityBehaviour.EndAttack();
 
             if (_currentHp <= 0)
             {
