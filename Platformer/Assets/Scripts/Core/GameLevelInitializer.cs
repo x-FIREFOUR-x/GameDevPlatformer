@@ -14,19 +14,22 @@ using NPC.Enum;
 using NPC.Spawn;
 using StatsSystem;
 using UI;
-using UnityEngine.Serialization;
+using LevelSystem;
 
 namespace Core
 {
     class GameLevelInitializer : MonoBehaviour
     {
         [SerializeField] private PlayerEntityBehaviour _playerEntityBehaviour;
+
         [SerializeField] private GameUIInputView _ganeUIInputView;
+
         [SerializeField] private ItemRarityDescriptorsStorage _rarityDescriptorsStorage;
         [SerializeField] private LayerMask _whatIsPlayer;
         [SerializeField] private ItemStorage _itemsStorage;
         [SerializeField] private StatsStorage _statsStorage;
-        [SerializeField] private Transform _pointOfSpawn;
+
+        [SerializeField] private LevelStorage _levelStorage; 
 
         private ExternalDevicesInputReader _externalDevicesInput;
         private PlayerSystem _playerSystem;
@@ -66,18 +69,17 @@ namespace Core
             _uiContext = new UIContext(new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput }, data);
 
             _entitySpawner = new EntitySpawner();
+
+            foreach (var enemiesData in _levelStorage.ListEnemiesData)
+            {
+                _entitySpawner.SpawnEntity(enemiesData.TypeEntity, enemiesData.СoordinateSpawn);
+            }
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
-            
-            if (Input.GetKeyDown(KeyCode.M))
-                _entitySpawner.SpawnEntity(EntityId.HeavyBandit, _pointOfSpawn.position);
-
-            if (Input.GetKeyDown(KeyCode.N))
-                _entitySpawner.SpawnEntity(EntityId.LightBandit, _pointOfSpawn.position);
         }
 
         private void OnDestroy()
