@@ -39,17 +39,16 @@ namespace StatsSystem
             if (modificator.Duration < 0)
                 return;
 
-            if(_activeModificators.Contains(modificator))
+            var existModificator = _activeModificators.Find(m => m.Stat.Type == modificator.Stat.Type);
+            if (existModificator != null)
             {
-                _activeModificators.Remove(modificator);
+                RemoveModificator(existModificator);
             }
-            else
-            {
-                var addedStat = new Stat(modificator.Stat.Type, -newValue);
-                var tempModificator = new StatModificator(addedStat, StatModificatorType.Additive, modificator.Duration, Time.time);
+            
+            var addedStat = new Stat(modificator.Stat.Type, newValue);
+            var tempModificator = new StatModificator(modificator.Stat, modificator.StatModificatorType, modificator.Duration, Time.time);
 
-                _activeModificators.Add(tempModificator);
-            }
+            _activeModificators.Add(tempModificator);
         }
 
         public void Dispose() => ProjectUpdater.Instance.UpdateCalled -= OnUpdate;
@@ -59,11 +58,28 @@ namespace StatsSystem
             if (_activeModificators.Count == 0)
                 return;
 
-            var expiredModificator = _activeModificators.Where(modificator => modificator.StartTime + modificator.Duration > Time.time);
+            var expiredModificator = _activeModificators.Where(modificator => Time.time > modificator.StartTime + modificator.Duration);
 
-            foreach (var modificator in expiredModificator)
-                ProcessModificator(modificator);
-                 
+            while (expiredModificator.Count() != 0)
+                RemoveModificator(expiredModificator.First());
+        }
+
+        private void RemoveModificator(StatModificator modificator)
+        {
+            var statToChange = _currentStats.Find(stat => stat.Type == modificator.Stat.Type);
+
+            if (statToChange == null)
+                return;
+
+            var previousModificator = modificator.GetReverseModificator();
+
+            var newValue = modificator.StatModificatorType == StatModificatorType.Additive ?
+                statToChange + previousModificator.Stat :
+                statToChange * previousModificator.Stat;
+
+            statToChange.SetStatValue(newValue);
+
+            _activeModificators.Remove(modificator);
         }
     }
 }

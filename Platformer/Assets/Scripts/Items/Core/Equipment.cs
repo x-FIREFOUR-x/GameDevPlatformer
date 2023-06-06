@@ -32,6 +32,15 @@ namespace Items.Core
             Equip();
         }
 
+        public void UsePotion()
+        {
+            _amount--;
+            foreach (var stat in _itemDescriptor.Stats)
+            {
+                _statsController.ProcessModificator(stat);
+            }
+        }
+
         private void Equip()
         {
             _equipped = true;

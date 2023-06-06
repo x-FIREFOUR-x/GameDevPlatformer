@@ -4965,7 +4965,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2022259680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5700,27 +5700,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1225345781781343315, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_Color.b
-      value: 0.0827623
+      value: 0.07665193
       objectReference: {fileID: 0}
     - target: {fileID: 1225345781781343315, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_Color.g
-      value: 0.4811321
+      value: 0.46226418
       objectReference: {fileID: 0}
     - target: {fileID: 1225345781781343315, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_Color.r
-      value: 0.065815255
-      objectReference: {fileID: 0}
-    - target: {fileID: 5891185884003846244, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5891185884003846244, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6142220555785553789, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.04579032
       objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_RootOrder

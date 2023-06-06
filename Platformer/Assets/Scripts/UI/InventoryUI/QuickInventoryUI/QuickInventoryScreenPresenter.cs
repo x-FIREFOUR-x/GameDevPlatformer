@@ -30,11 +30,13 @@ namespace UI.InventoryUI.QuickInventoryUI
             _equipmentSlots = new Dictionary<ItemSlot, Equipment>();
 
             _inventory.EquipmentChanged += UpdateEquipment;
+            _inventory.BackPackChanged += UpdateEquipment;
         }
 
         public void Dispose()
         {
             _inventory.EquipmentChanged -= UpdateEquipment;
+            _inventory.BackPackChanged -= UpdateEquipment;
         }
 
         private void UpdateEquipment()
@@ -65,7 +67,7 @@ namespace UI.InventoryUI.QuickInventoryUI
                 if (item == null)
                     continue;
 
-                slot.SetItem(item.Descriptor.ItemSprite, GetBackSprite(item.Descriptor.ItemRarity), item.Amount);
+                slot.SetItem(item.Descriptor.ItemSprite, GetBackSprite(item.Descriptor.ItemRarity), item.Descriptor.ItemId, item.Amount);
                 SubscribeToSlotEvents(slot);
             }
         }
@@ -100,8 +102,8 @@ namespace UI.InventoryUI.QuickInventoryUI
                 
             if(slot.EquipmentType == EquipmentType.Potion)
             {
-                Debug.Log("Use point");
-                //Todo:
+                var equipment = _equipmentSlots[slot];
+                _inventory.UsePotion(equipment);
             }
         }
 
