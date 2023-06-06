@@ -37,21 +37,42 @@ namespace StatsSystem
                 statToChange + modificator.Stat :
                 statToChange * modificator.Stat;
 
+            if (modificator.Stat.Type == StatType.Health)
+            {
+                newValue = Mathf.Clamp(newValue, 0, GetStatValue(StatType.MaxHealth)); 
+            }
+            
             statToChange.SetStatValue(newValue);
-            if (modificator.Duration < 0)
-                return;
 
+            
+            if (modificator.Duration < 0)
+            {
+                StatsChanges?.Invoke();
+                return;
+            }
+                
             var existModificator = _activeModificators.Find(m => m.Stat.Type == modificator.Stat.Type);
             if (existModificator != null)
             {
                 RemoveModificator(existModificator);
             }
             
-            var addedStat = new Stat(modificator.Stat.Type, newValue);
             var tempModificator = new StatModificator(modificator.Stat, modificator.StatModificatorType, modificator.Duration, Time.time);
 
             _activeModificators.Add(tempModificator);
 
+            StatsChanges?.Invoke();
+        }
+
+        public void UpdateStat(StatType statType, float value)
+        {
+            var statToChange = CurrentStats.Find(stat => stat.Type == statType);
+
+            if (statToChange == null)
+                return;
+            
+            statToChange.SetStatValue(value);
+            
             StatsChanges?.Invoke();
         }
 

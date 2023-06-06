@@ -11,9 +11,7 @@ namespace NPC.Controller
     {
         private readonly BaseEntityBehaviour _entityBehaviour;
         protected readonly StatsController StatsController;
-
-        private float _currentHp;
-
+        
         protected bool IsAttacking = false;
 
         public event Action<Entity> Died;
@@ -23,7 +21,6 @@ namespace NPC.Controller
             _entityBehaviour = entityBehaviour;
             _entityBehaviour.Initialize();
             StatsController = statsController;
-            _currentHp = statsController.GetStatValue(StatType.MaxHealth);
             _entityBehaviour.DamageTaken += OnDamageTaken;
         }
         
@@ -34,7 +31,7 @@ namespace NPC.Controller
             _entityBehaviour.PlayDeath();
         }
 
-        protected abstract void VisualiseHP(float currentHp);
+        protected abstract void VisualiseHP(float currentHp, float maxHp);
         
         private void OnDamageTaken(float damage)
         {
@@ -43,14 +40,19 @@ namespace NPC.Controller
             
             if (damageThroughDefence <= 0)
                 return;
+
+            float currentHp = StatsController.GetStatValue(StatType.Health);
+            float newHpValue = Mathf.Clamp(currentHp - damageThroughDefence, 0, StatsController.GetStatValue(StatType.MaxHealth)); 
             
-            _currentHp = Mathf.Clamp(_currentHp - damageThroughDefence, 0, _currentHp); 
-            VisualiseHP(_currentHp);
+            VisualiseHP(newHpValue, StatsController.GetStatValue(StatType.MaxHealth));
+            
+            StatsController.UpdateStat(StatType.Health, newHpValue);
+            
             _entityBehaviour.PlayHurt();
 
             _entityBehaviour.EndAttack();
 
-            if (_currentHp <= 0)
+            if (newHpValue <= 0)
             {
                 Died?.Invoke(this);
             }
