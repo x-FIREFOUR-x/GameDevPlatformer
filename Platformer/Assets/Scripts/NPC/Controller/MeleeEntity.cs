@@ -26,7 +26,6 @@ namespace NPC.Controller
         private Path _currentPath;
         private int _indexCurrentPointInPath;
 
-        private bool _isAttack;
 
         public MeleeEntity(MeleeEntityBehaviour entityBehaviour, StatsController statsController) :
             base(entityBehaviour, statsController)
@@ -59,7 +58,7 @@ namespace NPC.Controller
 
         private IEnumerator SearchPathCoroutine()
         {
-            while(!_isAttack)
+            while(!IsAttacking)
             {
                 if(!TryGetTarget(out _target))
                 { 
@@ -102,7 +101,7 @@ namespace NPC.Controller
 
         private void OnFixedUpdateCalled()
         {
-            if (_isAttack || _target == null || _currentPath == null || TryAttack() || _indexCurrentPointInPath >= _currentPath.vectorPath.Count)
+            if (IsAttacking || _target == null || _currentPath == null || TryAttack() || _indexCurrentPointInPath >= _currentPath.vectorPath.Count)
             {
                 ResetMovement();
                 return;
@@ -138,14 +137,14 @@ namespace NPC.Controller
         private bool TryAttack()
         {
             var distance = _destination - _meleeEntityBehaviour.transform.position;
-            if (Mathf.Abs(distance.x) > 0.2f)
+            if (Mathf.Abs(distance.x) > _meleeEntityBehaviour.AttackRadius)
                 return false;
 
             _meleeEntityBehaviour.SetDirection(_meleeEntityBehaviour.transform.position.x > _target.transform.position.x ? Direction.Left : Direction.Right);
             ResetMovement();
 
-            _isAttack = true;
-            _meleeEntityBehaviour.StartAttack();
+            IsAttacking = true;
+            _meleeEntityBehaviour.Attack();
 
             if (_searchCoroutine != null)
                 ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
@@ -169,7 +168,7 @@ namespace NPC.Controller
 
         private void OnAttackEnded()
         {
-            _isAttack = false;
+            IsAttacking = false;
             ProjectUpdater.Instance.Invoke(() =>
             {
                 _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());

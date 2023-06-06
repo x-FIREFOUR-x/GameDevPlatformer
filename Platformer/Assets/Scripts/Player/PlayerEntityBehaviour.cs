@@ -12,24 +12,17 @@ namespace Player
     [RequireComponent(typeof(BoxCollider2D))]
     public class PlayerEntityBehaviour : BaseEntityBehaviour
     {
-
         [SerializeField] private JumpData _jumperData;
         [SerializeField] private RollData _rollData;
-        
-        [SerializeField] private Transform _attackPoint;
-        [SerializeField] private float _attackRadius;
-        
-        [field: SerializeField] public LayerMask TargetsMask { get; private set; }
 
         [field: SerializeField] public PlayerStatsUIView statsUIView { get; private set; }
-        
+
+        public event Action AttackSequenceEnded;
+
         private Jumper _jumper;
         private Roller _roller;
         private Blocker _blocker;
         private bool _isAttacking;
-
-        public event Action<IDamageable> Attacked;
-        public event Action AttackEnded;
 
         public override void Initialize()
         {
@@ -64,25 +57,17 @@ namespace Player
         {
             if (CanAttack())
             {
-                Animator.SetAnimationState(AnimationType.Attack, true, OnAttack, OnAttackEnded, true);
+                Animator.SetAnimationState(AnimationType.Attack, true, StartAttack, EndAttack, true);
                 return true;
             }
 
             return false;
         }
 
-        private void OnAttack()
-        {
-            _isAttacking = true;
-            var targetCollider = Physics2D.OverlapCircle(_attackPoint.position, _attackRadius, TargetsMask);
-            if (targetCollider != null && targetCollider.TryGetComponent(out IDamageable damageable))
-                Attacked?.Invoke(damageable);
-        }
-
-        private void OnAttackEnded()
+        public override void EndAttack()
         {
             _isAttacking = false;
-            AttackEnded?.Invoke();
+            AttackSequenceEnded?.Invoke();
         }
 
         private bool CanMove()

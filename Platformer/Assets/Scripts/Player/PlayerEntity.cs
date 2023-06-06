@@ -18,14 +18,11 @@ namespace Player
 
         private readonly List<IEntityInputSource> _inputSources;
 
-        private bool _isAttacking;
-        private bool _canAttack = true;
-
         public PlayerEntity(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources, StatsController statValueGiver )
         : base(playerEntityBehaviour, statValueGiver)
         {
             _playerEntityBehaviour = playerEntityBehaviour;
-            _playerEntityBehaviour.AttackEnded += OnAttackEnded;
+            _playerEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
             _playerEntityBehaviour.Attacked += OnAttacked;
             _inputSources = inputSources;
 
@@ -41,33 +38,29 @@ namespace Player
 
         private void OnAttackEnded()
         {
-            _isAttacking = false;
             ProjectUpdater.Instance.Invoke(() =>
-                _canAttack = true, StatsController.GetStatValue((StatType.AfterAttackDelay)));
+                IsAttacking = false, StatsController.GetStatValue((StatType.AfterAttackDelay)));
         }
 
         public void Dispose()
         {
             base.Dispose();
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
-            _playerEntityBehaviour.AttackEnded -= OnAttackEnded;
+            _playerEntityBehaviour.AttackSequenceEnded -= OnAttackEnded;
             _playerEntityBehaviour.Attacked -= OnAttacked;
         }
 
         private void OnFixedUpdate()
         {
-
             _playerEntityBehaviour.Move(GetMoveDirection() * StatsController.GetStatValue(StatType.Speed));
 
-            if (IsAttack && _canAttack)
+            if (IsAttack && !IsAttacking)
             {
                 if (_playerEntityBehaviour.TryStartAttack())
                 {
-                    _isAttacking = true;
-                    _canAttack = false;
+                    IsAttacking = true;
                 }
             }
-                
 
             if (IsJump)
                 _playerEntityBehaviour.Jump(StatsController.GetStatValue(StatType.JumpForce));

@@ -711,6 +711,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 4376251333676912599}
+  <TargetsMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1024
+  AttackPoint: {fileID: 5816299284801588490}
+  AttackRadius: 0.2
   _jumperData:
     GravityScale: 1
     <GroundCheck>k__BackingField: {fileID: 467637774457261783}
@@ -722,11 +727,6 @@ MonoBehaviour:
     RollDistance: 2.5
     OffsetRollCollider: {x: -0.05, y: 0.425}
     SizeRollCollider: {x: 0.84, y: 0.72}
-  _attackPoint: {fileID: 5816299284801588490}
-  _attackRadius: 0.2
-  <TargetsMask>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 1024
   <statsUIView>k__BackingField: {fileID: 3438427643379494594}
 --- !u!114 &4376251333676912599
 MonoBehaviour:
