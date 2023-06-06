@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Core.Animation
@@ -10,10 +11,12 @@ namespace Core.Animation
 
         private readonly AnimationType _firstAttackAnimation = AnimationType.Attack;
         private readonly AnimationType _lastAttackAnimation = AnimationType.Attack3;
+        private Action _animationStartAction;
+        private Action _animationEndAction;
 
         private AnimationType _lastShowAttackAnim = AnimationType.Attack;
 
-        public void UpdateAnimationsAttack(bool attackActive)
+        public void UpdateRandomAnimationAttack(bool attackActive)
         {
             if(!attackActive)
             {
@@ -32,6 +35,54 @@ namespace Core.Animation
                     _lastShowAttackAnim = randomAttackAnim;
                 }
             }
+        }
+        
+        public bool SetAnimationState(
+            AnimationType animationType, bool active,
+            Action startAnimationAction = null, Action endAnimationAction = null,
+            bool randomVariantofTypeAnim = false)
+        {
+            if (!active)
+            {
+                if (_currentAnimationType == AnimationType.Idle || _currentAnimationType != animationType)
+                    return false;
+                
+                OnAnimationEnded();
+                return false;
+            }
+
+            if (_currentAnimationType >= animationType)
+                return false;
+
+            _animationStartAction = startAnimationAction;
+            _animationEndAction = endAnimationAction;
+
+            if (randomVariantofTypeAnim && ((int)animationType >= (int)_firstAttackAnimation || (int)animationType <= (int)_lastAttackAnimation))
+            {
+                UpdateRandomAnimationAttack(active);
+            }
+            else
+            {
+                SetAnimation(animationType);
+            }
+            
+            return true;
+        }
+
+        protected void OnActionRequested() => _animationStartAction?.Invoke();
+        
+        private void OnAnimationEnded()
+        {
+            _animationEndAction?.Invoke();
+            _animationStartAction = null;
+            _animationEndAction = null;
+            SetAnimation(AnimationType.Idle);
+        }
+
+        private void SetAnimation(AnimationType animationType)
+        {
+            _currentAnimationType = animationType;
+            PlayAnimation(_currentAnimationType);
         }
         
         public void PlayAnimation(AnimationType animationType, bool active)

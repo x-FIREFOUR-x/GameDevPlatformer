@@ -4,9 +4,11 @@ using System.Linq;
 
 using InputReader;
 using Core.Services.Updater;
+using Fight;
 using NPC.Controller;
 using StatsSystem;
 using StatsSystem.Enum;
+using UnityEngine;
 
 namespace Player
 {
@@ -20,19 +22,66 @@ namespace Player
         : base(playerEntityBehaviour, statValueGiver)
         {
             _playerEntityBehaviour = playerEntityBehaviour;
+            _playerEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
+            _playerEntityBehaviour.Attacked += OnAttacked;
             _inputSources = inputSources;
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
+            StatsController.StatsChanges += OnStatsChange;
+
+            VisualiseHP(StatsController.GetStatValue(StatType.Health), StatsController.GetStatValue(StatType.MaxHealth));
         }
 
-        public void Dispose() => ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+        public void Dispose()
+        {
+            base.Dispose();
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+            _playerEntityBehaviour.AttackSequenceEnded -= OnAttackEnded;
+            _playerEntityBehaviour.Attacked -= OnAttacked;
+            StatsController.StatsChanges -= OnStatsChange;
+        }
+
+        protected sealed override void VisualiseHP(float currentHp, float maxHp)
+        {
+            if (_playerEntityBehaviour.statsUIView.HPBar.maxValue < maxHp)
+                _playerEntityBehaviour.statsUIView.HPBar.maxValue = maxHp;
+
+            _playerEntityBehaviour.statsUIView.HPBar.value = currentHp;
+            _playerEntityBehaviour.statsUIView.CurrentHPText.text = currentHp + " / " + maxHp;
+        }
+
+        protected sealed override void OnDamageTaken(float damage)
+        {
+            if (IsBlock())
+            {
+                damage = damage * (1 - StatsController.GetStatValue(StatType.Resistance));
+            }
+
+            base.OnDamageTaken(damage);
+        }
+
+        private void OnAttacked(IDamageable target)
+        {
+            target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
+        }
+
+        private void OnAttackEnded()
+        {
+            ProjectUpdater.Instance.Invoke(() =>
+                IsAttacking = false, StatsController.GetStatValue((StatType.AfterAttackDelay)));
+        }
 
         private void OnFixedUpdate()
         {
             _playerEntityBehaviour.Move(GetMoveDirection() * StatsController.GetStatValue(StatType.Speed));
 
-            if (IsAttack)
-                _playerEntityBehaviour.Attack();
+            if (IsAttack && !IsAttacking)
+            {
+                if (_playerEntityBehaviour.TryStartAttack())
+                {
+                    IsAttacking = true;
+                }
+            }
 
             if (IsJump)
                 _playerEntityBehaviour.Jump(StatsController.GetStatValue(StatType.JumpForce));
@@ -47,7 +96,12 @@ namespace Player
                 inputSource.ResetOneTimeActions();
             }
         }
-
+        
+        private void OnStatsChange()
+        {
+            VisualiseHP(StatsController.GetStatValue(StatType.Health),StatsController.GetStatValue(StatType.MaxHealth));
+        }
+        
         private float GetMoveDirection()
         {
             foreach(var inputSource in _inputSources)
@@ -69,7 +123,7 @@ namespace Player
         {
             foreach (var inputSource in _inputSources)
             {
-                if (inputSource.Block == true)
+                if (inputSource.Block)
                     return true;
             }
 

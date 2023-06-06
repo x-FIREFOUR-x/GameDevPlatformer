@@ -16,4 +16,12 @@ MonoBehaviour:
   <Stats>k__BackingField:
   - <Type>k__BackingField: 6
     <Value>k__BackingField: 3.5
+  - <Type>k__BackingField: 1
+    <Value>k__BackingField: 100
+  - <Type>k__BackingField: 4
+    <Value>k__BackingField: 10
+  - <Type>k__BackingField: 8
+    <Value>k__BackingField: 0.3
+  - <Type>k__BackingField: 9
+    <Value>k__BackingField: 100
   <EntityBehaviourPrefab>k__BackingField: {fileID: 1793852178780157164, guid: e105e3499568d2d469032dea9e5c5909, type: 3}

@@ -9,12 +9,13 @@ using Items.Enum;
 using UI.Core;
 using UI.InventoryUI.Element;
 
-namespace UI.InventoryUI
+namespace UI.InventoryUI.InventoryUI
 {
     public class InventoryScreenView : ScreenView
     {
         [SerializeField] private Button _closeButton;
         [SerializeField] private TMP_Text _coinsText;
+        [SerializeField] private TMP_Text _statsText;
         
         [SerializeField] private Transform _backPackContainer;
         [SerializeField] private Transform _equipmentContainer;
@@ -37,5 +38,7 @@ namespace UI.InventoryUI
         }
 
         public void SetCoinsAmount(string amount) => _coinsText.text = amount;
+
+        public void SetStats(string stats) => _statsText.text = stats;
     }
 }

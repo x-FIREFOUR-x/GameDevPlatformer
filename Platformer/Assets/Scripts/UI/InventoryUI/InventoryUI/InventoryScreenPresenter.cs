@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -7,10 +8,12 @@ using Items;
 using Items.Core;
 using Items.Data;
 using Items.Enum;
+using StatsSystem;
+using StatsSystem.Enum;
 using UI.Core;
 using UI.InventoryUI.Element;
 
-namespace UI.InventoryUI
+namespace UI.InventoryUI.InventoryUI
 {
     public class InventoryScreenPresenter : ScreenController<InventoryScreenView>, IDisposable
     {
@@ -24,7 +27,9 @@ namespace UI.InventoryUI
 
         private readonly Sprite _emptyBackSprite;
 
-        public InventoryScreenPresenter(InventoryScreenView view, Inventory inventory, List<RarityDescriptor> rarityDescriptors) : base(view)
+        private readonly StatsController _statsController;
+
+        public InventoryScreenPresenter(InventoryScreenView view, Inventory inventory, List<RarityDescriptor> rarityDescriptors, StatsController statsController) : base(view)
         {
             _inventory = inventory;
 
@@ -33,11 +38,15 @@ namespace UI.InventoryUI
             _backPackSlots = new Dictionary<ItemSlot, Item>();
             _equipmentSlots = new Dictionary<ItemSlot, Equipment>();
             _equipmentConditionChecker = new EquipmentConditionChecker();
+            _statsController = statsController;
+
+            _statsController.StatsChanges += UpdateStats;
             View.CloseClicked += RequestCloseScreen;
         }
         
         public void Dispose()
         {
+            _statsController.StatsChanges -= UpdateStats;
             View.CloseClicked -= RequestCloseScreen;
         }
         
@@ -45,8 +54,11 @@ namespace UI.InventoryUI
         {
             InitializeBackPack();
             InitializeEquipment();
+            UpdateStats();
+            
             _inventory.BackPackChanged += UpdateBackPack;
             _inventory.EquipmentChanged += UpdateEquipment;
+            
             base.Initialize();
         }
 
@@ -71,7 +83,7 @@ namespace UI.InventoryUI
                 if (item == null)
                     continue;
                 
-                slot.SetItem(item.Descriptor.ItemSprite,GetBackSprite(item.Descriptor.ItemRarity), item.Amount);
+                slot.SetItem(item.Descriptor.ItemSprite,GetBackSprite(item.Descriptor.ItemRarity), item.Descriptor.ItemId, item.Amount);
                 SubscribeToSlotEvents(slot);
             }
         }
@@ -98,7 +110,7 @@ namespace UI.InventoryUI
                 if (item == null)
                     continue;
                 
-                slot.SetItem(item.Descriptor.ItemSprite, GetBackSprite(item.Descriptor.ItemRarity), item.Amount);
+                slot.SetItem(item.Descriptor.ItemSprite, GetBackSprite(item.Descriptor.ItemRarity), item.Descriptor.ItemId, item.Amount);
                 SubscribeToSlotEvents(slot);
             }
         }
@@ -161,6 +173,22 @@ namespace UI.InventoryUI
         {
             ClearEquipment();
             InitializeEquipment();
+            UpdateStats();
+        }
+
+        private void UpdateStats()
+        {
+            List<Stat> stats = _statsController.CurrentStats;
+
+            string statsString = "";
+            
+            foreach (var stat in stats)
+            {
+                float value = (float)Math.Round(stat.Value, 2);
+                statsString += ((StatType)stat.Type).ToString() + ": " + value.ToString() + "\n";
+            }
+            
+            View.SetStats(statsString);
         }
         
         private void ClearBackPack()

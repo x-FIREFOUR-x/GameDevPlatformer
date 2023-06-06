@@ -57,17 +57,13 @@ namespace Core
             _disposables.Add(_playerSystem);
 
             ItemsFactory itemsFactory = new ItemsFactory(_playerSystem.StatsController);
-            List<IItemRarityColor> rarityColors =
-                _rarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
+            List<IItemRarityColor> rarityColors = _rarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
+            List<ItemDescriptor> descriptors = _itemsStorage.ItemScriptables.Select(scriptable => scriptable.ItemDescriptor).ToList();
             _itemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, _playerSystem.Inventory);
-            List<ItemDescriptor> descriptors =
-                _itemsStorage.ItemScriptables.Select(scriptable => scriptable.ItemDescriptor).ToList();
             _dropGenerator = new DropGenerator(descriptors, _playerEntityBehaviour, _itemsSystem);
 
-            UIContext.Data data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors);
-            _uiContext = new UIContext(
-                new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput },
-                data);
+            UIContext.Data data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors, _playerSystem.StatsController);
+            _uiContext = new UIContext(new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput }, data);
 
             _entitySpawner = new EntitySpawner();
         }
@@ -79,6 +75,9 @@ namespace Core
             
             if (Input.GetKeyDown(KeyCode.M))
                 _entitySpawner.SpawnEntity(EntityId.HeavyBandit, _pointOfSpawn.position);
+
+            if (Input.GetKeyDown(KeyCode.N))
+                _entitySpawner.SpawnEntity(EntityId.LightBandit, _pointOfSpawn.position);
         }
 
         private void OnDestroy()

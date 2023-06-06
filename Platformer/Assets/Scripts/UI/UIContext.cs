@@ -4,10 +4,12 @@ using UnityEngine;
 
 using UI.Enum;
 using UI.Core;
-using UI.InventoryUI;
+using UI.InventoryUI.InventoryUI;
+using UI.InventoryUI.QuickInventoryUI;
 using InputReader;
 using Items;
 using Items.Data;
+using StatsSystem;
 
 namespace UI
 {
@@ -38,6 +40,8 @@ namespace UI
                 name = nameof(UIContext)
             };
             _uiContainer = container.transform;
+
+            OpenQuickInventory();
         }
     
         public void CloseCurrentScreen()
@@ -72,6 +76,16 @@ namespace UI
             OpenScreen(ScreenType.Inventory);
         }
 
+        private void OpenQuickInventory()
+        {
+            if (!_controllers.TryGetValue(ScreenType.QuickInventory, out IScreenController screenControllers))
+            {
+                screenControllers = GetController(ScreenType.QuickInventory);
+                _controllers.Add(ScreenType.QuickInventory, screenControllers);
+                screenControllers.Initialize();
+            }
+        }
+
         private void OpenScreen(ScreenType screenType)
         {
             _currentController?.Complete();
@@ -94,7 +108,9 @@ namespace UI
             switch (screenType)
             {
                 case ScreenType.Inventory:
-                    return new InventoryScreenPresenter((InventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors);
+                    return new InventoryScreenPresenter((InventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors, _data.StatsController);
+                case ScreenType.QuickInventory:
+                    return new QuickInventoryScreenPresenter((QuickInventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors);
                 default:
                     throw new NullReferenceException();
             };
@@ -110,11 +126,14 @@ namespace UI
         {
             public Inventory Inventory { get; }
             public List<RarityDescriptor> RarityDescriptors { get; }
+            
+            public StatsController StatsController { get; }
 
-            public Data(Inventory inventory, List<RarityDescriptor> rarityDescriptors)
+            public Data(Inventory inventory, List<RarityDescriptor> rarityDescriptors, StatsController statsController)
             {
                 Inventory = inventory;
                 RarityDescriptors = rarityDescriptors;
+                StatsController = statsController;
             }
         }
     }

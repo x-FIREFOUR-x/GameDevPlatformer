@@ -73,16 +73,31 @@ namespace Items
         public void Equip(Equipment equipment)
         {
             EquipmentItems.Add(equipment);
+            if (equipment.EquipmentType != EquipmentType.Potion)
+                equipment.Use();
             EquipmentChanged?.Invoke();
         }
         
         public void UnEquip(Equipment equipment, bool toWorld)
         {
             EquipmentItems.Remove(equipment);
+            if (equipment.EquipmentType != EquipmentType.Potion)
+                equipment.Use();
             EquipmentChanged?.Invoke();
 
             if (toWorld)
                 ItemDropped?.Invoke(equipment, _player.position);
+        }
+
+        public void UsePotion(Equipment equipment)
+        {
+            if(equipment.EquipmentType == EquipmentType.Potion)
+            {
+                equipment.UsePotion();
+                if (equipment.Amount == 0)
+                    EquipmentItems.Remove(equipment);
+                EquipmentChanged?.Invoke();
+            }
         }
 
         private bool TryAddItemToStackExistItem(Item item)
@@ -97,6 +112,7 @@ namespace Items
                 return false;
 
             ((Potion)existItem).AddToStack(1);
+            BackPackChanged?.Invoke();
             return true;
         }
     }

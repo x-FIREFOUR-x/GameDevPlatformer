@@ -12,5 +12,6 @@ namespace Core.Services.Updater
 
         Coroutine StartCoroutine(IEnumerator coroutine);
         void StopCoroutine(Coroutine coroutine);
+        void Invoke(Action action, float timeDelay);
     }
 }

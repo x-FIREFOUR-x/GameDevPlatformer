@@ -61,12 +61,9 @@ namespace Items.Behaviour
             transform.position = position;
             Vector2 movePosition = (transform.position + new Vector3(UnityEngine.Random.Range(-_dropRadius, _dropRadius), 0, 0));
 
-            _sequence = DOTween.Sequence();
-            _sequence.Join(transform.DOMove(movePosition, _dropAnimTime));
-            _sequence.Join(
-                _itemTransform.DORotate(new Vector3(0, 0, UnityEngine.Random.Range(-_dropRotation, _dropRotation)), _dropAnimTime));
 
-            _sequence.OnComplete(() => _canvas.enabled = _textEnabled);
+
+            _canvas.enabled = _textEnabled;
         }
     }
 }

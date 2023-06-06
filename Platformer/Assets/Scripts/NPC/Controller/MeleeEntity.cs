@@ -6,6 +6,7 @@ using StatsSystem;
 using StatsSystem.Enum;
 using NPC.Behaviour;
 using Core.Services.Updater;
+using Fight;
 using Movement.Enums;
 
 namespace NPC.Controller
@@ -25,7 +26,6 @@ namespace NPC.Controller
         private Path _currentPath;
         private int _indexCurrentPointInPath;
 
-        private bool _isAttack;
 
         public MeleeEntity(MeleeEntityBehaviour entityBehaviour, StatsController statsController) :
             base(entityBehaviour, statsController)
@@ -35,17 +35,38 @@ namespace NPC.Controller
 
             var speedDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
             _moveDelta = new Vector2(speedDelta, 0);
+            VisualiseHP(StatsController.GetStatValue(StatType.Health), StatsController.GetStatValue(StatType.MaxHealth));
 
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
+            _meleeEntityBehaviour.Attacked += OnAttacked;
 
             _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
-
+            
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdateCalled;
+        }
+        
+        public override void Dispose()
+        {
+            _meleeEntityBehaviour.AttackSequenceEnded -= OnAttackEnded;
+            _meleeEntityBehaviour.Attacked -= OnAttacked;
+            
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdateCalled;
+            ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
+            
+            base.Dispose();
+        }
+
+        protected sealed override void VisualiseHP(float currentHp, float maxHp)
+        {
+            if (_meleeEntityBehaviour.HPBar.maxValue < maxHp)
+                _meleeEntityBehaviour.HPBar.maxValue = maxHp;
+
+            _meleeEntityBehaviour.HPBar.value = currentHp;
         }
 
         private IEnumerator SearchPathCoroutine()
         {
-            while(!_isAttack)
+            while(!IsAttacking)
             {
                 if(!TryGetTarget(out _target))
                 { 
@@ -76,6 +97,10 @@ namespace NPC.Controller
 
         private bool TryGetTarget(out Collider2D target)
         {
+            target = null;
+            if (_meleeEntityBehaviour == null || _meleeEntityBehaviour.transform == null)
+                return false;
+            
             target = Physics2D.OverlapBox(_meleeEntityBehaviour.transform.position, _meleeEntityBehaviour.TargetSearchBox, 0,
                 _meleeEntityBehaviour.TargetsMask);
 
@@ -84,7 +109,7 @@ namespace NPC.Controller
 
         private void OnFixedUpdateCalled()
         {
-            if (_isAttack || _target == null || _currentPath == null || TryAttack() || _indexCurrentPointInPath >= _currentPath.vectorPath.Count)
+            if (IsAttacking || _target == null || _currentPath == null || TryAttack() || _indexCurrentPointInPath >= _currentPath.vectorPath.Count)
             {
                 ResetMovement();
                 return;
@@ -120,13 +145,13 @@ namespace NPC.Controller
         private bool TryAttack()
         {
             var distance = _destination - _meleeEntityBehaviour.transform.position;
-            if (Mathf.Abs(distance.x) > 0.2f)
+            if (Mathf.Abs(distance.x) > _meleeEntityBehaviour.AttackRadius)
                 return false;
 
             _meleeEntityBehaviour.SetDirection(_meleeEntityBehaviour.transform.position.x > _target.transform.position.x ? Direction.Left : Direction.Right);
             ResetMovement();
 
-            _isAttack = true;
+            IsAttacking = true;
             _meleeEntityBehaviour.Attack();
 
             if (_searchCoroutine != null)
@@ -144,10 +169,19 @@ namespace NPC.Controller
             _meleeEntityBehaviour.Move(position.x, position.x);
         }
 
+        private void OnAttacked(IDamageable target)
+        {
+            target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
+        }
+
         private void OnAttackEnded()
         {
-            _isAttack = false;
-            _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
+            IsAttacking = false;
+            ProjectUpdater.Instance.Invoke(() =>
+            {
+                _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
+            }, StatsController.GetStatValue(StatType.AfterAttackDelay));
+            
         }
     }
 }

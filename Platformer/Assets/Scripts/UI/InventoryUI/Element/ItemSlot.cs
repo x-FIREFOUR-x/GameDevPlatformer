@@ -14,6 +14,7 @@ namespace UI.InventoryUI.Element
         [SerializeField] private Image _itemBackground;
         [SerializeField] private Image _emptyBackground;
         [SerializeField] private Image _itemIcon;
+        [SerializeField] private TMP_Text _itemName;
         [SerializeField] private TMP_Text _itemAmount;
         
         [SerializeField] private Button _slotButton;
@@ -25,11 +26,11 @@ namespace UI.InventoryUI.Element
 
         private void Awake()
         {
-            ClearButton.onClick.AddListener(() => SlotClearClicked?.Invoke(this));
+            ClearButton?.onClick.AddListener(() => SlotClearClicked?.Invoke(this));
             _slotButton.onClick.AddListener(() => SlotClicked?.Invoke(this));
         }
 
-        public void SetItem(Sprite iconSprite, Sprite itemBackSprite, int amount)
+        public void SetItem(Sprite iconSprite, Sprite itemBackSprite, ItemId itemId, int amount)
         {
             _itemIcon.gameObject.SetActive(true);
             _itemIcon.sprite = iconSprite;
@@ -37,9 +38,14 @@ namespace UI.InventoryUI.Element
             _emptyBackground.gameObject.SetActive(false);
             _itemBackground.sprite = itemBackSprite;
             
-            ClearButton.gameObject.SetActive(EquipmentType == EquipmentType.None);
+            ClearButton?.gameObject.SetActive(EquipmentType == EquipmentType.None);
             _itemAmount.gameObject.SetActive(amount > 0);
             _itemAmount.text = amount.ToString();
+
+
+            _itemName?.gameObject.SetActive(true);
+            if (_itemName != null)
+                _itemName.text = ((ItemId)itemId).ToString();
         }
 
         public void ClearItem(Sprite emptyBackSprite)
@@ -49,12 +55,13 @@ namespace UI.InventoryUI.Element
             
             _itemAmount.gameObject.SetActive(false);
             _emptyBackground.gameObject.SetActive(true);
-            ClearButton.gameObject.SetActive(false);
+            ClearButton?.gameObject.SetActive(false);
+            _itemName?.gameObject.SetActive(false);
         }
 
         private void OnDestroy()
         {
-            ClearButton.onClick.RemoveAllListeners();
+            ClearButton?.onClick.RemoveAllListeners();
             _slotButton.onClick.RemoveAllListeners();
         }
     }

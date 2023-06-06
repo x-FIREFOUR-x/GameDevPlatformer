@@ -11,6 +11,8 @@
         Block = 6,
         Attack = 7,
         Attack2 = 8,
-        Attack3 = 9
+        Attack3 = 9,
+        Hurt = 10,
+        Death = 11,
     }
 }
