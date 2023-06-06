@@ -56,6 +56,14 @@ namespace NPC.Controller
             base.Dispose();
         }
 
+        protected sealed override void VisualiseHP(float currentHp, float maxHp)
+        {
+            if (_meleeEntityBehaviour.HPBar.maxValue < maxHp)
+                _meleeEntityBehaviour.HPBar.maxValue = maxHp;
+
+            _meleeEntityBehaviour.HPBar.value = currentHp;
+        }
+
         private IEnumerator SearchPathCoroutine()
         {
             while(!IsAttacking)
@@ -174,14 +182,6 @@ namespace NPC.Controller
                 _searchCoroutine = ProjectUpdater.Instance.StartCoroutine(SearchPathCoroutine());
             }, StatsController.GetStatValue(StatType.AfterAttackDelay));
             
-        }
-
-        protected sealed override void VisualiseHP(float currentHp, float maxHp)
-        {
-            if (_meleeEntityBehaviour.HPBar.maxValue < maxHp)
-                _meleeEntityBehaviour.HPBar.maxValue = maxHp;
-
-            _meleeEntityBehaviour.HPBar.value = currentHp;
         }
     }
 }

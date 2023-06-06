@@ -41,6 +41,25 @@ namespace Player
             StatsController.StatsChanges -= OnStatsChange;
         }
 
+        protected sealed override void VisualiseHP(float currentHp, float maxHp)
+        {
+            if (_playerEntityBehaviour.statsUIView.HPBar.maxValue < maxHp)
+                _playerEntityBehaviour.statsUIView.HPBar.maxValue = maxHp;
+
+            _playerEntityBehaviour.statsUIView.HPBar.value = currentHp;
+            _playerEntityBehaviour.statsUIView.CurrentHPText.text = currentHp + " / " + maxHp;
+        }
+
+        protected sealed override void OnDamageTaken(float damage)
+        {
+            if (IsBlock())
+            {
+                damage = damage * (1 - StatsController.GetStatValue(StatType.Resistance));
+            }
+
+            base.OnDamageTaken(damage);
+        }
+
         private void OnAttacked(IDamageable target)
         {
             target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
@@ -109,25 +128,6 @@ namespace Player
             }
 
             return false;
-        }
-
-        protected sealed override void VisualiseHP(float currentHp, float maxHp)
-        {
-            if (_playerEntityBehaviour.statsUIView.HPBar.maxValue < maxHp)
-                _playerEntityBehaviour.statsUIView.HPBar.maxValue = maxHp;
-
-            _playerEntityBehaviour.statsUIView.HPBar.value = currentHp;
-            _playerEntityBehaviour.statsUIView.CurrentHPText.text = currentHp + " / " + maxHp;
-        }
-
-        protected sealed override void OnDamageTaken(float damage)
-        {
-            if(IsBlock())
-            {
-                damage = damage * (1 - StatsController.GetStatValue(StatType.Resistance));
-            }
-
-            base.OnDamageTaken(damage);
         }
     }
 }

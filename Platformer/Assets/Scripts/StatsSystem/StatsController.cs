@@ -39,13 +39,12 @@ namespace StatsSystem
                 statToChange + modificator.Stat :
                 statToChange * modificator.Stat;
 
-            newValue = Mathf.Round(newValue * 1 / precision) * precision;
-
             if (modificator.Stat.Type == StatType.Health)
             {
                 newValue = Mathf.Clamp(newValue, 0, GetStatValue(StatType.MaxHealth)); 
             }
-            
+
+            newValue = Mathf.Round(newValue * (1 / precision)) * precision;
             statToChange.SetStatValue(newValue);
 
             
@@ -70,7 +69,7 @@ namespace StatsSystem
 
         public void UpdateStat(StatType statType, float value)
         {
-            value = Mathf.Round(value * 1 / precision) * precision;
+            value = Mathf.Round(value * (1 / precision)) * precision;
 
             var statToChange = CurrentStats.Find(stat => stat.Type == statType);
 
@@ -108,7 +107,7 @@ namespace StatsSystem
                 statToChange + previousModificator.Stat :
                 statToChange * previousModificator.Stat;
 
-            newValue = Mathf.Round(newValue * 1 / precision) * precision;
+            newValue = Mathf.Round(newValue * (1 / precision)) * precision;
 
             statToChange.SetStatValue(newValue);
 
