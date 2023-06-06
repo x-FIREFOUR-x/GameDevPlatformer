@@ -54,7 +54,7 @@ namespace Core.Animation
             _animationStartAction = startAnimationAction;
             _animationEndAction = endAnimationAction;
 
-            if (animationType != AnimationType.Attack2 && animationType != AnimationType.Attack3)
+            if ((int)animationType <= (int)_firstAttackAnimation || (int)animationType > (int)_lastAttackAnimation)
             {
                 SetAnimation(animationType); 
             }
