@@ -117,6 +117,7 @@ namespace Player
                 _playerEntityBehaviour.statsUIView.HPBar.maxValue = maxHp;
 
             _playerEntityBehaviour.statsUIView.HPBar.value = currentHp;
+            _playerEntityBehaviour.statsUIView.CurrentHPText.text = currentHp + " / " + maxHp;
         }
     }
 }
