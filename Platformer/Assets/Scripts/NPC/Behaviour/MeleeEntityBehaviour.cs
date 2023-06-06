@@ -14,14 +14,10 @@ namespace NPC.Behaviour
     public class MeleeEntityBehaviour : BaseEntityBehaviour
     {
         private Collider2D _entityCollider;
-        [SerializeField] private Transform _attackPoint;
-        [SerializeField] private float _attackRadius;
         
-        [field: SerializeField] public LayerMask TargetsMask { get; private set; }
         [field: SerializeField] public Vector2 TargetSearchBox { get; private set; }
         [field: SerializeField] public Slider HPBar { get; private set; }
-        
-        public event Action<IDamageable> Attacked;
+
         public event Action AttackSequenceEnded;
 
         public Vector2 Size => _entityCollider.bounds.size;
@@ -48,22 +44,15 @@ namespace NPC.Behaviour
             ((PositionMover)Mover).Move(direction, finalDirection);
         }
 
-        public void StartAttack() => Animator.SetAnimationState(AnimationType.Attack, true, Attack, EndAttack);
+        public void Attack() => Animator.SetAnimationState(AnimationType.Attack, true, StartAttack, EndAttack);
         
-        private void Attack()
-        {
-            var targetCollider = Physics2D.OverlapCircle(_attackPoint.position, _attackRadius, TargetsMask);
-            if (targetCollider != null && targetCollider.TryGetComponent(out IDamageable damageable))
-                Attacked?.Invoke(damageable);
-        }
-        
-        private void EndAttack() => AttackSequenceEnded?.Invoke();
+        public override void EndAttack() => AttackSequenceEnded?.Invoke();
 
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireCube(transform.position, TargetSearchBox);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(_attackPoint.position, _attackRadius);
+            Gizmos.DrawWireSphere(AttackPoint.position, AttackRadius);
         }
 
         public void SetDirection(Direction direction) => Mover.SetDirection(direction);
