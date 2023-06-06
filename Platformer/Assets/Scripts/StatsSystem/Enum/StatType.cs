@@ -11,6 +11,7 @@
         Speed = 6,
         JumpForce = 7,
         AfterAttackDelay = 8,
-        Health = 9
+        Health = 9,
+        Resistance = 10,
     }
 }

@@ -15,6 +15,8 @@ namespace StatsSystem
 
         public Action StatsChanges;
 
+        private int precision = 2;
+
         public StatsController(List<Stat> currentStats)
         {
             CurrentStats = currentStats;
@@ -41,7 +43,8 @@ namespace StatsSystem
             {
                 newValue = Mathf.Clamp(newValue, 0, GetStatValue(StatType.MaxHealth)); 
             }
-            
+
+            newValue = (float)Math.Round(newValue, precision);
             statToChange.SetStatValue(newValue);
 
             
@@ -66,6 +69,8 @@ namespace StatsSystem
 
         public void UpdateStat(StatType statType, float value)
         {
+            value = (float)Math.Round(value, precision);
+
             var statToChange = CurrentStats.Find(stat => stat.Type == statType);
 
             if (statToChange == null)
@@ -102,6 +107,7 @@ namespace StatsSystem
                 statToChange + previousModificator.Stat :
                 statToChange * previousModificator.Stat;
 
+            newValue = (float)Math.Round(newValue, precision);
             statToChange.SetStatValue(newValue);
 
             _activeModificators.Remove(modificator);
