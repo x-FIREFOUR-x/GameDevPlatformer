@@ -12,9 +12,16 @@ namespace NPC.Behaviour
     {
         [SerializeField] protected AnimationController Animator;
 
+        [field: SerializeField] public LayerMask TargetsMask { get; private set; }
+
+        [field: SerializeField] public Transform AttackPoint;
+        [field: SerializeField] public float AttackRadius;
+
         protected Rigidbody2D Rigidbody;
         protected BaseMover Mover;
-        
+
+        public event Action<IDamageable> Attacked;
+
         public event Action<float> DamageTaken;
         
         public virtual void Initialize()
@@ -22,7 +29,16 @@ namespace NPC.Behaviour
             Rigidbody = GetComponent<Rigidbody2D>();
             Mover = new VelocityMover(Rigidbody);
         }
-        
+
+        public virtual void StartAttack()
+        {
+            var targetCollider = Physics2D.OverlapCircle(AttackPoint.position, AttackRadius, TargetsMask);
+            if (targetCollider != null && targetCollider.TryGetComponent(out IDamageable damageable))
+                Attacked?.Invoke(damageable);
+        }
+
+        public abstract void EndAttack();
+
         public abstract void Move(float direction);
         
         public void TakeDamage(float damage)

@@ -13,7 +13,9 @@ namespace NPC.Controller
         protected readonly StatsController StatsController;
 
         private float _currentHp;
-        
+
+        protected bool IsAttacking = false;
+
         public event Action<Entity> Died;
         
         protected Entity(BaseEntityBehaviour entityBehaviour, StatsController statsController)
@@ -45,6 +47,8 @@ namespace NPC.Controller
             _currentHp = Mathf.Clamp(_currentHp - damageThroughDefence, 0, _currentHp); 
             VisualiseHP(_currentHp);
             _entityBehaviour.PlayHurt();
+
+            _entityBehaviour.EndAttack();
 
             if (_currentHp <= 0)
             {

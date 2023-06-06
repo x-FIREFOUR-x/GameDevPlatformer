@@ -75,9 +75,9 @@ namespace Core
             
             if (Input.GetKeyDown(KeyCode.M))
                 _entitySpawner.SpawnEntity(EntityId.HeavyBandit, _pointOfSpawn.position);
-            
-            if (Input.GetKeyDown(KeyCode.K))
-                _playerEntityBehaviour.TakeDamage(10);
+
+            if (Input.GetKeyDown(KeyCode.N))
+                _entitySpawner.SpawnEntity(EntityId.LightBandit, _pointOfSpawn.position);
         }
 
         private void OnDestroy()
