@@ -184,7 +184,7 @@ namespace UI.InventoryUI.InventoryUI
             
             foreach (var stat in stats)
             {
-                float value = Mathf.Round(stat.Value * 100.0f) * 0.01f;
+                float value = (float)Math.Round(stat.Value, 2);
                 statsString += ((StatType)stat.Type).ToString() + ": " + value.ToString() + "\n";
             }
             
