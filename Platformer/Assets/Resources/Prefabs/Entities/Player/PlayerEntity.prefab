@@ -640,7 +640,7 @@ MonoBehaviour:
     OffsetRollCollider: {x: -0.05, y: 0.425}
     SizeRollCollider: {x: 0.84, y: 0.72}
   _attackPoint: {fileID: 5816299284801588490}
-  _attackRadius: 2
+  _attackRadius: 0.2
   <TargetsMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 1024

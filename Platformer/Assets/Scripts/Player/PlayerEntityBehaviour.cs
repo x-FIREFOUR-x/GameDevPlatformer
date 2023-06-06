@@ -64,7 +64,7 @@ namespace Player
         {
             if (CanAttack())
             {
-                Animator.SetAnimationState(AnimationType.Attack2, true, OnAttack, OnAttackEnded);
+                Animator.SetAnimationState(AnimationType.Attack, true, OnAttack, OnAttackEnded, true);
                 return true;
             }
 
