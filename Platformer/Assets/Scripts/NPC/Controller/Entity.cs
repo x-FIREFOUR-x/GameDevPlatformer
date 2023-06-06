@@ -44,6 +44,7 @@ namespace NPC.Controller
             
             _currentHp = Mathf.Clamp(_currentHp - damageThroughDefence, 0, _currentHp); 
             VisualiseHP(_currentHp);
+            _entityBehaviour.PlayHurt();
 
             if (_currentHp <= 0)
             {

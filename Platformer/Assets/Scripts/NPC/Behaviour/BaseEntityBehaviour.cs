@@ -38,6 +38,11 @@ namespace NPC.Behaviour
             });
         }
 
+        public void PlayHurt()
+        {
+            Animator.PlayAnimation(AnimationType.Hurt, true);
+        }
+
         protected virtual void UpdateAnimations()
         {
             Animator.PlayAnimation(AnimationType.Idle, true);
