@@ -31,6 +31,14 @@ namespace Player
             VisualiseHP(StatsController.GetStatValue(StatType.MaxHealth));
         }
 
+        public void Dispose()
+        {
+            base.Dispose();
+            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+            _playerEntityBehaviour.AttackSequenceEnded -= OnAttackEnded;
+            _playerEntityBehaviour.Attacked -= OnAttacked;
+        }
+
         private void OnAttacked(IDamageable target)
         {
             target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
@@ -40,14 +48,6 @@ namespace Player
         {
             ProjectUpdater.Instance.Invoke(() =>
                 IsAttacking = false, StatsController.GetStatValue((StatType.AfterAttackDelay)));
-        }
-
-        public void Dispose()
-        {
-            base.Dispose();
-            ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
-            _playerEntityBehaviour.AttackSequenceEnded -= OnAttackEnded;
-            _playerEntityBehaviour.Attacked -= OnAttacked;
         }
 
         private void OnFixedUpdate()
@@ -97,7 +97,7 @@ namespace Player
         {
             foreach (var inputSource in _inputSources)
             {
-                if (inputSource.Block == true)
+                if (inputSource.Block)
                     return true;
             }
 
@@ -110,6 +110,16 @@ namespace Player
                 _playerEntityBehaviour.statsUIView.HPBar.maxValue = currentHp;
 
             _playerEntityBehaviour.statsUIView.HPBar.value = currentHp;
+        }
+
+        protected sealed override void OnDamageTaken(float damage)
+        {
+            if(IsBlock())
+            {
+                damage = damage * (1 - StatsController.GetStatValue(StatType.Resistance));
+            }
+
+            base.OnDamageTaken(damage);
         }
     }
 }

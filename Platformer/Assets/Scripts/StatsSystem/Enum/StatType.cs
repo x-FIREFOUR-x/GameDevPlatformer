@@ -11,5 +11,6 @@
         Speed = 6,
         JumpForce = 7,
         AfterAttackDelay = 8,
+        Resistance = 10,
     }
 }

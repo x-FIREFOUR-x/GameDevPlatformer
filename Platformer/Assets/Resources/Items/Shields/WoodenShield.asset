@@ -21,7 +21,7 @@ MonoBehaviour:
     <Level>k__BackingField: 1
     <Stats>k__BackingField:
     - <Stat>k__BackingField:
-        <Type>k__BackingField: 5
-        <Value>k__BackingField: 5
+        <Type>k__BackingField: 10
+        <Value>k__BackingField: 0.1
       <StatModificatorType>k__BackingField: 0
       <Duration>k__BackingField: -1

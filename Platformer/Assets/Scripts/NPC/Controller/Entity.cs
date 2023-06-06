@@ -36,15 +36,14 @@ namespace NPC.Controller
 
         protected abstract void VisualiseHP(float currentHp);
         
-        private void OnDamageTaken(float damage)
+        protected virtual void OnDamageTaken(float damage)
         {
-            float defence = StatsController.GetStatValue(StatType.Defence);
-            float damageThroughDefence = damage - defence;
+            damage = damage - StatsController.GetStatValue(StatType.Defence);
             
-            if (damageThroughDefence <= 0)
+            if (damage <= 0)
                 return;
             
-            _currentHp = Mathf.Clamp(_currentHp - damageThroughDefence, 0, _currentHp); 
+            _currentHp = Mathf.Clamp(_currentHp - damage, 0, _currentHp); 
             VisualiseHP(_currentHp);
             _entityBehaviour.PlayHurt();
 
