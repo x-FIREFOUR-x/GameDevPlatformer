@@ -38,7 +38,7 @@ namespace NPC.Controller
         
         protected virtual void OnDamageTaken(float damage)
         {
-            damage = damage - StatsController.GetStatValue(StatType.Defence);
+            damage = damage * (1 - StatsController.GetStatValue(StatType.Defence));
             
             if (damage <= 0)
                 return;
