@@ -149,7 +149,6 @@ namespace NPC.Controller
             if (_searchCoroutine != null)
                 ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
 
-            Debug.Log("1");
             return true;
         }
 
@@ -169,7 +168,6 @@ namespace NPC.Controller
 
         private void OnAttackEnded()
         {
-            Debug.Log("2");
             IsAttacking = false;
             ProjectUpdater.Instance.Invoke(() =>
             {
