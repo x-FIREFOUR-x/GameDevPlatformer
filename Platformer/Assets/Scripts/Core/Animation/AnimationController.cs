@@ -16,7 +16,7 @@ namespace Core.Animation
 
         private AnimationType _lastShowAttackAnim = AnimationType.Attack;
 
-        public void UpdateAnimationsAttack(bool attackActive)
+        public void UpdateRandomAnimationAttack(bool attackActive)
         {
             if(!attackActive)
             {
@@ -37,7 +37,10 @@ namespace Core.Animation
             }
         }
         
-        public bool SetAnimationState(AnimationType animationType, bool active, Action startAnimationAction = null, Action endAnimationAction = null)
+        public bool SetAnimationState(
+            AnimationType animationType, bool active,
+            Action startAnimationAction = null, Action endAnimationAction = null,
+            bool randomVariantofTypeAnim = false)
         {
             if (!active)
             {
@@ -53,7 +56,16 @@ namespace Core.Animation
 
             _animationStartAction = startAnimationAction;
             _animationEndAction = endAnimationAction;
-            SetAnimation(animationType);
+
+            if (randomVariantofTypeAnim && ((int)animationType >= (int)_firstAttackAnimation || (int)animationType <= (int)_lastAttackAnimation))
+            {
+                UpdateRandomAnimationAttack(active);
+            }
+            else
+            {
+                SetAnimation(animationType);
+            }
+            
             return true;
         }
 

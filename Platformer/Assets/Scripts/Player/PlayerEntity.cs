@@ -4,9 +4,11 @@ using System.Linq;
 
 using InputReader;
 using Core.Services.Updater;
+using Fight;
 using NPC.Controller;
 using StatsSystem;
 using StatsSystem.Enum;
+using UnityEngine;
 
 namespace Player
 {
@@ -16,10 +18,15 @@ namespace Player
 
         private readonly List<IEntityInputSource> _inputSources;
 
+        private bool _isAttacking;
+        private bool _canAttack = true;
+
         public PlayerEntity(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources, StatsController statValueGiver )
         : base(playerEntityBehaviour, statValueGiver)
         {
             _playerEntityBehaviour = playerEntityBehaviour;
+            _playerEntityBehaviour.AttackEnded += OnAttackEnded;
+            _playerEntityBehaviour.Attacked += OnAttacked;
             _inputSources = inputSources;
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
@@ -27,18 +34,40 @@ namespace Player
             VisualiseHP(StatsController.GetStatValue(StatType.Health));
         }
 
+        private void OnAttacked(IDamageable target)
+        {
+            target.TakeDamage(StatsController.GetStatValue(StatType.Damage));
+        }
+
+        private void OnAttackEnded()
+        {
+            _isAttacking = false;
+            ProjectUpdater.Instance.Invoke(() =>
+                _canAttack = true, StatsController.GetStatValue((StatType.AfterAttackDelay)));
+        }
+
         public void Dispose()
         {
             base.Dispose();
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
+            _playerEntityBehaviour.AttackEnded -= OnAttackEnded;
+            _playerEntityBehaviour.Attacked -= OnAttacked;
         }
 
         private void OnFixedUpdate()
         {
+
             _playerEntityBehaviour.Move(GetMoveDirection() * StatsController.GetStatValue(StatType.Speed));
 
-            if (IsAttack)
-                _playerEntityBehaviour.Attack();
+            if (IsAttack && _canAttack)
+            {
+                if (_playerEntityBehaviour.TryStartAttack())
+                {
+                    _isAttacking = true;
+                    _canAttack = false;
+                }
+            }
+                
 
             if (IsJump)
                 _playerEntityBehaviour.Jump(StatsController.GetStatValue(StatType.JumpForce));
