@@ -31,7 +31,7 @@ namespace Player
 
             ProjectUpdater.Instance.FixedUpdateCalled += OnFixedUpdate;
 
-            VisualiseHP(StatsController.GetStatValue(StatType.Health));
+            VisualiseHP(StatsController.GetStatValue(StatType.MaxHealth));
         }
 
         private void OnAttacked(IDamageable target)

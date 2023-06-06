@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ using Items;
 using Items.Core;
 using Items.Data;
 using Items.Enum;
+using StatsSystem;
+using StatsSystem.Enum;
 using UI.Core;
 using UI.InventoryUI.Element;
 
@@ -24,7 +27,9 @@ namespace UI.InventoryUI.InventoryUI
 
         private readonly Sprite _emptyBackSprite;
 
-        public InventoryScreenPresenter(InventoryScreenView view, Inventory inventory, List<RarityDescriptor> rarityDescriptors) : base(view)
+        private readonly StatsController _statsController;
+
+        public InventoryScreenPresenter(InventoryScreenView view, Inventory inventory, List<RarityDescriptor> rarityDescriptors, StatsController statsController) : base(view)
         {
             _inventory = inventory;
 
@@ -33,11 +38,15 @@ namespace UI.InventoryUI.InventoryUI
             _backPackSlots = new Dictionary<ItemSlot, Item>();
             _equipmentSlots = new Dictionary<ItemSlot, Equipment>();
             _equipmentConditionChecker = new EquipmentConditionChecker();
+            _statsController = statsController;
+
+            _statsController.StatsChanges += UpdateStats;
             View.CloseClicked += RequestCloseScreen;
         }
         
         public void Dispose()
         {
+            _statsController.StatsChanges -= UpdateStats;
             View.CloseClicked -= RequestCloseScreen;
         }
         
@@ -45,8 +54,11 @@ namespace UI.InventoryUI.InventoryUI
         {
             InitializeBackPack();
             InitializeEquipment();
+            UpdateStats();
+            
             _inventory.BackPackChanged += UpdateBackPack;
             _inventory.EquipmentChanged += UpdateEquipment;
+            
             base.Initialize();
         }
 
@@ -161,6 +173,21 @@ namespace UI.InventoryUI.InventoryUI
         {
             ClearEquipment();
             InitializeEquipment();
+            UpdateStats();
+        }
+
+        private void UpdateStats()
+        {
+            List<Stat> stats = _statsController.CurrentStats;
+
+            string statsString = "";
+            
+            foreach (var stat in stats)
+            {
+                statsString += ((StatType)stat.Type).ToString() + ": " + stat.Value + "\n";
+            }
+            
+            View.SetStats(statsString);
         }
         
         private void ClearBackPack()

@@ -21,7 +21,7 @@ namespace NPC.Controller
             _entityBehaviour = entityBehaviour;
             _entityBehaviour.Initialize();
             StatsController = statsController;
-            _currentHp = statsController.GetStatValue(StatType.Health);
+            _currentHp = statsController.GetStatValue(StatType.MaxHealth);
             _entityBehaviour.DamageTaken += OnDamageTaken;
         }
         

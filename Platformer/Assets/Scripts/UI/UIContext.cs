@@ -9,6 +9,7 @@ using UI.InventoryUI.QuickInventoryUI;
 using InputReader;
 using Items;
 using Items.Data;
+using StatsSystem;
 
 namespace UI
 {
@@ -107,7 +108,7 @@ namespace UI
             switch (screenType)
             {
                 case ScreenType.Inventory:
-                    return new InventoryScreenPresenter((InventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors);
+                    return new InventoryScreenPresenter((InventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors, _data.StatsController);
                 case ScreenType.QuickInventory:
                     return new QuickInventoryScreenPresenter((QuickInventoryScreenView)GetView<ScreenView>(screenType), _data.Inventory, _data.RarityDescriptors);
                 default:
@@ -125,11 +126,14 @@ namespace UI
         {
             public Inventory Inventory { get; }
             public List<RarityDescriptor> RarityDescriptors { get; }
+            
+            public StatsController StatsController { get; }
 
-            public Data(Inventory inventory, List<RarityDescriptor> rarityDescriptors)
+            public Data(Inventory inventory, List<RarityDescriptor> rarityDescriptors, StatsController statsController)
             {
                 Inventory = inventory;
                 RarityDescriptors = rarityDescriptors;
+                StatsController = statsController;
             }
         }
     }
