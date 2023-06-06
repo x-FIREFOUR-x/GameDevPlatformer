@@ -72,7 +72,7 @@ namespace Core
 
             foreach (var enemiesData in _levelStorage.ListEnemiesData)
             {
-                _entitySpawner.SpawnEntity(enemiesData.TypeEntity, enemiesData.coordinateSpawn);
+                _entitySpawner.SpawnEntity(enemiesData.TypeEntity, enemiesData.СoordinateSpawn);
             }
         }
 

@@ -9,6 +9,6 @@ namespace LevelSystem
     public class EnemiesData
     {
         [field: SerializeField] public EntityId TypeEntity { get; private set; }
-        [field: SerializeField] public Vector3 coordinateSpawn { get; private set; }
+        [field: SerializeField] public Vector3 СoordinateSpawn { get; private set; }
     }
 }
