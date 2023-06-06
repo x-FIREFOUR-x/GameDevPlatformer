@@ -10,23 +10,25 @@ namespace StatsSystem
 {
     public class StatsController: IDisposable, IStatValueGiver
     {
-        private readonly List<Stat> _currentStats;
+        public List<Stat> CurrentStats { get; }
         private readonly List<StatModificator> _activeModificators;
+
+        public Action StatsChanges;
 
         public StatsController(List<Stat> currentStats)
         {
-            _currentStats = currentStats;
+            CurrentStats = currentStats;
 
             _activeModificators = new List<StatModificator>();
             ProjectUpdater.Instance.UpdateCalled += OnUpdate;
         }
 
         public float GetStatValue(StatType statType) =>
-            _currentStats.Find(stat => stat.Type == statType);
+            CurrentStats.Find(stat => stat.Type == statType);
 
         public void ProcessModificator(StatModificator modificator)
         {
-            var statToChange = _currentStats.Find(stat => stat.Type == modificator.Stat.Type);
+            var statToChange = CurrentStats.Find(stat => stat.Type == modificator.Stat.Type);
 
             if (statToChange == null)
                 return;
@@ -49,6 +51,8 @@ namespace StatsSystem
             var tempModificator = new StatModificator(modificator.Stat, modificator.StatModificatorType, modificator.Duration, Time.time);
 
             _activeModificators.Add(tempModificator);
+
+            StatsChanges?.Invoke();
         }
 
         public void Dispose() => ProjectUpdater.Instance.UpdateCalled -= OnUpdate;
@@ -66,7 +70,7 @@ namespace StatsSystem
 
         private void RemoveModificator(StatModificator modificator)
         {
-            var statToChange = _currentStats.Find(stat => stat.Type == modificator.Stat.Type);
+            var statToChange = CurrentStats.Find(stat => stat.Type == modificator.Stat.Type);
 
             if (statToChange == null)
                 return;
@@ -80,6 +84,8 @@ namespace StatsSystem
             statToChange.SetStatValue(newValue);
 
             _activeModificators.Remove(modificator);
+            
+            StatsChanges?.Invoke();
         }
     }
 }

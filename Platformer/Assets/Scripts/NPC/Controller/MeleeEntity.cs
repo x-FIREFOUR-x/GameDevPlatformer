@@ -35,7 +35,7 @@ namespace NPC.Controller
 
             var speedDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
             _moveDelta = new Vector2(speedDelta, 0);
-            VisualiseHP(StatsController.GetStatValue(StatType.Health));
+            VisualiseHP(StatsController.GetStatValue(StatType.MaxHealth));
 
             _meleeEntityBehaviour.AttackSequenceEnded += OnAttackEnded;
             _meleeEntityBehaviour.Attacked += OnAttacked;
