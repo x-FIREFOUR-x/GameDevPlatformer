@@ -46,7 +46,9 @@ namespace NPC.Spawn
             entity.Died -= RemoveEntity;
             _spawnedEntities.Remove(entity);
 
-            //((MeleeEntity)entity).LevelDropedItem
+            MeleeEntity enemies = entity as MeleeEntity;
+            if(enemies != null)
+                _dropGenerator.DropRandomItem(enemies.LevelDropedItem, entity.GetCoordinate());
             
             entity.Dispose();
             entity = null;

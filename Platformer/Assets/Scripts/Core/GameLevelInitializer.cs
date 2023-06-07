@@ -60,7 +60,8 @@ namespace Core
 
             ItemsFactory itemsFactory = new ItemsFactory(_playerSystem.StatsController);
             List<IItemRarityColor> rarityColors = _rarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
-            List<ItemDescriptor> descriptors = _itemsStorage.ItemScriptables.Select(scriptable => scriptable.ItemDescriptor).ToList();
+            List<StatChangingItemDescriptor> descriptors =
+                _itemsStorage.ItemScriptables.Select(scriptable => (StatChangingItemDescriptor) scriptable.ItemDescriptor).ToList();
             _itemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, _playerSystem.Inventory);
             _dropGenerator = new DropGenerator(descriptors, _playerEntityBehaviour, _itemsSystem);
 
@@ -76,7 +77,7 @@ namespace Core
             foreach (var itemsSpawnData in _levelStorage.ListItemsSpawnData)
             {
                 var item = _itemsStorage.ItemScriptables.Find(item => item.ItemDescriptor.ItemId == itemsSpawnData.IdItem);
-                _itemsSystem.DropItem(item.ItemDescriptor, itemsSpawnData.СoordinateSpawn);
+                _itemsSystem.DropItem((StatChangingItemDescriptor)item.ItemDescriptor, itemsSpawnData.СoordinateSpawn);
             }
         }
 

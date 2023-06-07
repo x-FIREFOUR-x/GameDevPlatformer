@@ -12,10 +12,10 @@ namespace Items
     public class DropGenerator
     {
         private readonly PlayerEntityBehaviour _playerEntityBehaviour;
-        private readonly List<ItemDescriptor> _itemDescriptors;
+        private readonly List<StatChangingItemDescriptor> _itemDescriptors;
         private readonly ItemsSystem _itemsSystem;
 
-        public DropGenerator(List<ItemDescriptor> itemDescriptors, PlayerEntityBehaviour playerEntityBehaviour, ItemsSystem itemsSystem)
+        public DropGenerator(List<StatChangingItemDescriptor> itemDescriptors, PlayerEntityBehaviour playerEntityBehaviour, ItemsSystem itemsSystem)
         {
             _playerEntityBehaviour = playerEntityBehaviour;
             _itemDescriptors = itemDescriptors;
@@ -23,10 +23,19 @@ namespace Items
             ProjectUpdater.Instance.UpdateCalled += Update;
         }
 
+        public void DropRandomItem(int level, Vector3 position)
+        {
+            List<StatChangingItemDescriptor> items = _itemDescriptors.Where(item => item.Level == level || item.Level == 0).ToList();
+            StatChangingItemDescriptor itemDescriptor = items[UnityEngine.Random.Range(0, items.Count)];
+
+            position.y = position.y + 1;
+            _itemsSystem.DropItem(itemDescriptor, position);
+        }
+
         private void DropRandomItem(ItemRarity rarity)
         {
-            List<ItemDescriptor> items = _itemDescriptors.Where(item => item.ItemRarity == rarity).ToList();
-            ItemDescriptor itemDescriptor = items[UnityEngine.Random.Range(0, items.Count)];
+            List<StatChangingItemDescriptor> items = _itemDescriptors.Where(item => item.ItemRarity == rarity).ToList();
+            StatChangingItemDescriptor itemDescriptor = items[UnityEngine.Random.Range(0, items.Count)];
             _itemsSystem.DropItem(itemDescriptor, _playerEntityBehaviour.transform.position + UnityEngine.Vector3.one);
         }
 

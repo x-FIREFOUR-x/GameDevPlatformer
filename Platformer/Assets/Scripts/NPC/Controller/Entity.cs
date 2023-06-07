@@ -31,6 +31,8 @@ namespace NPC.Controller
             _entityBehaviour.PlayDeath();
         }
 
+        public Vector3 GetCoordinate() => _entityBehaviour.transform.position;
+
         protected abstract void VisualiseHP(float currentHp, float maxHp);
         
         protected virtual void OnDamageTaken(float damage)
