@@ -3,10 +3,10 @@ using UnityEngine;
 
 using NPC.Enum;
 
-namespace LevelSystem
+namespace LevelSystem.Storage
 {
     [Serializable]
-    public class EnemiesData
+    public class EnemiesSpawnData
     {
         [field: SerializeField] public EntityId TypeEntity { get; private set; }
         [field: SerializeField] public Vector3 СoordinateSpawn { get; private set; }
