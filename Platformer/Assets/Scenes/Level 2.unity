@@ -6223,18 +6223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5891185884003846244, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5891185884003846244, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8617698486661253665, guid: 4b90badacc47760428af352369253d53, type: 3}
-      propertyPath: _rollData.RollSpeed
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 8617698486661253666, guid: 4b90badacc47760428af352369253d53, type: 3}
       propertyPath: m_RootOrder
       value: 8
