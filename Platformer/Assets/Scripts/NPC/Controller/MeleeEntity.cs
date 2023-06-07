@@ -16,6 +16,7 @@ namespace NPC.Controller
     {
         private readonly MeleeEntityBehaviour _meleeEntityBehaviour;
         private readonly Seeker _pathSeeker;
+
         private readonly Vector2 _moveDelta;
 
         private Coroutine _searchCoroutine;
@@ -26,12 +27,14 @@ namespace NPC.Controller
         private Path _currentPath;
         private int _indexCurrentPointInPath;
 
+        public int LevelDropedItem { get; private set; }
 
-        public MeleeEntity(MeleeEntityBehaviour entityBehaviour, StatsController statsController) :
+        public MeleeEntity(MeleeEntityBehaviour entityBehaviour, StatsController statsController, int levelDropedItem) :
             base(entityBehaviour, statsController)
         {
             _pathSeeker = entityBehaviour.GetComponent<Seeker>();
             _meleeEntityBehaviour = entityBehaviour;
+            LevelDropedItem = levelDropedItem;
 
             var speedDelta = StatsController.GetStatValue(StatType.Speed) * Time.fixedDeltaTime;
             _moveDelta = new Vector2(speedDelta, 0);

@@ -18,7 +18,7 @@ MonoBehaviour:
     <ItemSprite>k__BackingField: {fileID: 21300000, guid: 4ceb0a22206fea046be70ad00381bf62, type: 3}
     <ItemRarity>k__BackingField: 3
     <Price>k__BackingField: 1200
-    <Level>k__BackingField: 1
+    <Level>k__BackingField: 6
     <Stats>k__BackingField:
     - <Stat>k__BackingField:
         <Type>k__BackingField: 4

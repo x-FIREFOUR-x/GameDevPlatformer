@@ -15,25 +15,29 @@ MonoBehaviour:
   <ListEnemiesSpawnData>k__BackingField:
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: -2, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 1
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 2, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 1
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 5, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 1
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 12, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 1
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 15, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 2
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 20, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 1
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 26, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 2
   <ListItemsSpawnData>k__BackingField:
   - <IdItem>k__BackingField: 151
-    <ItemScriptable>k__BackingField: {fileID: 11400000, guid: aed46099fb62f7942a26970282fbee55, type: 2}
     "<\u0421oordinateSpawn>k__BackingField": {x: -4.5, y: -1, z: 0}
   - <IdItem>k__BackingField: 251
-    <ItemScriptable>k__BackingField: {fileID: 11400000, guid: f254f74d489562a479fe95188c26b93a, type: 2}
     "<\u0421oordinateSpawn>k__BackingField": {x: 3, y: -3.2, z: 0}
   - <IdItem>k__BackingField: 51
-    <ItemScriptable>k__BackingField: {fileID: 11400000, guid: c9e3a392910364241a759ec3c33d66a7, type: 2}
     "<\u0421oordinateSpawn>k__BackingField": {x: 22, y: -3.2, z: 0}
