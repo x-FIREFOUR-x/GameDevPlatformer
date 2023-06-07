@@ -10,11 +10,10 @@ using Items;
 using Items.Data;
 using Items.Rarity;
 using Items.Storage;
-using NPC.Enum;
 using NPC.Spawn;
 using StatsSystem;
 using UI;
-using LevelSystem;
+using LevelSystem.Storage;
 
 namespace Core
 {
@@ -70,9 +69,14 @@ namespace Core
 
             _entitySpawner = new EntitySpawner();
 
-            foreach (var enemiesData in _levelStorage.ListEnemiesData)
+            foreach (var enemiesSpawnData in _levelStorage.ListEnemiesSpawnData)
             {
-                _entitySpawner.SpawnEntity(enemiesData.TypeEntity, enemiesData.СoordinateSpawn);
+                _entitySpawner.SpawnEntity(enemiesSpawnData.TypeEntity, enemiesSpawnData.СoordinateSpawn);
+            }
+            foreach (var itemsSpawnData in _levelStorage.ListItemsSpawnData)
+            {
+                var item = _itemsStorage.ItemScriptables.Find(item => item.ItemDescriptor.ItemId == itemsSpawnData.IdItem);
+                _itemsSystem.DropItem(item.ItemDescriptor, itemsSpawnData.СoordinateSpawn);
             }
         }
 
