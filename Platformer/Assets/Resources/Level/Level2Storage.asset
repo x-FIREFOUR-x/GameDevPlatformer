@@ -59,4 +59,26 @@ MonoBehaviour:
     "<\u0421oordinateSpawn>k__BackingField": {x: 53, y: -3.6, z: 0}
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 53.3, y: -3.6, z: 0}
-  <ListItemsSpawnData>k__BackingField: []
+  <ListItemsSpawnData>k__BackingField:
+  - <IdItem>k__BackingField: 154
+    "<\u0421oordinateSpawn>k__BackingField": {x: -9, y: -1.31, z: 0}
+  - <IdItem>k__BackingField: 52
+    "<\u0421oordinateSpawn>k__BackingField": {x: -10, y: -1.31, z: 0}
+  - <IdItem>k__BackingField: 251
+    "<\u0421oordinateSpawn>k__BackingField": {x: 10, y: -1.31, z: 0}
+  - <IdItem>k__BackingField: 103
+    "<\u0421oordinateSpawn>k__BackingField": {x: 12, y: -1.31, z: 0}
+  - <IdItem>k__BackingField: 253
+    "<\u0421oordinateSpawn>k__BackingField": {x: 9, y: -1.31, z: 0}
+  - <IdItem>k__BackingField: 53
+    "<\u0421oordinateSpawn>k__BackingField": {x: 24, y: -1.3, z: 0}
+  - <IdItem>k__BackingField: 251
+    "<\u0421oordinateSpawn>k__BackingField": {x: 29, y: -0.48, z: 0}
+  - <IdItem>k__BackingField: 254
+    "<\u0421oordinateSpawn>k__BackingField": {x: 30.14, y: 1.98, z: 0}
+  - <IdItem>k__BackingField: 162
+    "<\u0421oordinateSpawn>k__BackingField": {x: 39, y: -1.33, z: 0}
+  - <IdItem>k__BackingField: 104
+    "<\u0421oordinateSpawn>k__BackingField": {x: 47.74, y: -1.71, z: 0}
+  - <IdItem>k__BackingField: 251
+    "<\u0421oordinateSpawn>k__BackingField": {x: 48.92, y: -3.37, z: 0}
