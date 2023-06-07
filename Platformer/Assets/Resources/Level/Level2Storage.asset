@@ -15,50 +15,73 @@ MonoBehaviour:
   <ListEnemiesSpawnData>k__BackingField:
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: -10, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: -5.5, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: -3.2, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: -1, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 1.5, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 3.8, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 8, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 8.2, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 13, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 13.3, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 20, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 20.3, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 0
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 20.6, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 20.9, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 30, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 30.3, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 30.6, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 40, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 3
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 40.3, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 40.6, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 46, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 53, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 53.3, y: -3.6, z: 0}
+    <LevelDropedItem>k__BackingField: 4
   <ListItemsSpawnData>k__BackingField:
   - <IdItem>k__BackingField: 154
     "<\u0421oordinateSpawn>k__BackingField": {x: -9, y: -1.31, z: 0}
