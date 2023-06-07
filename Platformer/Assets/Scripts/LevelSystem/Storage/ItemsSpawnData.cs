@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-using Items.Enum;
 using Items.Scriptable;
 
 namespace LevelSystem.Storage
