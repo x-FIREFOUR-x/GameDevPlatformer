@@ -75,7 +75,8 @@ namespace Core
             }
             foreach (var itemsSpawnData in _levelStorage.ListItemsSpawnData)
             {
-                _itemsSystem.DropItem(itemsSpawnData.ItemScriptable.ItemDescriptor, itemsSpawnData.СoordinateSpawn);
+                var item = _itemsStorage.ItemScriptables.Find(item => item.ItemDescriptor.ItemId == itemsSpawnData.IdItem);
+                _itemsSystem.DropItem(item.ItemDescriptor, itemsSpawnData.СoordinateSpawn);
             }
         }
 
