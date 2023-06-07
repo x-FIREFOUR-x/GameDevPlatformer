@@ -51,7 +51,11 @@ namespace NPC.Controller
             _meleeEntityBehaviour.Attacked -= OnAttacked;
             
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdateCalled;
-            ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
+
+            if (_searchCoroutine != null)
+            {
+                ProjectUpdater.Instance.StopCoroutine(_searchCoroutine);
+            }
             
             base.Dispose();
         }
@@ -165,8 +169,11 @@ namespace NPC.Controller
             _target = null;
             _currentPath = null;
             _previousTargetPosition = Vector2.negativeInfinity;
-            var position = _meleeEntityBehaviour.transform.position;
-            _meleeEntityBehaviour.Move(position.x, position.x);
+            if(_meleeEntityBehaviour != null)
+            {
+                var position = _meleeEntityBehaviour.transform.position;
+                _meleeEntityBehaviour.Move(position.x, position.x);
+            }
         }
 
         private void OnAttacked(IDamageable target)

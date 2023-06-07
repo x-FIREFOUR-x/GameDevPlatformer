@@ -32,9 +32,10 @@ namespace Player
             VisualiseHP(StatsController.GetStatValue(StatType.Health), StatsController.GetStatValue(StatType.MaxHealth));
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             base.Dispose();
+            
             ProjectUpdater.Instance.FixedUpdateCalled -= OnFixedUpdate;
             _playerEntityBehaviour.AttackSequenceEnded -= OnAttackEnded;
             _playerEntityBehaviour.Attacked -= OnAttacked;

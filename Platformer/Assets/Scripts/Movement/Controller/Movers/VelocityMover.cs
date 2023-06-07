@@ -11,6 +11,9 @@ namespace Movement.Controller.Movers
 
         public override void Move(float horizontalMovement, bool isCanMove)
         {
+            if (Rigidbody == null)
+                return;
+            
             Vector2 velocity = Rigidbody.velocity;
             if (isCanMove)
             {
