@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using LevelSystem;
+
 namespace Core.GameCamera
 {
     public class CamerasSwitcher : MonoBehaviour

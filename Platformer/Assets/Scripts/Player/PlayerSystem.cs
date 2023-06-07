@@ -19,7 +19,7 @@ namespace Player
         public StatsController StatsController { get; }
         public Inventory Inventory { get;  }
 
-        public PlayerSystem(PlayerEntityBehaviour playerEntityBehaviour, List<IEntityInputSource> inputSources)
+        public PlayerSystem(PlayerEntityBehaviour playerEntityBehaviour, Inventory inventory, List<IEntityInputSource> inputSources)
         {
             _disposables = new List<IDisposable>();
 
@@ -33,7 +33,8 @@ namespace Player
             _playerEntity = new PlayerEntity(_playerEntityBehaviour, inputSources, StatsController);
             _disposables.Add(_playerEntity);
 
-            Inventory = new Inventory(null, null, _playerEntityBehaviour.transform);
+            Inventory = inventory;
+            Inventory.SetPlayer(_playerEntityBehaviour.transform);
 
             _playerEntity.Died += OnPlayerDied;
         }

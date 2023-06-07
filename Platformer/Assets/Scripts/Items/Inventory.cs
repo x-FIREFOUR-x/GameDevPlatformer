@@ -13,7 +13,7 @@ namespace Items
         public const int BackPackMaxSize = 24;
         public const int MaxCountEquipmentPotion = 2;
 
-        private readonly Transform _player;
+        private Transform _player;
         
         public List<Item> BackPackItems { get; }
         public List<Equipment> EquipmentItems { get; }
@@ -33,6 +33,11 @@ namespace Items
             BackPackItems = new List<Item>();
             for (int i = 0; i < BackPackMaxSize; i++)
                 BackPackItems.Add(null);
+        }
+
+        public void SetPlayer(Transform player)
+        {
+            _player = player;
         }
 
         public bool IsFullBackPack()
