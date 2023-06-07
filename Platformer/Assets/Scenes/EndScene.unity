@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 278237376}
   - component: {fileID: 278237378}
   - component: {fileID: 278237377}
+  - component: {fileID: 278237379}
   m_Layer: 5
   m_Name: Sanya
   m_TagString: Untagged
@@ -199,6 +200,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278237375}
   m_CullTransparentMesh: 1
+--- !u!95 &278237379
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278237375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6cf061a38f6fc4744b30b9bc80e03b73, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &336840835
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +232,7 @@ GameObject:
   - component: {fileID: 336840838}
   - component: {fileID: 336840837}
   - component: {fileID: 336840836}
+  - component: {fileID: 336840840}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -304,6 +326,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &336840840
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336840835}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0617962ee37b181409adca29ae8cb77e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &470557373
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +864,7 @@ GameObject:
   - component: {fileID: 1891901199}
   - component: {fileID: 1891901201}
   - component: {fileID: 1891901200}
+  - component: {fileID: 1891901202}
   m_Layer: 5
   m_Name: ChelImg
   m_TagString: Untagged
@@ -887,6 +930,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891901198}
   m_CullTransparentMesh: 1
+--- !u!95 &1891901202
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891901198}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 15730699cc3b4a64eaace88852dddbea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &2098802788
 GameObject:
   m_ObjectHideFlags: 0
