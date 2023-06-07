@@ -10,5 +10,6 @@ namespace LevelSystem.Storage
     {
         [field: SerializeField] public EntityId TypeEntity { get; private set; }
         [field: SerializeField] public Vector3 СoordinateSpawn { get; private set; }
+        [field: SerializeField] public int LevelDropedItem { get; private set; }
     }
 }

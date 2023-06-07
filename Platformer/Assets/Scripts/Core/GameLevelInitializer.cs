@@ -67,11 +67,11 @@ namespace Core
             UIContext.Data data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors, _playerSystem.StatsController);
             _uiContext = new UIContext(new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput }, data);
 
-            _entitySpawner = new EntitySpawner();
+            _entitySpawner = new EntitySpawner(_dropGenerator);
 
             foreach (var enemiesSpawnData in _levelStorage.ListEnemiesSpawnData)
             {
-                _entitySpawner.SpawnEntity(enemiesSpawnData.TypeEntity, enemiesSpawnData.СoordinateSpawn);
+                _entitySpawner.SpawnEntity(enemiesSpawnData.TypeEntity, enemiesSpawnData.СoordinateSpawn, enemiesSpawnData.LevelDropedItem);
             }
             foreach (var itemsSpawnData in _levelStorage.ListItemsSpawnData)
             {

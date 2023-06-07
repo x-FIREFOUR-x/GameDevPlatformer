@@ -5,6 +5,7 @@ using UnityEngine;
 using NPC.Controller;
 using NPC.Data;
 using NPC.Enum;
+using Items;
 
 namespace NPC.Spawn
 {
@@ -12,18 +13,22 @@ namespace NPC.Spawn
     {
         private readonly List<Entity> _spawnedEntities;
         private readonly EntitiesFactory _entitiesFactory;
-        
-        public EntitySpawner()
+
+        private readonly DropGenerator _dropGenerator;
+
+        public EntitySpawner(DropGenerator dropGenerator)
         {
+            _dropGenerator = dropGenerator;
+
             _spawnedEntities = new List<Entity>();
             
             var entitiesSpawnerStorage = Resources.Load<EntitiesSpawnerStorage>($"{nameof(EntitySpawner)}/{nameof(EntitiesSpawnerStorage)}");
             _entitiesFactory = new EntitiesFactory(entitiesSpawnerStorage);
         }
         
-        public void SpawnEntity(EntityId entityId, Vector2 position)
+        public void SpawnEntity(EntityId entityId, Vector2 position, int levelDropedItem)
         {
-            var entity = _entitiesFactory.GetEntityBrain(entityId, position);
+            var entity = _entitiesFactory.GetEntityBrain(entityId, position, levelDropedItem);
             entity.Died += RemoveEntity;
 
             _spawnedEntities.Add(entity);
@@ -40,6 +45,8 @@ namespace NPC.Spawn
         {
             entity.Died -= RemoveEntity;
             _spawnedEntities.Remove(entity);
+
+            //((MeleeEntity)entity).LevelDropedItem
             
             entity.Dispose();
             entity = null;
