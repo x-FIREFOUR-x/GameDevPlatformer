@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
 
 using UI.Enum;
 using UI.Core;
@@ -19,21 +19,16 @@ namespace UI
 
         private readonly Dictionary<ScreenType, IScreenController> _controllers;
         private readonly Transform _uiContainer;
-        private readonly List<IWindowsInputSource> _inputSources;
-        private readonly Data _data;
+        private List<IWindowsInputSource> _inputSources;
+        private Data _data;
 
         private IScreenController _currentController;
 
+        private IScreenController _quickInventoryController;
 
-        public UIContext(List<IWindowsInputSource> inputSources, Data data)
+        public UIContext()
         {
             _controllers = new Dictionary<ScreenType, IScreenController>();
-            _inputSources = inputSources;
-            _data = data;
-            foreach (IWindowsInputSource inputSource in _inputSources)
-            {
-                inputSource.InventoryRequested += HandleInventory;
-            }
 
             GameObject container = new GameObject()
             {
@@ -41,9 +36,23 @@ namespace UI
             };
             _uiContainer = container.transform;
 
-            OpenQuickInventory();
+            MonoBehaviour.DontDestroyOnLoad(container);
         }
-    
+
+        public void SetData(List<IWindowsInputSource> inputSources, Data data)
+        {
+            _inputSources = inputSources;
+            _data = data;
+
+            foreach (IWindowsInputSource inputSource in _inputSources)
+            {
+                inputSource.InventoryRequested += HandleInventory;
+            }
+
+            if (_quickInventoryController == null)
+                OpenQuickInventory();
+        }
+
         public void CloseCurrentScreen()
         {
             _currentController?.Complete();
@@ -83,6 +92,8 @@ namespace UI
                 screenControllers = GetController(ScreenType.QuickInventory);
                 _controllers.Add(ScreenType.QuickInventory, screenControllers);
                 screenControllers.Initialize();
+
+                _quickInventoryController = screenControllers;
             }
         }
 

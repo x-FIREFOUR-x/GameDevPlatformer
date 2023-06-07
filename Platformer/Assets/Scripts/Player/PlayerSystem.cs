@@ -19,13 +19,11 @@ namespace Player
         public StatsController StatsController { get; }
         public Inventory Inventory { get;  }
 
-        public PlayerSystem(PlayerEntityBehaviour playerEntityBehaviour, Inventory inventory, List<IEntityInputSource> inputSources)
+        public PlayerSystem(PlayerEntityBehaviour playerEntityBehaviour, Inventory inventory, StatsController statsController, List<IEntityInputSource> inputSources)
         {
             _disposables = new List<IDisposable>();
 
-            var statsStorage = Resources.Load<StatsStorage>($"Player/{nameof(StatsStorage)}");
-            var stats = statsStorage.Stats.Select(stat => stat.GetCopy()).ToList();
-            StatsController = new StatsController(stats);
+            StatsController = statsController;
 
             _playerEntityBehaviour = playerEntityBehaviour;
             _playerEntityBehaviour.Initialize();

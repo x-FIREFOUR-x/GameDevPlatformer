@@ -23,22 +23,21 @@ namespace LevelSystem
         [SerializeField] private LayerMask _whatIsPlayer;
 
         [SerializeField] private GameUIInputView _ganeUIInputView;
+        private ExternalDevicesInputReader _externalDevicesInput;
 
         [Header("FinisArea")]
         [SerializeField] private Transform _finishArea;
 
         [Header("Storages")]
-        [SerializeField] private ItemRarityDescriptorsStorage _rarityDescriptorsStorage;
         [SerializeField] private ItemStorage _itemsStorage;
         [SerializeField] private StatsStorage _statsStorage;
         [SerializeField] private LevelStorage _levelStorage;
 
-        private ExternalDevicesInputReader _externalDevicesInput;
+        
         private PlayerSystem _playerSystem;
         private ProjectUpdater _projectUpdater;
         private DropGenerator _dropGenerator;
         private ItemsSystem _itemsSystem;
-        private UIContext _uiContext;
         private EntitySpawner _entitySpawner;
 
         private List<IDisposable> _disposables;
@@ -51,14 +50,23 @@ namespace LevelSystem
             else
                 _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
 
+
             _externalDevicesInput = new ExternalDevicesInputReader();
             _disposables.Add(_externalDevicesInput);
 
-            _playerSystem = new PlayerSystem(_playerEntityBehaviour, SceneController.Instance.Inventory, new List<IEntityInputSource>
-            {
-                _ganeUIInputView,
-                _externalDevicesInput
-            });
+            SceneController.Instance.StatsController = new StatsController(SceneController.Instance.Stats);
+
+            _playerSystem = new PlayerSystem
+            (
+                _playerEntityBehaviour,
+                SceneController.Instance.Inventory,
+                SceneController.Instance.StatsController,
+                new List<IEntityInputSource>
+                {
+                    _ganeUIInputView,
+                    _externalDevicesInput
+                }
+            );
             _disposables.Add(_playerSystem);
 
             InitializeSystem();
@@ -106,14 +114,17 @@ namespace LevelSystem
         private void InitializeSystem()
         {
             ItemsFactory itemsFactory = new ItemsFactory(_playerSystem.StatsController);
-            List<IItemRarityColor> rarityColors = _rarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
+            List<IItemRarityColor> rarityColors = SceneController.Instance.RarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
             List<StatChangingItemDescriptor> descriptors =
                 _itemsStorage.ItemScriptables.Select(scriptable => (StatChangingItemDescriptor)scriptable.ItemDescriptor).ToList();
             _itemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, _playerSystem.Inventory);
             _dropGenerator = new DropGenerator(descriptors, _playerEntityBehaviour, _itemsSystem);
 
-            UIContext.Data data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors, _playerSystem.StatsController);
-            _uiContext = new UIContext(new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput }, data);
+            UIContext.Data data = new UIContext.Data(
+                SceneController.Instance.Inventory,
+                SceneController.Instance.RarityDescriptorsStorage.RarityDescriptors,
+                SceneController.Instance.StatsController);
+            SceneController.Instance.UIContext.SetData(new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput }, data);
         }
 
         private void SpawnItemsAndEntities()
