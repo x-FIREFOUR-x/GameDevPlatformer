@@ -23,12 +23,15 @@ namespace Items
             ProjectUpdater.Instance.UpdateCalled += Update;
         }
 
-        public void DropRandomItem(int level, Vector3 position)
+        public void DropRandomItem(int level, Vector3 position, float chanceOfDrop = 1, float offsetHeight = 1.2f)
         {
+            if (UnityEngine.Random.Range(0, 100) / 100.0f > chanceOfDrop)
+                return;
+
             List<StatChangingItemDescriptor> items = _itemDescriptors.Where(item => item.Level == level || item.Level == 0).ToList();
             StatChangingItemDescriptor itemDescriptor = items[UnityEngine.Random.Range(0, items.Count)];
 
-            position.y = position.y + 1;
+            position.y = position.y + offsetHeight;
             _itemsSystem.DropItem(itemDescriptor, position);
         }
 

@@ -48,7 +48,7 @@ namespace NPC.Spawn
 
             MeleeEntity enemies = entity as MeleeEntity;
             if(enemies != null)
-                _dropGenerator.DropRandomItem(enemies.LevelDropedItem, entity.GetCoordinate());
+                _dropGenerator.DropRandomItem(enemies.LevelDropedItem, entity.GetCoordinate(), 0.75f);
             
             entity.Dispose();
             entity = null;
