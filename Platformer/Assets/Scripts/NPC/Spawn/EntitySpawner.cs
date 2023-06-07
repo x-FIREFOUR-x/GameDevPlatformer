@@ -42,6 +42,7 @@ namespace NPC.Spawn
             _spawnedEntities.Remove(entity);
             
             entity.Dispose();
+            entity = null;
         }
     }
 }

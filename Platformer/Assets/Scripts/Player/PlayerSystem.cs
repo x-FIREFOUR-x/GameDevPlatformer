@@ -46,7 +46,7 @@ namespace Player
 
         private void OnPlayerDied(Entity entity)
         {
-            Dispose();
+            entity.Dispose();
         }
     }
 }

@@ -35,6 +35,9 @@ namespace Movement.Controller
 
         public void Move(float horizontalMovement, float finalDestination)
         {
+            if (Rigidbody == null)
+                return;
+            
             var newFinalPosition = new Vector2(finalDestination, Rigidbody.position.y);
             _finalDestination = newFinalPosition;
 
