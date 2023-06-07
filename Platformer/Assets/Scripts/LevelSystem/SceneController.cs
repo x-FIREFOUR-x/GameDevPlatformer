@@ -29,6 +29,10 @@ namespace LevelSystem
             {
                 Instance = this;
             }
+            else
+            {
+                Destroy(this.gameObject);
+            }
 
             DontDestroyOnLoad(this.gameObject);
 
