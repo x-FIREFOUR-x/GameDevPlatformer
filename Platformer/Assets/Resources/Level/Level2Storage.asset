@@ -26,21 +26,37 @@ MonoBehaviour:
   - <TypeEntity>k__BackingField: 2
     "<\u0421oordinateSpawn>k__BackingField": {x: 3.8, y: -3.6, z: 0}
   - <TypeEntity>k__BackingField: 2
-    "<\u0421oordinateSpawn>k__BackingField": {x: 7, y: -3.6, z: 0}
-  - <TypeEntity>k__BackingField: 2
-    "<\u0421oordinateSpawn>k__BackingField": {x: 7.2, y: -3.6, z: 0}
-  - <TypeEntity>k__BackingField: 2
-    "<\u0421oordinateSpawn>k__BackingField": {x: 7.5, y: -3.6, z: 0}
+    "<\u0421oordinateSpawn>k__BackingField": {x: 8, y: -3.6, z: 0}
   - <TypeEntity>k__BackingField: 1
-    "<\u0421oordinateSpawn>k__BackingField": {x: 10, y: -3.6, z: 0}
+    "<\u0421oordinateSpawn>k__BackingField": {x: 8.2, y: -3.6, z: 0}
   - <TypeEntity>k__BackingField: 1
-    "<\u0421oordinateSpawn>k__BackingField": {x: 12, y: -3.6, z: 0}
+    "<\u0421oordinateSpawn>k__BackingField": {x: 13, y: -3.6, z: 0}
   - <TypeEntity>k__BackingField: 2
+    "<\u0421oordinateSpawn>k__BackingField": {x: 13.3, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 20, y: -3.6, z: 0}
   - <TypeEntity>k__BackingField: 1
-    "<\u0421oordinateSpawn>k__BackingField": {x: 20.2, y: -3.6, z: 0}
+    "<\u0421oordinateSpawn>k__BackingField": {x: 20.3, y: -3.6, z: 0}
   - <TypeEntity>k__BackingField: 2
-    "<\u0421oordinateSpawn>k__BackingField": {x: 20.4, y: -3.6, z: 0}
-  - <TypeEntity>k__BackingField: 1
     "<\u0421oordinateSpawn>k__BackingField": {x: 20.6, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 1
+    "<\u0421oordinateSpawn>k__BackingField": {x: 20.9, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 1
+    "<\u0421oordinateSpawn>k__BackingField": {x: 30, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 1
+    "<\u0421oordinateSpawn>k__BackingField": {x: 30.3, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 1
+    "<\u0421oordinateSpawn>k__BackingField": {x: 30.6, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 1
+    "<\u0421oordinateSpawn>k__BackingField": {x: 40, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 2
+    "<\u0421oordinateSpawn>k__BackingField": {x: 40.3, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 2
+    "<\u0421oordinateSpawn>k__BackingField": {x: 40.6, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 2
+    "<\u0421oordinateSpawn>k__BackingField": {x: 46, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 2
+    "<\u0421oordinateSpawn>k__BackingField": {x: 53, y: -3.6, z: 0}
+  - <TypeEntity>k__BackingField: 2
+    "<\u0421oordinateSpawn>k__BackingField": {x: 53.3, y: -3.6, z: 0}
   <ListItemsSpawnData>k__BackingField: []
