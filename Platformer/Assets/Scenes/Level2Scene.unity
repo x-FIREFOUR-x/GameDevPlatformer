@@ -4707,6 +4707,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1933364800653239462, guid: 8ad82690d177c30429248f350da51138, type: 3}
+      propertyPath: _levelStorage
+      value: 
+      objectReference: {fileID: 11400000, guid: 1faf22190e3debf42af26abd5b34d1e2, type: 2}
+    - target: {fileID: 1933364800653239462, guid: 8ad82690d177c30429248f350da51138, type: 3}
       propertyPath: _ganeUIInputView
       value: 
       objectReference: {fileID: 1673820770}
