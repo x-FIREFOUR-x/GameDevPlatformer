@@ -41,6 +41,8 @@ namespace NPC.Controller
             if (damage <= 0)
                 return;
 
+            damage = (float)Math.Round(damage);
+
             float currentHp = StatsController.GetStatValue(StatType.Health);
             float newHpValue = Mathf.Clamp(currentHp - damage, 0, StatsController.GetStatValue(StatType.MaxHealth));
             newHpValue = (float)Math.Round(newHpValue, 2);
