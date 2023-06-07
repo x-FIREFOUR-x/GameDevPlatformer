@@ -51,7 +51,6 @@ namespace LevelSystem
 
             var statsStorage = Resources.Load<StatsStorage>($"Player/{nameof(StatsStorage)}");
             Stats = statsStorage.Stats.Select(stat => stat.GetCopy()).ToList();
-            Debug.Log("1");
         }
 
         public void MenuGameScene()
