@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 278237377}
   - component: {fileID: 278237379}
   m_Layer: 5
-  m_Name: Sanya
+  m_Name: HeroImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 1891901200}
   - component: {fileID: 1891901202}
   m_Layer: 5
-  m_Name: ChelImg
+  m_Name: BucherImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
