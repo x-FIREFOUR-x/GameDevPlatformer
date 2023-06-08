@@ -97,12 +97,19 @@ namespace LevelSystem
 
             var statsStorage = Resources.Load<StatsStorage>($"Player/{nameof(StatsStorage)}");
             Stats = statsStorage.Stats.Select(stat => stat.GetCopy()).ToList();
-            StatsController = new StatsController(Stats);
-            
+
+            if (StatsController == null)
+                StatsController = new StatsController(Stats);
+            else
+                StatsController.ResetStats(Stats);
+
             ItemsFactory itemsFactory = new ItemsFactory(StatsController);
             List<IItemRarityColor> rarityColors = RarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
             List<StatChangingItemDescriptor> descriptors =
                 _itemsStorage.ItemScriptables.Select(scriptable => (StatChangingItemDescriptor)scriptable.ItemDescriptor).ToList();
+
+            if (ItemsSystem != null)
+                ItemsSystem.Dispose();
             ItemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, Inventory);
             DropGenerator = new DropGenerator(descriptors, ItemsSystem);
         }
