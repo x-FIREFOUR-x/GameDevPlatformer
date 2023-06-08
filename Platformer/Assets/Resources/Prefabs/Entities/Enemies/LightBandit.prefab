@@ -357,7 +357,7 @@ MonoBehaviour:
     m_Bits: 512
   AttackPoint: {fileID: 557113210611714114}
   AttackRadius: 0.2
-  <TargetSearchBox>k__BackingField: {x: 6, y: 4}
+  <TargetSearchBox>k__BackingField: {x: 9, y: 4}
   <HPBar>k__BackingField: {fileID: 1010499248502750318}
 --- !u!114 &-6866939978275696797
 MonoBehaviour:

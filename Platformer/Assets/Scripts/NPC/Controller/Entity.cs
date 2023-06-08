@@ -31,6 +31,8 @@ namespace NPC.Controller
             _entityBehaviour.PlayDeath();
         }
 
+        public Vector3 GetCoordinate() => _entityBehaviour.transform.position;
+
         protected abstract void VisualiseHP(float currentHp, float maxHp);
         
         protected virtual void OnDamageTaken(float damage)
@@ -38,6 +40,8 @@ namespace NPC.Controller
             damage = damage * (1 - StatsController.GetStatValue(StatType.Defence));
             if (damage <= 0)
                 return;
+
+            damage = (float)Math.Round(damage);
 
             float currentHp = StatsController.GetStatValue(StatType.Health);
             float newHpValue = Mathf.Clamp(currentHp - damage, 0, StatsController.GetStatValue(StatType.MaxHealth));

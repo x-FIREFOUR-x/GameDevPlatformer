@@ -39,7 +39,7 @@ namespace Items
             _inventory.ItemDropped -= DropItem;
         }
 
-        public void DropItem(ItemDescriptor descriptor, Vector2 position)
+        public void DropItem(StatChangingItemDescriptor descriptor, Vector2 position)
         {
             Item item = _itemsFactory.CreateItem(descriptor);
             DropItem(item, position);

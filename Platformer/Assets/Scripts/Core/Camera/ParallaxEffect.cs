@@ -18,6 +18,9 @@ namespace Core.GameCamera
 
         private void LateUpdate()
         {
+            if (_target == null)
+                return;
+            
             float deltaMovement = _previousTargetPosition - _target.position.x;
             foreach (var layer in _layers)
             {

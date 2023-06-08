@@ -28,7 +28,7 @@ namespace NPC.Spawn
             _entitiesContainer = gameObject.transform;
         }
 
-        public Entity GetEntityBrain(EntityId entityId, Vector2 position)
+        public Entity GetEntityBrain(EntityId entityId, Vector2 position, int levelDropedItem)
         {
             var data = _entitiesSpawnerStorage.EntitiesData.Find(element => element.Id == entityId);
 
@@ -47,7 +47,7 @@ namespace NPC.Spawn
             {
                 case EntityId.LightBandit:
                 case EntityId.HeavyBandit:
-                    return new MeleeEntity(entityBehaviour as MeleeEntityBehaviour, statsController);
+                    return new MeleeEntity(entityBehaviour as MeleeEntityBehaviour, statsController, levelDropedItem);
                 case EntityId.None:
                 default:
                     throw new NotImplementedException();

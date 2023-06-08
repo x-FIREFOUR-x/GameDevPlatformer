@@ -10,23 +10,25 @@ using Items;
 using Items.Data;
 using Items.Rarity;
 using Items.Storage;
-using NPC.Enum;
 using NPC.Spawn;
 using StatsSystem;
 using UI;
-using UnityEngine.Serialization;
+using LevelSystem.Storage;
 
 namespace Core
 {
     class GameLevelInitializer : MonoBehaviour
     {
         [SerializeField] private PlayerEntityBehaviour _playerEntityBehaviour;
+
         [SerializeField] private GameUIInputView _ganeUIInputView;
+
         [SerializeField] private ItemRarityDescriptorsStorage _rarityDescriptorsStorage;
         [SerializeField] private LayerMask _whatIsPlayer;
         [SerializeField] private ItemStorage _itemsStorage;
         [SerializeField] private StatsStorage _statsStorage;
-        [SerializeField] private Transform _pointOfSpawn;
+
+        [SerializeField] private LevelStorage _levelStorage; 
 
         private ExternalDevicesInputReader _externalDevicesInput;
         private PlayerSystem _playerSystem;
@@ -58,26 +60,31 @@ namespace Core
 
             ItemsFactory itemsFactory = new ItemsFactory(_playerSystem.StatsController);
             List<IItemRarityColor> rarityColors = _rarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
-            List<ItemDescriptor> descriptors = _itemsStorage.ItemScriptables.Select(scriptable => scriptable.ItemDescriptor).ToList();
+            List<StatChangingItemDescriptor> descriptors =
+                _itemsStorage.ItemScriptables.Select(scriptable => (StatChangingItemDescriptor) scriptable.ItemDescriptor).ToList();
             _itemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, _playerSystem.Inventory);
             _dropGenerator = new DropGenerator(descriptors, _playerEntityBehaviour, _itemsSystem);
 
             UIContext.Data data = new UIContext.Data(_playerSystem.Inventory, _rarityDescriptorsStorage.RarityDescriptors, _playerSystem.StatsController);
             _uiContext = new UIContext(new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput }, data);
 
-            _entitySpawner = new EntitySpawner();
+            _entitySpawner = new EntitySpawner(_dropGenerator);
+
+            foreach (var enemiesSpawnData in _levelStorage.ListEnemiesSpawnData)
+            {
+                _entitySpawner.SpawnEntity(enemiesSpawnData.TypeEntity, enemiesSpawnData.СoordinateSpawn, enemiesSpawnData.LevelDropedItem);
+            }
+            foreach (var itemsSpawnData in _levelStorage.ListItemsSpawnData)
+            {
+                var item = _itemsStorage.ItemScriptables.Find(item => item.ItemDescriptor.ItemId == itemsSpawnData.IdItem);
+                _itemsSystem.DropItem((StatChangingItemDescriptor)item.ItemDescriptor, itemsSpawnData.СoordinateSpawn);
+            }
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
-            
-            if (Input.GetKeyDown(KeyCode.M))
-                _entitySpawner.SpawnEntity(EntityId.HeavyBandit, _pointOfSpawn.position);
-
-            if (Input.GetKeyDown(KeyCode.N))
-                _entitySpawner.SpawnEntity(EntityId.LightBandit, _pointOfSpawn.position);
         }
 
         private void OnDestroy()
