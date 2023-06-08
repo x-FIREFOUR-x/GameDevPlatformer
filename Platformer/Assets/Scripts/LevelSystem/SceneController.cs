@@ -23,13 +23,13 @@ namespace LevelSystem
         [field: SerializeField] private LayerMask _whatIsPlayer;
 
         public List<Stat> Stats { get; private set; }
-        public DropGenerator DropGenerator;
+        public DropGenerator DropGenerator { get; private set; }
         public Inventory Inventory { get; private set; }
-        public ItemsSystem ItemsSystem;
+        public ItemsSystem ItemsSystem { get; private set; }
 
         public UIContext UIContext { get; private set; }
 
-        public ProjectUpdater ProjectUpdater;
+        public ProjectUpdater ProjectUpdater { get; private set; }
 
         [SerializeField]
         private string _menuScene = "MenuScene";
@@ -91,6 +91,11 @@ namespace LevelSystem
             else
                 Inventory.Clear();
 
+            if (ProjectUpdater.Instance == null)
+                ProjectUpdater = new GameObject().AddComponent<ProjectUpdater>();
+            else
+                ProjectUpdater = ProjectUpdater.Instance as ProjectUpdater;
+
             var statsStorage = Resources.Load<StatsStorage>($"Player/{nameof(StatsStorage)}");
             Stats = statsStorage.Stats.Select(stat => stat.GetCopy()).ToList();
 
@@ -108,11 +113,6 @@ namespace LevelSystem
                 ItemsSystem.Dispose();
             ItemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, Inventory);
             DropGenerator = new DropGenerator(descriptors, ItemsSystem);
-
-            if (ProjectUpdater.Instance == null)
-                ProjectUpdater = new GameObject().AddComponent<ProjectUpdater>();
-            else
-                ProjectUpdater = ProjectUpdater.Instance as ProjectUpdater;
         }
     }
 }
