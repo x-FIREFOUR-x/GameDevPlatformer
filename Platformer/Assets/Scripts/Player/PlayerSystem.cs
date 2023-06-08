@@ -46,6 +46,7 @@ namespace Player
 
         private void OnPlayerDied(Entity entity)
         {
+            entity.Death();
             entity.Dispose();
             SceneController.Instance.EndGameScene();
         }

@@ -48,6 +48,7 @@ namespace NPC.Spawn
 
         private void RemoveEntity(Entity entity)
         {
+            entity.Death();
             entity.Died -= RemoveEntity;
             _spawnedEntities.Remove(entity);
 

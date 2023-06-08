@@ -26,11 +26,14 @@ namespace NPC.Controller
         
         public virtual void Dispose()
         {
-            StatsController.Dispose();
             _entityBehaviour.DamageTaken -= OnDamageTaken;
-            _entityBehaviour.PlayDeath();
         }
 
+        public void Death()
+        {
+            _entityBehaviour.PlayDeath();
+            StatsController.Dispose();
+        }
         public Vector3 GetCoordinate() => _entityBehaviour.transform.position;
 
         protected abstract void VisualiseHP(float currentHp, float maxHp);
