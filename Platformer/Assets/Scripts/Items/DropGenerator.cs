@@ -11,15 +11,20 @@ namespace Items
 {
     public class DropGenerator
     {
-        private readonly PlayerEntityBehaviour _playerEntityBehaviour;
+        private PlayerEntityBehaviour _playerEntityBehaviour;
         private readonly List<StatChangingItemDescriptor> _itemDescriptors;
         private readonly ItemsSystem _itemsSystem;
 
-        public DropGenerator(List<StatChangingItemDescriptor> itemDescriptors, PlayerEntityBehaviour playerEntityBehaviour, ItemsSystem itemsSystem)
+        public DropGenerator(List<StatChangingItemDescriptor> itemDescriptors, ItemsSystem itemsSystem)
         {
-            _playerEntityBehaviour = playerEntityBehaviour;
+            //_playerEntityBehaviour = playerEntityBehaviour;
             _itemDescriptors = itemDescriptors;
             _itemsSystem = itemsSystem;
+        }
+
+        public void SetPlayer(PlayerEntityBehaviour playerEntityBehaviour)
+        {
+            _playerEntityBehaviour = playerEntityBehaviour;
         }
 
         public void DropRandomItem(int level, Vector3 position, float chanceOfDrop = 1, float offsetHeight = 1.2f)

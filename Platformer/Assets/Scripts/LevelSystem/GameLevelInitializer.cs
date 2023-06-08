@@ -35,26 +35,24 @@ namespace LevelSystem
 
         
         private PlayerSystem _playerSystem;
-        private ProjectUpdater _projectUpdater;
-        private DropGenerator _dropGenerator;
-        private ItemsSystem _itemsSystem;
+        //private ProjectUpdater _projectUpdater;
+        //private DropGenerator _dropGenerator;
+        //private ItemsSystem _itemsSystem;
         private EntitySpawner _entitySpawner;
 
         private List<IDisposable> _disposables;
 
         private void Awake()
         {
+            Debug.Log("Awake GAME");
             _disposables = new List<IDisposable>();
-            if (ProjectUpdater.Instance == null)
-                _projectUpdater = new GameObject().AddComponent<ProjectUpdater>();
-            else
-                _projectUpdater = ProjectUpdater.Instance as ProjectUpdater;
-
 
             _externalDevicesInput = new ExternalDevicesInputReader();
             _disposables.Add(_externalDevicesInput);
 
-            SceneController.Instance.StatsController = new StatsController(SceneController.Instance.Stats);
+            //SceneController.Instance.StatsController = new StatsController(SceneController.Instance.Stats);
+            SceneController.Instance.DropGenerator.SetPlayer(_playerEntityBehaviour);
+            
 
             _playerSystem = new PlayerSystem
             (
@@ -71,7 +69,7 @@ namespace LevelSystem
 
             InitializeSystem();
 
-            _entitySpawner = new EntitySpawner(_dropGenerator);
+            _entitySpawner = new EntitySpawner(SceneController.Instance.DropGenerator);
 
             SpawnItemsAndEntities();
         }
@@ -95,7 +93,7 @@ namespace LevelSystem
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
-                _projectUpdater.IsPaused = !_projectUpdater.IsPaused;
+                SceneController.Instance.ProjectUpdater.IsPaused = !SceneController.Instance.ProjectUpdater.IsPaused;
         }
 
         private void OnDestroy()
@@ -108,18 +106,11 @@ namespace LevelSystem
 
         public void StartLevel()
         {
-            _projectUpdater.IsPaused = false;
+            SceneController.Instance.ProjectUpdater.IsPaused = false;
         }
 
         private void InitializeSystem()
         {
-            ItemsFactory itemsFactory = new ItemsFactory(_playerSystem.StatsController);
-            List<IItemRarityColor> rarityColors = SceneController.Instance.RarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
-            List<StatChangingItemDescriptor> descriptors =
-                _itemsStorage.ItemScriptables.Select(scriptable => (StatChangingItemDescriptor)scriptable.ItemDescriptor).ToList();
-            _itemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, _playerSystem.Inventory);
-            _dropGenerator = new DropGenerator(descriptors, _playerEntityBehaviour, _itemsSystem);
-
             SceneController.Instance.Inventory.SetPlayer(_playerEntityBehaviour.transform);
 
             UIContext.Data data = new UIContext.Data(
@@ -138,7 +129,7 @@ namespace LevelSystem
             foreach (var itemsSpawnData in _levelStorage.ListItemsSpawnData)
             {
                 var item = _itemsStorage.ItemScriptables.Find(item => item.ItemDescriptor.ItemId == itemsSpawnData.IdItem);
-                _itemsSystem.DropItem((StatChangingItemDescriptor)item.ItemDescriptor, itemsSpawnData.СoordinateSpawn);
+                SceneController.Instance.ItemsSystem.DropItem((StatChangingItemDescriptor)item.ItemDescriptor, itemsSpawnData.СoordinateSpawn);
             }
         }
     }

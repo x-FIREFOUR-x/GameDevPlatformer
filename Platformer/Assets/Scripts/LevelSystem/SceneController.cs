@@ -2,10 +2,12 @@
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
-
+using Core.Services.Updater;
 using Items;
 using UI;
 using InputReader;
+using Items.Data;
+using Items.Rarity;
 using StatsSystem;
 using Items.Storage;
 
@@ -17,10 +19,15 @@ namespace LevelSystem
 
         public StatsController StatsController { get; set; }
         [field: SerializeField] public ItemRarityDescriptorsStorage RarityDescriptorsStorage { get; private set; }
+        [field: SerializeField] private ItemStorage _itemsStorage;
+        [field: SerializeField] private LayerMask _whatIsPlayer;
         public List<Stat> Stats { get; private set; }
+        public ProjectUpdater ProjectUpdater;
 
         public Inventory Inventory { get; private set;}
         public UIContext UIContext { get; private set; }
+        public DropGenerator DropGenerator;
+        public ItemsSystem ItemsSystem;
 
         [SerializeField]
         private string _menuScene = "MenuScene";
@@ -46,6 +53,7 @@ namespace LevelSystem
 
             DontDestroyOnLoad(this.gameObject);
 
+            Debug.Log("Awake");
             ResetDate();
         }
 
@@ -59,8 +67,8 @@ namespace LevelSystem
         {
             if (_nextLevel < _Level1Scenes.Count)
             {
-                if(_nextLevel != 0)
-                    SceneManager.LoadScene(_menuScene);
+                //if(_nextLevel != 0)
+                   // SceneManager.LoadScene(_menuScene, );
                 SceneManager.LoadScene(_Level1Scenes[_nextLevel]);
                 _nextLevel++;
             }
@@ -72,7 +80,6 @@ namespace LevelSystem
 
         public void EndGameScene()
         {
-            ResetDate();
             SceneManager.LoadScene(_endScene);
         }
 
@@ -81,8 +88,21 @@ namespace LevelSystem
             _nextLevel = 0;
             Inventory = new Inventory(null, null, null);
 
+            if (ProjectUpdater.Instance == null)
+               ProjectUpdater = new GameObject().AddComponent<ProjectUpdater>();
+            else 
+                ProjectUpdater = ProjectUpdater.Instance as ProjectUpdater;
+
             var statsStorage = Resources.Load<StatsStorage>($"Player/{nameof(StatsStorage)}");
             Stats = statsStorage.Stats.Select(stat => stat.GetCopy()).ToList();
+            StatsController = new StatsController(Stats);
+            
+            ItemsFactory itemsFactory = new ItemsFactory(StatsController);
+            List<IItemRarityColor> rarityColors = RarityDescriptorsStorage.RarityDescriptors.Cast<IItemRarityColor>().ToList();
+            List<StatChangingItemDescriptor> descriptors =
+                _itemsStorage.ItemScriptables.Select(scriptable => (StatChangingItemDescriptor)scriptable.ItemDescriptor).ToList();
+            ItemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, Inventory);
+            DropGenerator = new DropGenerator(descriptors, ItemsSystem);
         }
     }
 }

@@ -57,6 +57,7 @@ namespace Items
 
         private void TryPickItem(SceneItem sceneItem)
         {
+            Debug.Log("TryPickItem");
             Collider2D player = Physics2D.OverlapCircle(sceneItem.Position, sceneItem.InteractionDistance, _whatIsPlayer);
             if (player == null)
                 return;

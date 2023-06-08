@@ -843,6 +843,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <RarityDescriptorsStorage>k__BackingField: {fileID: 11400000, guid: f872a3885c466fa41a3a31670988fd4b, type: 2}
+  _itemsStorage: {fileID: 11400000, guid: 06ca9570270819f4c95e7db976bb90ac, type: 2}
+  _whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 512
   _menuScene: MenuScene
   _endScene: EndScene
   _victoryScene: VictoryScene
