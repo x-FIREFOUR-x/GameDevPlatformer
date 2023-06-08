@@ -43,7 +43,6 @@ namespace LevelSystem
 
         private void Awake()
         {
-            Debug.Log("Awake GAME");
             _disposables = new List<IDisposable>();
 
             _externalDevicesInput = new ExternalDevicesInputReader();

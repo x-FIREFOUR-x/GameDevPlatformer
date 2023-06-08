@@ -22,7 +22,6 @@ namespace Items
 
         public ItemsSystem(List<IItemRarityColor> colors, LayerMask whatIsPlayer, ItemsFactory itemsFactory, Inventory inventory)
         {
-            Debug.Log("dddd");
             _sceneItem = Resources.Load<SceneItem>($"{"Prefabs"}/{"Items"}/{nameof(SceneItem)}");
             _itemsOnScene = new Dictionary<SceneItem, Item>();
             GameObject gameObject = new GameObject();
@@ -37,7 +36,6 @@ namespace Items
 
         public void Dispose()
         {
-            Debug.Log("aaaa");
             _inventory.ItemDropped -= DropItem;
         }
 
@@ -59,7 +57,6 @@ namespace Items
 
         private void TryPickItem(SceneItem sceneItem)
         {
-            Debug.Log("TryPickItem");
             Collider2D player = Physics2D.OverlapCircle(sceneItem.Position, sceneItem.InteractionDistance, _whatIsPlayer);
             if (player == null)
                 return;

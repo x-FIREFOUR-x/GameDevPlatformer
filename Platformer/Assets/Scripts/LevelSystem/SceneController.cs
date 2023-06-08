@@ -53,7 +53,6 @@ namespace LevelSystem
 
             DontDestroyOnLoad(this.gameObject);
 
-            Debug.Log("Awake");
             ResetDate();
         }
 
