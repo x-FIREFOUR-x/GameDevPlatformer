@@ -21,22 +21,19 @@ namespace LevelSystem
     {
         [SerializeField] private PlayerEntityBehaviour _playerEntityBehaviour;
         [SerializeField] private LayerMask _whatIsPlayer;
+        private PlayerSystem _playerSystem;
 
         [SerializeField] private GameUIInputView _ganeUIInputView;
         private ExternalDevicesInputReader _externalDevicesInput;
 
-        [Header("FinisArea")]
+        [Header("FinishArea")]
         [SerializeField] private Transform _finishArea;
 
         [Header("Storages")]
         [SerializeField] private ItemStorage _itemsStorage;
         [SerializeField] private StatsStorage _statsStorage;
         [SerializeField] private LevelStorage _levelStorage;
-
-        private PlayerSystem _playerSystem;
-        //private ProjectUpdater _projectUpdater;
-        //private DropGenerator _dropGenerator;
-        //private ItemsSystem _itemsSystem;
+       
         private EntitySpawner _entitySpawner;
 
         private List<IDisposable> _disposables;
@@ -48,26 +45,9 @@ namespace LevelSystem
             _externalDevicesInput = new ExternalDevicesInputReader();
             _disposables.Add(_externalDevicesInput);
 
-            //SceneController.Instance.StatsController = new StatsController(SceneController.Instance.Stats);
-            SceneController.Instance.DropGenerator.SetPlayer(_playerEntityBehaviour);
-
-            _playerSystem = new PlayerSystem
-            (
-                _playerEntityBehaviour,
-                SceneController.Instance.Inventory,
-                SceneController.Instance.StatsController,
-                new List<IEntityInputSource>
-                {
-                    _ganeUIInputView,
-                    _externalDevicesInput
-                }
-            );
-            _disposables.Add(_playerSystem);
-
-            InitializeSystem();
+            InitializePlayerSystem();
 
             _entitySpawner = new EntitySpawner(SceneController.Instance.DropGenerator);
-
             SpawnItemsAndEntities();
         }
 
@@ -106,14 +86,28 @@ namespace LevelSystem
             SceneController.Instance.ProjectUpdater.IsPaused = false;
         }
 
-        private void InitializeSystem()
+        private void InitializePlayerSystem()
         {
+            SceneController.Instance.DropGenerator.SetPlayer(_playerEntityBehaviour);
             SceneController.Instance.Inventory.SetPlayer(_playerEntityBehaviour.transform);
 
-            UIContext.Data data = new UIContext.Data(
+            _playerSystem = new PlayerSystem
+            (
+                _playerEntityBehaviour,
                 SceneController.Instance.Inventory,
-                SceneController.Instance.RarityDescriptorsStorage.RarityDescriptors,
-                SceneController.Instance.StatsController);
+                SceneController.Instance.StatsController,
+                new List<IEntityInputSource>
+                {
+                    _ganeUIInputView,
+                    _externalDevicesInput
+                }
+            );
+            _disposables.Add(_playerSystem);
+
+            UIContext.Data data = new UIContext.Data(
+               SceneController.Instance.Inventory,
+               SceneController.Instance.RarityDescriptorsStorage.RarityDescriptors,
+               SceneController.Instance.StatsController);
             SceneController.Instance.UIContext.SetData(new List<IWindowsInputSource> { _ganeUIInputView, _externalDevicesInput }, data);
         }
 
