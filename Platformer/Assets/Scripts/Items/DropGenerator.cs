@@ -17,7 +17,6 @@ namespace Items
 
         public DropGenerator(List<StatChangingItemDescriptor> itemDescriptors, ItemsSystem itemsSystem)
         {
-            //_playerEntityBehaviour = playerEntityBehaviour;
             _itemDescriptors = itemDescriptors;
             _itemsSystem = itemsSystem;
         }

@@ -44,22 +44,12 @@ namespace UI.InventoryUI.InventoryUI
 
             _statsController.StatsChanges += UpdateStats;
             View.CloseClicked += RequestCloseScreen;
-            
-            //SceneManager.sceneLoaded += UpdatePresenter;
-        }
-
-        private void UpdatePresenter(Scene scene, LoadSceneMode mode)
-        {
-            InitializeBackPack();
-            InitializeEquipment();
-            UpdateStats();
         }
 
         public void Dispose()
         {
             _statsController.StatsChanges -= UpdateStats;
             View.CloseClicked -= RequestCloseScreen;
-            //SceneManager.sceneLoaded -= UpdatePresenter;
         }
         
         public override void Initialize()

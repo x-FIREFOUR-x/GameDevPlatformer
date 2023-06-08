@@ -123,8 +123,9 @@ namespace Items
 
         public void Clear()
         {
-            BackPackItems.Clear();
             EquipmentItems.Clear();
+
+            BackPackItems.Clear();
             for (int i = 0; i < BackPackMaxSize; i++)
                 BackPackItems.Add(null);
 
