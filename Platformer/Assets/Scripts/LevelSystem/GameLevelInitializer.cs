@@ -63,7 +63,7 @@ namespace LevelSystem
             {
                 var overlap = Physics2D.OverlapCircle(_finishArea.transform.position, 1, _whatIsPlayer);
 
-                if(overlap != null)// && !_entitySpawner.IsEntities())
+                if(overlap != null && !_entitySpawner.IsEntities())
                 {
                     SceneController.Instance.NextLevelGameScene();
                 }
