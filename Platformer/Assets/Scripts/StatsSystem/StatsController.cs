@@ -8,10 +8,10 @@ using Core.Services.Updater;
 
 namespace StatsSystem
 {
-    public class StatsController: IDisposable, IStatValueGiver
+    public class StatsController : IDisposable, IStatValueGiver
     {
-        public List<Stat> CurrentStats { get; }
-        private readonly List<StatModificator> _activeModificators;
+        public List<Stat> CurrentStats { get; private set; }
+        private List<StatModificator> _activeModificators;
 
         public Action StatsChanges;
 
@@ -24,6 +24,14 @@ namespace StatsSystem
             _activeModificators = new List<StatModificator>();
             ProjectUpdater.Instance.UpdateCalled += OnUpdate;
         }
+
+        public void ResetStats(List<Stat> currentStats)
+        {
+            CurrentStats = currentStats;
+
+            _activeModificators = new List<StatModificator>();
+        }
+
 
         public float GetStatValue(StatType statType) =>
             CurrentStats.Find(stat => stat.Type == statType);

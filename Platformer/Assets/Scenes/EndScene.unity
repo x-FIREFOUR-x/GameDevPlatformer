@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 278237377}
   - component: {fileID: 278237379}
   m_Layer: 5
-  m_Name: Sanya
+  m_Name: HeroImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,7 +319,7 @@ RectTransform:
   - {fileID: 278237376}
   - {fileID: 1604368838}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -661,8 +661,65 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &724265446
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.299526
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.9811006
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.07025064
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907949, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33766347567907950, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
+      propertyPath: m_Name
+      value: SceneController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ffc80cb9519108f40a7f14368f61504f, type: 3}
 --- !u!1 &1367565971
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +786,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1604368837
 GameObject:
@@ -743,8 +800,9 @@ GameObject:
   - component: {fileID: 1604368841}
   - component: {fileID: 1604368840}
   - component: {fileID: 1604368839}
+  - component: {fileID: 1604368842}
   m_Layer: 5
-  m_Name: StartBtn
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -853,6 +911,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604368837}
   m_CullTransparentMesh: 1
+--- !u!114 &1604368842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604368837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084348f81747e4640b73905ab7128877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1604368839}
 --- !u!1 &1891901198
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,7 +937,7 @@ GameObject:
   - component: {fileID: 1891901200}
   - component: {fileID: 1891901202}
   m_Layer: 5
-  m_Name: ChelImg
+  m_Name: BucherImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

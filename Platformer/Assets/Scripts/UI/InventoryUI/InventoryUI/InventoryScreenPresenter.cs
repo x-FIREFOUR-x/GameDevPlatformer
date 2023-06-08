@@ -12,6 +12,8 @@ using StatsSystem;
 using StatsSystem.Enum;
 using UI.Core;
 using UI.InventoryUI.Element;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace UI.InventoryUI.InventoryUI
 {
@@ -43,7 +45,7 @@ namespace UI.InventoryUI.InventoryUI
             _statsController.StatsChanges += UpdateStats;
             View.CloseClicked += RequestCloseScreen;
         }
-        
+
         public void Dispose()
         {
             _statsController.StatsChanges -= UpdateStats;

@@ -41,6 +41,11 @@ namespace NPC.Spawn
             _spawnedEntities.Clear();
         }
 
+        public bool IsEntities()
+        {
+            return _spawnedEntities.Count > 0;
+        }
+
         private void RemoveEntity(Entity entity)
         {
             entity.Died -= RemoveEntity;
