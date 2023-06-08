@@ -32,6 +32,12 @@ namespace StatsSystem
             _activeModificators = new List<StatModificator>();
         }
 
+        public void ResetTimeStatsModificator()
+        {
+            var expiredModificator = _activeModificators.Where(modificator => modificator.Duration > -1);
+            while (expiredModificator.Count() != 0)
+                RemoveModificator(expiredModificator.First());
+        }
 
         public float GetStatValue(StatType statType) =>
             CurrentStats.Find(stat => stat.Type == statType);

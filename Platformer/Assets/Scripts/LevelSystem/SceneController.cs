@@ -68,6 +68,7 @@ namespace LevelSystem
         {
             if (_nextLevel < _Level1Scenes.Count)
             {
+                StatsController.ResetTimeStatsModificator();
                 SceneManager.LoadScene(_Level1Scenes[_nextLevel]);
                 _nextLevel++;
             }
