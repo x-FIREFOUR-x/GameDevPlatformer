@@ -23,16 +23,6 @@ namespace Items.Core
             {
                 _statsController.ProcessModificator(stat);
             }
-
-            if (_amount <= 0)
-            {
-                Destroy();
-            }
-        }
-
-        private void Destroy()
-        {
-            Debug.Log("Destroy");
         }
 
         public void AddToStack(int amount)

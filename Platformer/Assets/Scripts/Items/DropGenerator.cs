@@ -11,16 +11,19 @@ namespace Items
 {
     public class DropGenerator
     {
-        private readonly PlayerEntityBehaviour _playerEntityBehaviour;
+        private PlayerEntityBehaviour _playerEntityBehaviour;
         private readonly List<StatChangingItemDescriptor> _itemDescriptors;
         private readonly ItemsSystem _itemsSystem;
 
-        public DropGenerator(List<StatChangingItemDescriptor> itemDescriptors, PlayerEntityBehaviour playerEntityBehaviour, ItemsSystem itemsSystem)
+        public DropGenerator(List<StatChangingItemDescriptor> itemDescriptors, ItemsSystem itemsSystem)
         {
-            _playerEntityBehaviour = playerEntityBehaviour;
             _itemDescriptors = itemDescriptors;
             _itemsSystem = itemsSystem;
-            ProjectUpdater.Instance.UpdateCalled += Update;
+        }
+
+        public void SetPlayer(PlayerEntityBehaviour playerEntityBehaviour)
+        {
+            _playerEntityBehaviour = playerEntityBehaviour;
         }
 
         public void DropRandomItem(int level, Vector3 position, float chanceOfDrop = 1, float offsetHeight = 1.2f)
@@ -40,12 +43,6 @@ namespace Items
             List<StatChangingItemDescriptor> items = _itemDescriptors.Where(item => item.ItemRarity == rarity).ToList();
             StatChangingItemDescriptor itemDescriptor = items[UnityEngine.Random.Range(0, items.Count)];
             _itemsSystem.DropItem(itemDescriptor, _playerEntityBehaviour.transform.position + UnityEngine.Vector3.one);
-        }
-
-        private void Update()
-        {
-            if(Input.GetKeyUp(KeyCode.G))
-                DropRandomItem(GetDropRarity());
         }
 
         private ItemRarity GetDropRarity()
