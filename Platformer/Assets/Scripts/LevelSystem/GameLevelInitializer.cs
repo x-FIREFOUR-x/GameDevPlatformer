@@ -33,7 +33,6 @@ namespace LevelSystem
         [SerializeField] private StatsStorage _statsStorage;
         [SerializeField] private LevelStorage _levelStorage;
 
-        
         private PlayerSystem _playerSystem;
         private ProjectUpdater _projectUpdater;
         private DropGenerator _dropGenerator;
@@ -55,6 +54,7 @@ namespace LevelSystem
             _disposables.Add(_externalDevicesInput);
 
             SceneController.Instance.StatsController = new StatsController(SceneController.Instance.Stats);
+            SceneController.Instance.Inventory.SetPlayer(_playerEntityBehaviour.transform);
 
             _playerSystem = new PlayerSystem
             (
@@ -119,8 +119,6 @@ namespace LevelSystem
                 _itemsStorage.ItemScriptables.Select(scriptable => (StatChangingItemDescriptor)scriptable.ItemDescriptor).ToList();
             _itemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, _playerSystem.Inventory);
             _dropGenerator = new DropGenerator(descriptors, _playerEntityBehaviour, _itemsSystem);
-
-            SceneController.Instance.Inventory.SetPlayer(_playerEntityBehaviour.transform);
 
             UIContext.Data data = new UIContext.Data(
                 SceneController.Instance.Inventory,

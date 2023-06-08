@@ -120,5 +120,16 @@ namespace Items
             BackPackChanged?.Invoke();
             return true;
         }
+
+        public void Clear()
+        {
+            BackPackItems.Clear();
+            EquipmentItems.Clear();
+            for (int i = 0; i < BackPackMaxSize; i++)
+                BackPackItems.Add(null);
+
+            BackPackChanged?.Invoke();
+            EquipmentChanged?.Invoke();
+        }
     }
 }
