@@ -46,15 +46,12 @@ namespace LevelSystem
 
             DontDestroyOnLoad(this.gameObject);
 
-            _nextLevel = 0;
-            Inventory = new Inventory(null, null, null);
-
-            var statsStorage = Resources.Load<StatsStorage>($"Player/{nameof(StatsStorage)}");
-            Stats = statsStorage.Stats.Select(stat => stat.GetCopy()).ToList();
+            ResetDate();
         }
 
         public void MenuGameScene()
         {
+            ResetDate();
             SceneManager.LoadScene(_menuScene);
         }
 
@@ -75,7 +72,17 @@ namespace LevelSystem
 
         public void EndGameScene()
         {
+            ResetDate();
             SceneManager.LoadScene(_endScene);
+        }
+
+        private void ResetDate()
+        {
+            _nextLevel = 0;
+            Inventory = new Inventory(null, null, null);
+
+            var statsStorage = Resources.Load<StatsStorage>($"Player/{nameof(StatsStorage)}");
+            Stats = statsStorage.Stats.Select(stat => stat.GetCopy()).ToList();
         }
     }
 }

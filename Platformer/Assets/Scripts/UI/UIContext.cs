@@ -115,7 +115,6 @@ namespace UI
 
         private IScreenController GetController(ScreenType screenType)
         {
-            
             switch (screenType)
             {
                 case ScreenType.Inventory:

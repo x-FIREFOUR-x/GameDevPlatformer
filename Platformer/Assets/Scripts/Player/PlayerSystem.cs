@@ -7,6 +7,7 @@ using InputReader;
 using Items;
 using NPC.Controller;
 using StatsSystem;
+using LevelSystem;
 
 namespace Player
 {
@@ -46,6 +47,7 @@ namespace Player
         private void OnPlayerDied(Entity entity)
         {
             entity.Dispose();
+            SceneController.Instance.EndGameScene();
         }
     }
 }

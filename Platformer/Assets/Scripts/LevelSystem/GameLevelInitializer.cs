@@ -120,6 +120,8 @@ namespace LevelSystem
             _itemsSystem = new ItemsSystem(rarityColors, _whatIsPlayer, itemsFactory, _playerSystem.Inventory);
             _dropGenerator = new DropGenerator(descriptors, _playerEntityBehaviour, _itemsSystem);
 
+            SceneController.Instance.Inventory.SetPlayer(_playerEntityBehaviour.transform);
+
             UIContext.Data data = new UIContext.Data(
                 SceneController.Instance.Inventory,
                 SceneController.Instance.RarityDescriptorsStorage.RarityDescriptors,
