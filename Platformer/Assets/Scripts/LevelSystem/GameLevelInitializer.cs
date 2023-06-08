@@ -33,7 +33,6 @@ namespace LevelSystem
         [SerializeField] private StatsStorage _statsStorage;
         [SerializeField] private LevelStorage _levelStorage;
 
-        
         private PlayerSystem _playerSystem;
         //private ProjectUpdater _projectUpdater;
         //private DropGenerator _dropGenerator;
@@ -52,7 +51,6 @@ namespace LevelSystem
 
             //SceneController.Instance.StatsController = new StatsController(SceneController.Instance.Stats);
             SceneController.Instance.DropGenerator.SetPlayer(_playerEntityBehaviour);
-            
 
             _playerSystem = new PlayerSystem
             (

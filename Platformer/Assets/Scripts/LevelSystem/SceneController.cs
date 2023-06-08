@@ -67,8 +67,6 @@ namespace LevelSystem
         {
             if (_nextLevel < _Level1Scenes.Count)
             {
-                //if(_nextLevel != 0)
-                   // SceneManager.LoadScene(_menuScene, );
                 SceneManager.LoadScene(_Level1Scenes[_nextLevel]);
                 _nextLevel++;
             }
@@ -86,7 +84,11 @@ namespace LevelSystem
         private void ResetDate()
         {
             _nextLevel = 0;
-            Inventory = new Inventory(null, null, null);
+
+            if (Inventory == null)
+                Inventory = new Inventory(null, null, null);
+            else
+                Inventory.Clear();
 
             if (ProjectUpdater.Instance == null)
                ProjectUpdater = new GameObject().AddComponent<ProjectUpdater>();
