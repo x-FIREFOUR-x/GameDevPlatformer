@@ -17,12 +17,12 @@ namespace LevelSystem
     {
         public static SceneController Instance;
 
-        public StatsController StatsController { get; set; }
         [field: SerializeField] public ItemRarityDescriptorsStorage RarityDescriptorsStorage { get; private set; }
         [field: SerializeField] private ItemStorage _itemsStorage;
         [field: SerializeField] private LayerMask _whatIsPlayer;
 
         public List<Stat> Stats { get; private set; }
+        public StatsController StatsController { get; set; }
         public DropGenerator DropGenerator { get; private set; }
         public Inventory Inventory { get; private set; }
         public ItemsSystem ItemsSystem { get; private set; }
